@@ -1,0 +1,85 @@
+<!--pages/my/my.wxml-->
+<!--引用摸版  -->
+<import src="../../utils/foot.wxml" />
+<!--用户信息  -->
+<view class="container" style="padding:60rpx;background:#fff;position:relative;">
+  <view  bindtap="bindViewTap" class="userinfo">
+      <view class="user_circle2">
+        <image class="userinfo-avatar" src="{{userInfo.userImg}}" background-size="cover"></image>
+      </view>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text> 
+      <!-- <view style='text-align:center'  wx:if="{{identity == 0}}"> <text class='daren darence' ></text></view> -->
+      <view style='text-align:center'  wx:if="{{identity == 1}}"> 
+          <text style='padding:4rpx 20rpx' class='daren darence' >员工</text>
+        </view>
+      <view style='text-align:center'  wx:if="{{identity == 2}}"> 
+        <text style="background: #22da9c;" class='daren darence' >分享达人</text>
+      </view>
+  </view>
+</view>
+<!--订单  -->
+<view class="xuanze borerNone" bindtap="dingdan">
+    <view class="classname">我的订单</view>
+    <view class="nextImg">查看全部订单<image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"/></view>
+</view>   
+<view class="listAll">
+    <view class="list">
+        <navigator class="flex"  url="../dingdan/dingdan?status={{item.status}}" wx:for="{{list}}">
+            <view class="" data-id="{{index}}">
+                <text class="num" wx:if="{{item.num != 0}}">{{item.num}}</text>
+                <image class="image{{index}}" src="{{item.pic}}" mode="widthFix"></image>
+                <text>{{item.title}}</text>
+            </view>
+        </navigator>
+    </view>
+</view>
+<view class="allXuan">
+    <!-- <view class="xuanze" bindtap="coupon">
+        <view class="classname"><image style="margin-right:-1rpx;" src="../images/ka.png" mode="widthFix"></image> 优惠卡券</view>
+        <view class="nextImg"><image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"/></view> 
+    </view>
+    <view class="xuanze" bindtap="tuijian">
+        <view class="classname"><image src="../images/jiang.png" mode="widthFix"></image>推荐有奖</view>
+        <view class="nextImg"><image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"/></view> 
+    </view> -->
+    <!-- <view class="xuanze" bindtap="userinform" wx:if="{{identity == 1 || identity == 2}}">
+        <view class="classname"><image src="../images/jiang.png" mode="widthFix"></image>会员中心</view>
+        <view class="nextImg"><image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"/></view> 
+    </view> -->
+    <view class="xuanze" bindtap="work">
+        <view class="classname"><image src="../images/work.png" mode="widthFix"></image>任务审核</view>
+        <view class="nextImg"><image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"/></view> 
+    </view>
+    <view class="xuanze" bindtap="shoucang">
+        <view class="classname"><image src="../images/like.png" mode="widthFix"></image>我的收藏</view>
+        <view class="nextImg"><image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"/></view> 
+    </view>
+    <view class="xuanze" bindtap="tixian">
+        <view class="classname"><image src="../images/money.png" mode="widthFix"></image>我的账户</view>
+        <view class="nextImg"><image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"/></view> 
+    </view>
+    <view class="xuanze bottom page-body-line" data-phone="{{service}}" bindtap='makePhone' style="position:relative">
+          <contact-button class="contact" type="default-light" size="12" session-from="weapp" style="opacity:0;position:absolute;top:0rpx;left:60rpx;">  
+          </contact-button>  
+          <contact-button class="contact" type="default-light" size="12" session-from="weapp" style="opacity:0;position:absolute;top:0rpx;left:100rpx;">  
+          </contact-button>  
+          <contact-button class="contact" type="default-light" size="12" session-from="weapp" style="opacity:0;position:absolute;top:0rpx;left:140rpx;">  
+          </contact-button>  
+          <contact-button class="contact" type="default-light" size="12" session-from="weapp" style="opacity:0;position:absolute;top:0rpx;left:200rpx;">  
+          </contact-button> 
+          <contact-button class="contact" type="default-light" size="12" session-from="weapp" style="opacity:0;position:absolute;top:0rpx;left:260rpx;">  
+          </contact-button>  
+          <contact-button class="contact" type="default-light" size="12" session-from="weapp" style="opacity:0;position:absolute;top:0rpx;left:320rpx;">  
+          </contact-button>  
+          <contact-button class="contact" type="default-light" size="12" session-from="weapp" style="opacity:0;position:absolute;top:0rpx;left:380rpx;">  
+          </contact-button>  
+          <contact-button class="contact" type="default-light" size="12" session-from="weapp" style="opacity:0;position:absolute;top:0rpx;left:440rpx;">  
+          </contact-button> 
+          <contact-button class="contact" type="default-light" size="12" session-from="weapp" style="opacity:0;position:absolute;top:0rpx;left:500rpx;">  
+          </contact-button>  
+          <contact-button class="contact" type="default-light" size="12" session-from="weapp" style="opacity:0;position:absolute;top:0rpx;left:560rpx;">  
+          </contact-button>  
+          <view class="kefu"><image src="../images/kefu.png" mode="widthFix"></image>联系客服</view>  
+         <contact-button size="20" session-from="weapp"></contact-button> 
+    </view>
+</view>

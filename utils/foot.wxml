@@ -1,0 +1,18 @@
+<template name="foot">
+    <view class="bg bgColor {{bar?'show':'hidden'}}" bindtap="guanbi"></view>   
+    <view class="bar">
+        <view class="list {{bar?'show':'hidden'}}">
+            <view class="li" catchtap="backHome">
+                <image src="../images/shouye.png" mode="widthFix"></image>
+            </view>
+            <text class="text wenzi">首页</text>
+            <view class="li" catchtap="gouwuche">
+                <image src="../images/gouwu.png" mode="widthFix"></image>
+            </view>
+            <text class="text wenzi">购物车</text>
+        </view>
+        <view class="kuaijie daohang daohangw {{daohang?'show':'hidden'}}" bindtap="daohang">快捷导航</view>
+        <view style="width:80rpx" bindtap="guanbi" class="daohang bgdaohang {{bar?'show':'hidden'}}"><image style="width:80rpx" src="../images/close.png" mode="widthFix"></image></view>
+        <view class="kuaijie daohang daohangw {{floorstatus?'show':'hidden'}}" bindtap="backtop" >回到顶部</view>
+    </view>
+</template>

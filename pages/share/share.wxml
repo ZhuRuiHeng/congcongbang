@@ -1,0 +1,35 @@
+<!--textages/share/share.wxml-->
+<import src="../../dist/toast/index.wxml" />
+<!--引入模板  -->
+<template is="zan-toast" data="{{ zanToast }}"></template>
+<view class="container">
+  <view class="shareBox">
+        <view class='h1'>分享达人</view>
+        <view class="content one">
+          <view style="margin-top: -40rpx;">
+              1.转发商品和生成海报有何不同？转发商品是直接分享该页面，生成海报是复制该商品内容可直接发送朋友圈动态。
+          </view>
+				<view>2.好友通过你的分享而购买商品，你会获得该商品单价的20%提成佣金，并且好友再分享给好友，产生购买交易，你也会间接获得佣金提成</view>
+				<view>3.花钱的同时分享出去悄悄赚钱！！！</view>
+			</view>
+			<view class="content two">
+				<view class="zf zhuangfa" bindtap='zhuangfa'>
+            <!-- <button class="flex" open-type="share"> -->
+                <view>
+                    <image src="../images/weixin.png" mode="widthFix"></image>
+                </view>
+                <view class="btn">转发商品</view>
+            <!-- </button> -->
+				</view> 
+				<view class="zf" id="haibao" bindtap='haibao'>
+					<view>
+              <image src="../images/erma.png" mode="widthFix"></image>
+          </view>
+					<view class="btn">生成海报</view>
+				</view>
+			</view>
+			<view class="foot">
+				别人花钱，我们挣钱
+			</view>
+		</view>
+</view>

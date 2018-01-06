@@ -1,0 +1,62 @@
+.bar{
+  padding: 0;
+  overflow: hidden;
+  width: 100rpx;
+  position: fixed;
+  right:20rpx;
+  bottom:220rpx;
+  z-index: 9;
+}
+.list .li{
+  font-size: 22rpx;
+  background: #fff;
+  border-radius: 50%;
+  text-align: center;
+  width: 80rpx;
+  height: 80rpx;
+  line-height:80rpx;
+}
+.list .text.wenzi{
+  display: block;
+  font-size: 22rpx;
+  width:80rpx;
+  text-align: center;
+  color: #fff;
+  margin:10rpx 0 20rpx 0;
+}
+.daohang{
+  border-radius: 50%;
+  font-size: 22rpx;
+  width: 60rpx;
+  
+}
+.daohang.daohangw{
+  padding:10rpx;
+  height: 60rpx;
+}
+.daohang image,.list .li image{
+  width: 40rpx;
+  vertical-align: middle
+}
+.bg.bgColor{
+    width: 100%;
+    height: 100%;
+    background: #000;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    opacity: 0.5;
+    z-index: 6;
+    overflow: hidden;
+}
+.kuaijie.daohang{
+    background: #515151;
+    color:#fff;
+    text-align: center;
+    margin-top: 10rpx;
+}
+.bgdaohang{
+  background: #fff;
+}
+.show{display:block;}
+.hidden{display:none;}

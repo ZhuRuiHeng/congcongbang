@@ -1,0 +1,51 @@
+/* pages/more/more.wxss */
+.container{
+    padding:20rpx;
+    box-sizing: border-box;
+    overflow: hidden;
+    background: #ffffff;
+}
+.boxList{
+  width: 100%;
+}
+.chose-list{
+    width: 100%;
+    text-align: center;
+}
+.chose-list .chose-item{
+    width: 48%;
+    margin: 0 1%;
+    float: left;
+}
+navigator{
+  display: inline-block;
+}
+.chose-list .chose-item .chose-img{
+    width: 100%;
+}
+.chose-list .chose-item .chose-img image{
+    width: 100%;
+    vertical-align: middle;
+    height:340rpx;
+}
+.chose-list .chose-item .chose-text .chose-title{
+    text-align:left;
+    color: #000000;
+	  width: 100%;
+	  font-size: 24rpx;
+    line-height: 36rpx;
+    padding-top:20rpx;
+    height: 70rpx;
+    display: -webkit-box;  
+    display: -moz-box;  
+    overflow: hidden;  
+    text-overflow: ellipsis;  
+    word-break: break-all;  
+    -webkit-box-orient: vertical;  
+    -webkit-line-clamp:2;  
+}
+.chose-list .chose-item .chose-text .price{
+    color:#ff4444;
+    font-size: 24rpx;
+    line-height: 58rpx;
+}

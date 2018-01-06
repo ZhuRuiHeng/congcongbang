@@ -1,0 +1,133 @@
+<!--pages/dingdanInform/dingdanInform.wxml-->
+<import src="../../dist/toast/index.wxml" />
+<!--引入模板  -->
+<template is="zan-toast" data="{{ zanToast }}"></template>
+<view class="container">
+    <!--地址  -->
+    <view class="address kong" bindtap="nextAddress" wx:if="{{dizhi.length == 0}}"><image src="../images/add.png" mode="widthFix"></image>新增收货地址</view>
+    <!--地址  -->
+    <view class="address" bindtap="nextAddress" wx:else>
+        <view class="inform">
+            <view class="left">
+                <image src="https://qncdn.playonwechat.com/shangcheng/address.png" mode="widthFix"></image>
+                收货人：{{dizhi.userName}}
+            </view>
+            <view class="right">
+                {{dizhi.telNumber}}
+            </view>
+        </view>
+        <view class="dizhi">
+            收货地址：{{dizhi.provinceName}}{{dizhi.cityName}}{{dizhi.countyName}}{{dizhi.detailInfo}}
+        </view>
+        <view class="next" bindtap="nextAddress">
+            <image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"></image>
+        </view>
+    </view>
+   
+    <view class="line">
+        <image src="https://qncdn.playonwechat.com/shangcheng/line.png" mode="widthFix"></image>
+    </view>
+    <!--店铺  -->
+    <view class="shop">
+        <view class="checkbox">
+            <label class="radio">
+                <image src="https://qncdn.playonwechat.com/shangcheng/shop.png" mode="widthFix"></image>店铺
+            </label>
+        </view>
+    </view>
+    <!--商品  -->
+    <view class="shangpin">
+        <view class="service-list">
+            <view class="service-item">
+                <view class="service-img">
+                    <image src="{{inform.picture[0]}}" mode="aspectFill"></image>
+                </view>
+                <view class="service-text">
+                    <view class="service-tite">{{inform.good_name}}</view>
+                    <view class="fenlei"> {{types}}</view>
+                    <view class="caozuo">
+                        <text class="service-price" wx:if="{{low_group_price}}">￥{{low_group_price}}</text>
+                        <text class="service-price" wx:else>￥{{low_price}}</text>
+                        <view class="service-gouwu">x{{num}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="controllist">
+        <view class="left">配送方式</view>
+        <view class="right">免运费</view>
+    </view>
+    <view class="control">
+        <view class="left">留言</view>
+        <view class="right"><input class="liuyan" name="userMes" type="text" placeholder="点击给商家留言" bindinput="userMesInput"/></view>
+    </view>
+    <!-- <view class="controllist">
+        <view class="left">合计</view>
+        <view class="right color">￥{{low_price*price}}</view>
+    </view> -->
+    <!-- <view class="controllist youhui top" bindtap="coupon" wx:if="{{type == 0}}">
+        <view class="left">优惠</view>
+        <view class="right">使用优惠卷￥{{amount}}<image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"></image></view>
+    </view> -->
+    <!-- <view class="controllist top" style="padding:10rpx 20rpx;">
+        <view class="left" style="position:relative;top:13rpx;">短信通知收件人</view>
+        <view class="right">
+            <view class="page-section page-section-gap">
+              <switch name="switch" bindchange="listenerSwitch" />
+            </view>
+        </view>
+    </view> -->
+    <view class="jine top">
+       <view class="controllist ">
+          <view class="left">商品金额</view>
+          <view class="right color">￥{{low_price}}</view>
+      </view>
+      <view class="controllist">
+          <view class="left">运费</view>
+          <view class="right color">免运费</view>
+      </view>
+    </view>
+     <!--购物车弹窗  -->
+    <view class="bg {{addCar?'show':'hidden'}}" bindtap="close"></view> 
+      <view class="carBox {{addCar?'show':'hidden'}}">
+        <view class="padding">
+            <view class="title">选择优惠</view>
+            <view class="coupon" style="margin:30rpx;text-align:center;" wx:if="{{useableCoupons.length==0}}"> 
+                暂无可用优惠券
+            </view>
+            <view class="coupon" wx:else>
+                <view class="weui-cells weui-cells_after-title">
+                  <radio-group bindchange="radioChange" >
+                    <label class="weui-cell weui-check__label" wx:for="{{useableCoupons}}" wx:key="{{item.value}}" bindtap="chage" data-amount="{{item.amount}}" >
+                      <view class="weui-cell__hd">
+                          <radio value="{{item.rid}}" color="#ff4444"  id="{{item.amount}}"/>
+                      </view>
+                      <view class="weui-cell__bd">省{{item.amount}}<text style="font-weight:bold">---</text>（{{item.description}}）</view>
+                    </label>
+                    <label class="weui-cell weui-check__label" bindtap="chage" data-amount="0">
+                      <view class="weui-cell__hd">
+                          <radio value="0" color="#ff4444"/>
+                      </view>
+                      <view class="weui-cell__bd">不使用优惠</view>
+                    </label>
+                  </radio-group>
+                </view>
+            </view>
+        </view>
+         <view class="btn">
+            <button class="close" style="background:#F8F8F8;color:#000" bindtap="close">关闭</button>
+            <button class="queren" bindtap="close">确认</button>
+        </view> 
+    </view>
+    <!--foot  -->
+    <view class="fixed">
+        <view class="heji">合计：<text>￥{{low_price*num}}</text>
+            <!-- <text><text style="color:#000;">优惠券:</text >￥{{amount}}</text>实付：<text>￥{{low_price*num-amount}}</text>  -->
+        </view>
+        <form report-submit="true" bindsubmit="formSubmit" class="formSubmit">
+            <button class="submit" formType="submit">提交订单</button>
+        </form>
+        <!-- <view class="submit">提交订单</view> -->
+    </view>
+</view>

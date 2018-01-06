@@ -1,0 +1,110 @@
+<view class="contain">
+    <view class='title'>本月任务</view>
+    <view class='navbar'>
+        <!-- <picker bindchange="bindPickerChange" value="{{index}}" range="{{monethList}}" range-key="{{'moneth'}}">
+          <view class="picker">
+            {{nowMonth}}{{location[index]}}
+          </view>
+        </picker> -->
+        <scroll-view scroll-x="true" class="tab-h" scroll-left="{{scrollLeft}}">
+            <view wx:for="{{monethList}}" class="tab-item {{currentTab== index ?'active':''}}"  data-current="{{index}}" bindtap="swichNav">
+            <text>{{item.moneth}}</text>
+            <text>{{item.eng}}</text>
+            </view>
+        </scroll-view>
+
+        
+        <!-- <swiper indicator-dots="{{indicatorDots}}"
+          autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+          <block wx:for="{{monethList}}">
+          <swiper-item style="width:33%!important;">
+              <view>
+                <text>{{item.moneth}}</text>
+                <text>{{item.eng}}</text>
+              </view>
+          </swiper-item>
+            
+          </block>
+        </swiper> -->
+    </view>
+    <view class='box' wx:if="{{dowork}}">
+        <view class='titles'>
+            <view class='left'>驱虫</view>
+            <view class='check'>
+                <picker bindchange="bindPickerChange" value="{{upIndex}}" range="{{array}}">
+                  <view class="picker">
+                    上传方式：{{array[upIndex]}}
+                  </view>
+                </picker>
+            </view>
+            <view class='close'  bindtap='close'><image src='../images/close-cure.png' mode='widthFix'></image></view>
+        </view>
+        <view class="tasks" wx:if="{{upIndex==1}}">
+            <view class='task-content'>
+                <view class='task-text' ><text class='active'></text>视频</view>
+            </view>
+            <view class='task-video'>
+                <view class="section tc">
+                    <video id="myVideo" wx:if="{{videoList.length}}>0" src="{{item}}"  enable-danmu danmu-btn controls></video>
+                </view>
+                <view class="section tc" bindtap='upVideo' >
+                    <image src="../images/video-add.png" mode='widthFix'></image>
+                </view>
+            </view>
+        </view>
+        <view class="tasks" wx:if="{{upIndex==0}}">
+            <view class='task-content'>
+                <view class='task-text'><text class='active'></text>图片</view>
+            </view>
+            <view class='task-video'>
+                <view class="section tc">
+                    <image wx:for="{{imageList}}" wx:key="{{index}}" src="{{item}}" mode='aspectFit'></image>
+                </view>
+                <view class="section tc" bindtap='upimages' >
+                    <image src="../images/video-add.png" mode='widthFix'></image>
+                </view>
+            </view>
+        </view>
+        <view class='shenhe' bindtap='shenhe'>提交审核</view>
+    </view>
+    <!--内容  -->
+    <view class='box' wx:else>
+        <view class='title-content'>
+            <view class='left'>本月任务</view>
+            <view class='right'>{{listNum.length}}/{{total_count}}</view>
+        </view>
+        <view class='bar'>
+            <view class='parents'></view>
+            <view class='child' style='padding-left:{{width}}%'></view>
+        </view>
+        <view class="task" wx:if="{{must.length!= 0}}">
+              <view class='task-title'>必选任务</view>
+              <view class='task-content'>
+                  <view class='task-text' wx:for="{{must}}" wx:key="{{index}}" 
+                        bindtap='taskTip' data-task_id='{{item.task_id}}' data-pet_id='{{item.pet_id}}'>
+                      <!-- <text wx:if="{{item.finished}}" class='active'></text>
+                      <text wx:else></text> -->
+                      <image class='icon' wx:if="{{item.finished}}" src="../img/icon1.png" mode='widthFix'></image>
+                      <image class='icon' wx:else src="../img/icon.png" mode='widthFix'></image>
+                      {{item.task_name}}({{item.pet_name}})
+                  </view>
+              </view>
+        </view>
+        <view class="task" wx:if="{{point.length!= 0}}">
+              <view class='task-title'>积分任务</view>
+              <view class='task-content'>
+                  <view class='task-text' wx:for="{{point}}" wx:key="{{index}}" 
+                        bindtap='taskTip' data-task_id='{{item.task_id}}' data-pet_id='{{item.pet_id}}'>
+                       <image class='icon' wx:if="{{item.finished}}" src="../img/icon1.png" mode='widthFix'></image>
+                      <image class='icon' wx:else src="../img/icon.png" mode='widthFix'></image>
+                      {{item.task_name}}({{item.pet_name}})
+                  </view>
+              </view>
+        </view>
+        <view  wx:if="{{must.length==0&&point.length==0}}" style="text-align:center;font-size:24rpx;padding:30rpx;">
+            暂未发布任务
+        </view>
+    </view>
+    
+    
+</view>

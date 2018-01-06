@@ -1,0 +1,538 @@
+/* pages/inform/inform.wxss */
+@import "../../utils/foot.wxss"; 
+.container {
+  padding: 0;
+}
+/*轮播*/
+.swiper{
+  width: 750rpx;
+  height: 416rpx;
+}
+.swiper swiper-item image{
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.img_tip{
+  position: absolute;
+  width: 750rpx;
+  height: 100rpx;
+  background: rgba(0, 0, 0, 0.2);
+  margin-top: -100rpx;
+  color: #fff;
+  font-size: 30rpx;
+  box-sizing: border-box;
+  padding:10rpx;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+/*简介  */
+.jianjie{
+     padding: 20rpx 0; 
+}
+.jianjie .title{
+    font-weight: normal;
+    font-size: 28rpx;
+    padding:20rpx;
+    height: 76rpx;
+    display: -webkit-box;  
+    display: -moz-box;  
+    overflow: hidden;  
+    text-overflow: ellipsis;  
+    word-break: break-all;  
+    -webkit-box-orient: vertical;  
+    -webkit-line-clamp:2;
+}
+.jianjie .price{
+    color:#ff4444;
+    font-size:30rpx;
+    padding:20rpx;
+}
+.jianjie .padding{
+    background: #fff;
+    font-size:24rpx;
+}
+
+.jianjie .shangpin{
+    padding:0 20rpx 100rpx;
+}
+.jianjie .padding.margin{
+    margin:20rpx 0;
+}
+.jianjie .yunfei{
+    color: #626262;
+    font-size:24rpx;
+    display: flex;
+    justify-content:space-between;
+    /* border-top:1px solid #e5e5e5; */
+    padding: 20rpx;
+    box-sizing: border-box;
+}
+.jianjie .yunfei,.jianjie .xuanze,.padding.margin,.padding.bod,.padding.shangpin{
+  position: relative;
+}
+.jianjie .yunfei:after,.jianjie .xuanze:after,.padding.margin:after,.padding.shangpin:after{
+    content:" ";
+    display: inline-block;
+    width:200%;
+    position:absolute;
+    top:0;
+    left:0;
+    border:1px solid #e5e5e5;
+    -webkit-transform:scale(0.5);
+    transform:scale(0.5);
+    -webkit-transform-origin:0 0;
+    transform-origin:0 0;
+    box-sizing:border-box;
+}
+.padding.margin:before,.padding.bod:before{
+    content:" ";
+    display: inline-block;
+    width:200%;
+    position:absolute;
+    bottom:0;
+    left:0;
+    border:1px solid #e5e5e5;
+    -webkit-transform:scale(0.5);
+    transform:scale(0.5);
+    -webkit-transform-origin:0 0;
+    transform-origin:0 0;
+    box-sizing:border-box;
+}
+
+.jianjie .xuanze{
+    font-size:26rpx;
+    display: flex;
+    justify-content:space-between;
+    padding: 20rpx 20rpx 10rpx 20rpx;
+    color:#000;
+}
+.jianjie .xuanze .nextImg{
+    width: 40rpx;
+    vertical-align: middle;
+}
+.jianjie .xuanze .nextImg image{
+    width: 100%;
+}
+.jianjie .baozhang{
+    display: flex;
+    font-size:24rpx;
+    padding:20rpx;
+}
+.jianjie .baozhang image{
+    width: 30rpx;
+    vertical-align: middle;
+    margin-right:10rpx;
+}
+.jianjie .baozhang .dianpu{
+    padding-right: 30rpx;
+}
+.allImg .title{
+    padding:20rpx 0;
+    font-size: 26rpx;
+    height:66rpx;
+}
+.allImg .imgs{
+    text-align: center;
+    vertical-align: middle;
+    margin-bottom:150rpx;
+}
+.allImg .imgs image{
+    width: 100%;
+}
+
+/*型号弹窗  */
+.show{display:block;}
+.hidden{display:none;}
+.bg{
+    width: 100%;
+    height: inherit;
+    background: #000;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    opacity: 0.6;
+    z-index: 6;
+    overflow: hidden;
+}
+.carBox{
+    width: 100%;
+    background: #fff;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 101;
+}
+.carBox .top{
+    display: flex;
+}
+.carBox .padding{
+    width: 90%;
+    margin: 0 auto
+}
+.carBox .top .left{
+     width: 140rpx;
+    height: 140rpx;
+}
+.carBox .top .left image{
+  width: 140rpx;
+    height: 140rpx;
+   border-radius: 10rpx;
+    border:1px solid #fff;
+    position: relative;
+    top:-20rpx;
+}
+.carBox .top .left image,.carBox .top .del image{
+    width: 100%;
+    height: inherit;
+}
+.carBox .top .right{
+    flex: 1;
+    padding:20rpx 0 0 0;
+}
+.carBox .top .right text,.carBox .mid .buy text{
+    display: block;
+    font-weight: normal;
+    font-size:24rpx;
+    line-height:40rpx;
+}
+.carBox .top .del{
+    width: 40rpx;
+    height: 40rpx; 
+    padding: 20rpx;  
+}
+.carBox .top .right{
+    display:block;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;width: 100%;
+    padding-left:20rpx;
+}
+.carBox .top .right text.price{
+    color:#ff4444;
+    padding-top:10rpx;
+}
+.carBox .top .shuoming{
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.carBox .mid{
+    display: flex;
+    justify-content:space-between;
+    padding: 20rpx 0;
+    border-top: 1rpx solid #e5e5e5;
+}
+.carBox .mid .num{
+    display: flex;
+    position:relative;
+    top:10rpx;
+}
+.carBox .mid .num button,.carBox .mid .num input{
+    display: inline-block;
+    width: 60rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    padding:0;
+    text-align: center;
+}
+.carBox .mid .num input{
+    font-size: 24rpx;
+    border:1rpx solid #e5e5e5;
+    border-left: 0;
+    border-right:0;
+    box-sizing: border-box;
+}
+.carBox .mid button{
+    border-radius:none;
+    font-size: 24rpx;
+    border:1rpx solid #e5e5e5; 
+}
+.carBox .mid button::after{
+    content:none;
+    width:200%;
+    height:200%;
+    position:absolute;
+    top:0;
+    left:0;
+    border:1px solid rgba(0, 0, 0, 0.2);
+    -webkit-transform:scale(0.5);
+    transform:scale(0.5);
+    -webkit-transform-origin:0 0;
+    transform-origin:0 0;
+    box-sizing:border-box;
+    border-radius:10px;
+}
+ .carBox .mid button.reduce{
+    border-radius: 5rpx 0 0 5rpx;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.carBox .mid button.add{
+    border-radius: 0 5rpx 5rpx 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+} 
+.normal{ 
+  color: black; 
+} 
+.disabled{ 
+  color: #ccc; 
+} 
+.carBox .mid .gray{
+    color:#949292;
+}
+.btn .ok{
+     background: #ff4444; 
+    color:#fff;
+    border-radius: 0;
+    font-size: 30rpx;
+    padding:7rpx 0;
+}
+.kuanshi .title{
+    font-size: 28rpx;
+    padding: 20rpx 0;
+}
+.kuanshi .leibie{
+    margin:0 0 30rpx 0;
+}
+
+.kuanshi .leibie .text{
+    display: inline-block;
+    font-size: 24rpx;
+    border:1rpx solid #e5e5e5; 
+    border-radius: 6rpx;
+    padding: 10rpx 20rpx; 
+    box-sizing: border-box;
+    margin-right:10rpx;
+    position: relative;
+}
+.kuanshi .leibie .text.white{
+    background: #fff;
+    color:#000;
+}
+.kuanshi .leibie .text.red{
+    background: #ff4444;
+    border-color:#ff4444;
+    color:#fff;
+}
+/*foot  */
+.fixed{
+    width: 100%;
+    background: #fff;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    font-size: 30rpx;
+    text-align: center;
+    border-top:1px solid #ddd;
+    box-sizing: border-box;
+}
+.fixed .shouye .imgLogo{
+    width: 50rpx;
+    height: 50rpx;
+    margin:0 auto;
+}  
+.fixed .gouwu .imgLogo{
+    width: 60rpx;
+    height: 50rpx;
+    margin:0 auto;
+    padding-top:6rpx;
+}  
+.fixed .gouwu{
+    position: relative;
+    color:#848484;
+}
+.fixed .flex{
+    flex: 2;
+    width: 100%;
+}
+.fixed .flex .gouwu{
+  width:33%;
+}
+.fixed .flex .gouwu:nth-child(2){
+  position: relative;
+}
+.fixed .flex .gouwu:nth-child(2):after{
+    content:" ";
+    display: inline-block;
+    height:100%;
+    position:absolute;
+    top:0;
+    left:0;
+    border:1px solid #e5e5e5;
+    -webkit-transform:scaleX(0.5);
+    transform:scaleX(0.5);
+    -webkit-transform-origin:0 0;
+    transform-origin:0 0;
+    box-sizing:border-box;
+}
+.fixed .flex .gouwu:nth-child(2)::before{
+    content:" ";
+    display: inline-block;
+    height:100%;
+    position:absolute;
+    top:0;
+    right:0;
+    border:1px solid #e5e5e5;
+    -webkit-transform:scaleX(0.5);
+    transform:scaleX(0.5);
+    -webkit-transform-origin:0 0;
+    transform-origin:0 0;
+    box-sizing:border-box;
+}
+.fixed .gouwu .imgLogo .buyNum{
+    display: inline-block;
+    position: absolute;
+    top:5rpx;
+    right:15rpx;
+    width: 20rpx;
+    height: 20rpx;
+    line-height: 20rpx;
+    text-align: center;
+    border-radius: 50%;
+    background: #ff4444;
+    color: #fff;
+}
+.fixed .imgLogo image{
+    width: 100%;
+    vertical-align: middle;
+}
+.fixed .shouye,.fixed .gouwu{
+    font-size: 24rpx;
+    /* width: 110rpx; */
+    vertical-align: middle;
+    display:inline-block;
+}
+.fixed .shouye{
+    border-right:1px solid #e5e5e5;
+    color:#848484;
+}
+.fixed .style{
+    flex:1;
+    line-height:80rpx;
+    padding:5rpx 0;
+}
+.fixed .addCars{
+     background: #ff8855; 
+     color:#fff;
+}
+.fixed .buyNow{
+    background: #ff4444;
+    color:#fff;
+}
+.allImg .imgs text{
+  display: block;
+  text-align: center;
+  font-size: 24rpx;
+  color:#3e3e3e;
+  line-height: 42rpx;
+}
+.zan-toast {
+  position: fixed;
+  top: 35%;
+  left: 20%;
+  transform: translateZ(0) translateY(-100%);
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font-size: 14px;
+  width: 60%;
+  line-height: 1.5em;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 10px;
+  text-align: center;
+  border-radius: 4px;
+  z-index: 100;
+}
+.fixed:after{
+  content:" ";
+  display: inline-block;
+  position:absolute;
+  top:0;
+  left:0;
+  border:1px solid #F7F7F7;
+  -webkit-transform:scaleY(0.5);
+  transform:scaleY(0.5);
+  -webkit-transform-origin:0 0;
+  transform-origin:0 0;
+  box-sizing:border-box;
+}
+/* 返回顶部 */
+.share{
+    position: fixed;
+    top:41%;
+    right:20rpx;
+    /* transform:translate(-50%,-50%); */
+    z-index: 99;
+}
+.share .wing{
+    display: block;
+    width: 96rpx;
+    height: 96rpx;
+    background: #25db9d;
+    color:#fff;
+    border-radius: 8rpx;
+    padding: 5rpx 0 0 0;
+    box-sizing:border-box;
+}
+.share .wing .rol{
+    background: #fff;
+    width: 40rpx;
+    height: 40rpx;
+    line-height: 36rpx;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+    margin-top:3px;
+}
+.share .wing image{
+    width: 32rpx;
+}
+.share .wing view{
+    display: block;
+    font-size: 22rpx;
+    margin: 0 auto;
+    text-align: center;
+    padding:6rpx 2rpx 0 2rpx;
+    box-sizing: border-box;
+}
+.wxParse{
+  font-size: 26rpx;
+  width: 100%;
+}
+.wxParse image{
+  width: 100%!important;
+}
+.footer{
+  font-size: 32rpx;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color:#f2f2f2;
+  z-index: 9;
+}
+.footer view{
+    text-align: center;
+    height: 92rpx;
+    line-height: 92rpx;
+    background: #fff;
+}
+.cancel{
+  margin-top: 10rpx;
+}
+.footer button{
+  font-size: 32rpx;
+  padding: 0!important;
+  margin: 0!important;
+  border-radius: 0!important;
+  height: 92rpx;
+  line-height: 92rpx;
+  background: #fff;
+}
+button:after{
+  content: none;
+}
+.poster{
+  border-top:1px solid #ddd;
+  border-bottom:1px solid #ddd;
+}

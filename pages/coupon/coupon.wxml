@@ -1,0 +1,68 @@
+<!--pages/coupon/coupon.wxml-->
+<view class="container">
+    <navigator url="../help/help" class="help">优惠券帮助中心</navigator>
+      <view class="stamp stamp02" wx:for="{{myCoupons}}" wx:key="{{index}}">
+          <view class="par">
+            <view>{{item.coupon_name}}</view>
+            <view class="midd"><text class="sign">￥</text><text>{{item.amount}}</text><text>优惠券</text></view>
+            <view>{{item.description}}</view>
+          </view>
+          <view class="copy">副券
+              <view>{{item.expire_date}} </view>
+              <view wx:if="{{item.status == 0}}">未使用</view>
+              <view wx:if="{{item.status == 1}}">即将过期</view>
+              <view wx:elif="{{item.status == 2}}">已过期</view>
+          </view>
+          <text></text>
+      </view>
+</view>
+<view class="container">
+    <!-- <navigator url="../help/help" class="help">优惠券帮助中心</navigator> -->
+      <view class="stamp stamp02" >
+          <view class="par">
+            <view>萌宠卷</view>
+            <view class="midd"><text class="sign">￥</text><text>66{{item.amount}}</text><text>优惠券</text></view>
+            <view>{{item.description}}2018/2/2-2018/3/3</view>
+          </view>
+          <view class="copy">副券
+              <view>{{item.expire_date}} </view>
+              <view>未使用</view>
+              <!-- <view>即将过期</view>
+              <view >已过期</view> -->
+          </view>
+          <text></text>
+      </view>
+</view>
+<view class="container">
+    <!-- <navigator url="../help/help" class="help">优惠券帮助中心</navigator> -->
+      <view class="stamp stamp02" >
+          <view class="par">
+            <view>萌宠卷2</view>
+            <view class="midd"><text class="sign">￥</text><text>88{{item.amount}}</text><text>优惠券</text></view>
+            <view>{{item.description}}2018/2/2-2018/3/3</view>
+          </view>
+          <view class="copy">副券
+              <view>{{item.expire_date}} </view>
+              <view>即将过期</view>
+              <!-- <view>即将过期</view>
+              <view >已过期</view> -->
+          </view>
+          <text></text>
+      </view>
+</view><view class="container">
+    <!-- <navigator url="../help/help" class="help">优惠券帮助中心</navigator> -->
+      <view class="stamp stamp02" >
+          <view class="par">
+            <view>萌宠卷3</view>
+            <view class="midd"><text class="sign">￥</text><text>20{{item.amount}}</text><text>优惠券</text></view>
+            <view>{{item.description}}2018/2/2-2018/3/3</view>
+          </view>
+          <view class="copy">副券
+              <view>{{item.expire_date}} </view>
+              <view>已过期</view>
+              <!-- <view>即将过期</view>
+              <view >已过期</view> -->
+          </view>
+          <text></text>
+      </view>
+</view>

@@ -1,0 +1,22 @@
+<!--pages/help/help.wxml-->
+<view class="container">
+    <view class="h1">
+      1.优惠券是什么
+    </view>
+    <view class="content">
+        <text>优惠券是在可用卷价基础上的一种优惠活动</text>
+    </view>
+    <view class="h1">
+      2.优惠券怎么获取
+    </view>
+    <view class="content">
+        <text>优惠券可以在“邀请有奖”渠道获取，目前推出一种满减卷，满99减50卷，邀请好友使用小程序下单并签收即可获得，购买任意物品都可以使用，邀请一个获得一张，N个获得N张，不重复</text>
+        <text>您可以到【我的】-【优惠券】中查看账户的优惠券</text>
+    </view>
+    <view class="h1">
+      3.优惠券如何使用
+    </view>
+    <view class="content">
+        <text>如果当您有优惠券的话，可以在优惠券方式中选择用卷优惠，然后在填单页选择您要使用的优惠券即可。</text>
+    </view>
+</view>

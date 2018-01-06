@@ -1,0 +1,28 @@
+<!--pages/mingxi/mingxi.wxml-->
+<view class="container">
+    <view class='noOrder' wx:if="{{commissionList.length==0}}">
+        <view class="noOrder1">
+            <image style='width:120rpx' src="../images/haoyouNone.png"  mode='widthFix'></image>
+        </view>
+        <view class="noOrder2" style="font-size:26rpx;text-align:center;padding:20rpx;margin-top:0;box-sizing:border-box;">
+            暂时没有数据！
+        </view>
+    </view>
+    <view id='mingxi' wx:else>
+        <view class='list' wx:for="{{commissionList}}" wx:key="{{item.index}}">
+            <view class='left'>
+                <!-- <image wx:if="{{avatarurl == null}}" src='../images/usera.png' mode='widthFix'></image> -->
+                <image src='{{item.avatarurl}}' mode='widthFix'></image>
+            </view>
+            <view class="center">
+                <!-- <view class='h4' wx:if="{{name== null}}"><image src="../images/star.png" mode='widthFix'></image> user</view> -->
+                <view class='h4'><image src="../images/star.png" mode='widthFix'></image>  {{item.wx_name}}</view>
+                <view class='name'>成为代理商时间：{{item.commission_time}}</view>
+            </view>
+            <view class="right">  
+                <view class='h4'>+￥{{item.commission_fee}}</view>
+            </view>
+        </view> 
+    </view> 
+   
+</view>

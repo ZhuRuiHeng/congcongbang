@@ -1,0 +1,26 @@
+<!--pages/tuijianShare/tuijianShare.wxml-->
+<view class='container'>
+  <view class='img_warp'>
+    <image src='{{arr.avatarurl}}'></image>
+  </view>
+
+  <view class='desc'>送你【新人专享】优惠，老用户也可领取满减劵哟</view>
+
+  <view class='share_block'>
+    <view class='type'>{{arr.type}}</view>
+    <view class='desc_msg'>{{arr.coupon_info}}</view>
+  </view>
+
+  <view class='btn {{received?"received":""}}' bindtap='receive'>领取</view>
+
+  <view class='detail_wrap'>
+    <view>猜你喜欢，大家都在推荐</view>
+    <view class='item_wrap'> 
+      <view class='item' wx:for="{{recommends}}" wx:key="{{index}}">
+        <image src='{{item.picture}}' class=''></image>
+        <view class='title'>{{item.good_name}}</view>
+        <view class='go_to' data-gid="{{item.gid}}" bindtap='goTo'>去看看</view>
+      </view>
+    </view>
+  </view>
+</view>

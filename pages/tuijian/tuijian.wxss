@@ -1,0 +1,197 @@
+/* pages/tuijian/tuijian.wxss */
+.container{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 750rpx;
+  min-height: 100%;
+  height: auto;
+  display: block;
+  border-top: 1rpx solid #ededed;
+}
+
+.invite{
+  width: 100%;
+  height: 250rpx;
+  margin-bottom: 20rpx;
+  /* background: url(https://qncdn.playonwechat.com/shangcheng/invite.png) no-repeat; */
+  background:#fff url(https://qncdn.playonwechat.com/shangcheng/welcome.png) no-repeat center;
+  /* background-size: 100% 100%; */
+  padding: 0 20rpx;
+  box-sizing: border-box;
+}
+
+.invite_wrap{
+  width: 750rpx;
+  padding: 20rpx 30rpx;
+  background: #fff;
+  margin-bottom: 20rpx;
+  font-size: 30rpx;
+  line-height: 50rpx;
+  color: #333;
+  box-sizing: border-box;
+}
+
+.invite_content{
+  width: 400rpx;
+  height: 140rpx;
+  /* background:radial-gradient(transparent 0, transparent 5rpx, #D24161 5rpx); */
+  background: url(https://qncdn.playonwechat.com/shangcheng/bg1.png) no-repeat;
+  background-size:100% 100%;
+  background-position:9rpx 3rpx;
+  margin: 20rpx auto 0;
+  padding:60rpx;
+  color: #fff;
+  text-align: center;
+}
+
+.invite_content:after{
+  content:'';
+  position:absolute;
+  left:10rpx;
+  top:10rpx;
+  right:10rpx;
+  bottom:10rpx;
+  box-shadow:0 0 20rpx 1px rgba(0, 0, 0, 0.5);
+  z-index:-2;
+}
+.two{
+  width: 100%;
+  height: 200rpx;
+  padding: 0 20rpx;
+  box-sizing:border-box; 
+  background: url(https://qncdn.playonwechat.com/shangcheng/invite2.png) no-repeat;
+  background-size: 100% 100%;
+}
+
+.invite_btn{
+  width: 90%;
+  height: 80rpx;
+  line-height: 80rpx;
+  color: red;
+  text-align: center;
+  background: #fff;
+  position: fixed;
+  bottom: 0;
+  font-size: 30rpx;
+  padding:0 20rpx;
+  overflow:hidden;
+  margin:20rpx 0;
+  
+}
+.invite_btn:after {
+  position:absolute;
+  left:10rpx;
+  top:10rpx;
+  right:10rpx;
+  bottom:10rpx;
+  box-shadow:0 0 20rpx 1px rgba(0, 0, 0, 0.5);
+  z-index:-2;
+}
+.invite_btn:before{
+  content: "";
+  display: block;
+  width: 200%;
+  height: 200%;
+  border-top: 1px solid #ededed;
+  transform: scale(0.5);
+  transform-origin: 0 0;
+  position: absolute;
+  top: 0;
+  left: 0;  
+}
+
+.invite_wrap2{
+  width: 750rpx;
+  padding: 20rpx 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  color: #333;
+  font-size: 30rpx;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+}
+
+.invite_wrap2 image{
+  width: 46rpx;
+  height: 46rpx;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 10rpx;
+}
+
+.invite_item{
+  width: 50%;
+}
+
+button.invite_item{
+  /* position:relative; */
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+  padding: 0;
+  box-sizing:border-box;
+  font-size:30rpx;
+  text-align:center;
+  text-decoration:none;
+  line-height:40rpx;
+  border-radius:0px;
+  -webkit-tap-highlight-color:transparent;
+  overflow:hidden;
+  color:#333;
+  background-color:transparent;
+}
+
+
+button:after{
+  border: 1rpx solid #fff;
+}
+.yaoqing{
+  display: flex;
+  justify-content: space-around;
+  border-bottom:10rpx solid #626262;
+  margin:100rpx 0 300rpx 0;
+}
+.yaoqing .direct .height{
+  display: inline-block;
+  width: 10rpx;
+  height:100rpx;
+  background: #626262;
+}
+.direct{
+  position: relative;
+  display: inline-block;
+}
+.diImg{
+  position: absolute;
+  top:-34rpx;
+  left: 40rpx;
+}
+.bottom{
+  position: absolute;
+  bottom:-60rpx;
+  left: 40rpx;
+}
+.direct view{
+  display: inline-block;
+}
+.direct .gaodu{
+  width: 60rpx;
+  height: 100rpx;
+  display: inline-block;
+  text-align:center;
+  position:relative;
+  bottom:-20rpx;
+}
+.lists{
+  position: relative;
+  width:100%;
+}
+.direct{
+  width: 24%;
+  padding-left:40rpx;
+  box-sizing:border-box;
+}

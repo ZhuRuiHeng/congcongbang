@@ -1,0 +1,55 @@
+<!--pages/tuijian/tuijian.wxml-->
+<view class='container'>
+  <view class='invite'></view>
+
+  <view class='invite_wrap'>
+    <view class='invite_title'>1.转发小程序，邀请好友下单并签收，各得{{coupon_info}}优惠券</view>
+
+    <view class='invite_content'>
+      <view>{{coupon_info}}</view>
+      <view>优惠券</view>
+    </view>
+  </view>
+
+  <view class='invite_wrap'>
+    <view class='invite_title'>2.邀请新用户达到指定数量，将额外获得不同奖励</view>
+
+    <!-- <view class='invite_content two'></view> -->
+    <view class="yaoqing">
+        <view class="lists">
+            <view class="direct">
+                <view class="diImg"><image src="../images/liwu.png" style="width:60rpx;" mode="widthFix"></image></view>
+                <view class="gaodu"><view class="height" style="height:100rpx;"></view></view>
+                <view class="bottom"><text>2位</text></view>
+            </view>
+            <view class="direct">
+                <view class="diImg"><image src="../images/liwu.png" style="width:60rpx;" mode="widthFix"></image></view>
+                <view class="gaodu"><view class="height" style="height:160rpx;"></view></view>
+                <view class="bottom"><text>10位</text></view>
+            </view>
+            <view class="direct">
+                <view class="diImg"><image src="../images/liwu.png" style="width:60rpx;" mode="widthFix"></image></view>
+                <view class="gaodu"><view class="height" style="height:220rpx;"></view></view>
+                <view class="bottom"><text>20位</text></view>
+            </view>
+            <view class="direct">
+                <view class="diImg"><image src="../images/liwu.png" style="width:60rpx;" mode="widthFix"></image></view>
+                <view class="gaodu"><view class="height" style="height:260rpx;"></view></view>
+                <view class="bottom"><text>50位</text></view>
+            </view>
+        </view>
+    </view>
+  </view>
+
+  <!-- <view class='invite_btn'>立即邀请</view> -->
+  <view class='invite_wrap2'>
+    <button class='invite_item' open-type='share'>
+      <image src='../images/zhu.png'></image>
+      <view>转发微信群</view>
+    </button>
+    <view class='invite_item' bindtap='erwei'>
+      <image src='../images/ewm.png'></image>
+      <view>生成二维码</view>
+    </view>
+  </view>
+</view>

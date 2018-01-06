@@ -1,0 +1,75 @@
+<!--pages/miaosha/miaosha.wxml-->
+<view class="main">
+      <view class="pintuanAll">
+          <scroll-view class="search_world" scroll-x="true">
+            <view class="search_w_box" style="width:{{w_width}}rpx">
+               <view class="search_item" style="width:40rpx;" wx:if="{{search_word.yesterday.length >0}}">
+                  <text class="time" style="width:40rpx;height:100rpx;">昨天</text>
+              </view>
+              <view wx:if="{{search_word.yesterday.length>0}}" wx:for="{{yesterday}}" data-active="{{item.active}}" 
+                    class="search_item {{item.active == true?'red':'default'}} {{star == true?'red':'default'}}" 
+                    bindtap="tapKeyWorld" data-sta="{{item.status}}" data-inx="{{index}}" data-star="{{item.activity_begin}}">
+                <text>{{item.activity_begin_time}}</text>
+                <text>{{item.status}}</text>
+              </view>
+              <view wx:if="{{search_word.today.length>0}}" class="search_item" style="width:40rpx;" >
+                  <text class="time" style="width:40rpx;height:100rpx;">今天</text>
+              </view>
+              <view wx:if="{{search_word.today.length>0}} " wx:for="{{today}}" data-active="{{item.active}}" 
+                    class="search_item {{item.active == true?'red':'default'}} {{star == true?'red':'default'}}" 
+                    bindtap="tapKeyWorld" data-begin="{{item.activity_begin}}" data-sta="{{item.status}}"  data-inx="{{index}}" data-star="{{item.activity_begin}}">
+                <text>{{item.activity_begin_time}}</text>
+                <text>{{item.status}}</text>
+              </view>
+              <view wx:if="{{search_word.tomorrow.length>0}}" class="search_item" style="width:40rpx;" >
+                  <text class="time" style="width:40rpx;height:100rpx;">明天</text>
+              </view>
+              <view wx:if="{{search_word.tomorrow.length>0}}" wx:for="{{tomorrow}}" data-active="{{item.active}}" 
+                    class="search_item {{item.active == true?'red':'default'}} {{star == true?'red':'default'}}" 
+                    bindtap="tapKeyWorld" data-begin="{{item.activity_begin}}" data-sta="{{item.status}}" data-inx="{{index}}" data-star="{{item.activity_begin}}">
+                <text>{{item.activity_begin_time}}</text>
+                <text>{{item.status}}</text>
+              </view> 
+            </view>
+          </scroll-view>
+          <!-- yesterday -->
+          <view class="xianshi">
+              <view class="left">{{description}}</view>
+              <view class="right" wx:if="{{description == '|限时限量 低价疯抢'}}" wx:for="{{Countdown}}">
+                  <image src="../images/time.png" mode="widthFix"></image>  
+                  距活动结束{{item.hr}}时{{item.min}}分{{item.sec}}秒
+              </view>
+              <view class="right" wx:if="{{description == '|提前设置提醒不错过'}}" wx:for="{{Countdown}}">
+                  <image src="../images/time.png" mode="widthFix"></image>  
+                  距活动开始{{item.day}}天{{item.hr}}时{{item.min}}分{{item.sec}}秒
+              </view>
+          </view>
+
+          <view class="service-list">
+            <navigator wx:for="{{main_content}}" data-index="{{index}}"  wx:key="{{index}}" class="service-item" url="../miaoshaInform/miaoshaInform?gid={{item.gid}}&sta={{sta}}">
+                  <view class="service-img">
+                      <image src="{{item.picture}}" mode="aspectFill"></image>
+                  </view>
+                  <view class="service-text">
+                      <view class="service-tite service-tite1">{{item.good_name}}</view>
+                      <view class="grounpline">
+                          <view class="common one"></view>
+                          <view class="common two" style="width:{{results[index]}}"></view>
+                      </view>
+                      <view class="kucun">
+                          <view class="left">已抢购{{item.sales_volume}}件</view>
+                          <view class="right">仅剩{{item.stock}}件</view>
+                      </view>
+                      <view class="caozuo">
+                          <view> <text class="service-price">￥{{item.seckill_price}}</text> <text class="old service-price">￥{{item.price}}</text></view>
+                          <view wx:if="{{sta=='即将开抢'}}" class="service-gouwu">未开始</view>
+                          <view wx:else class="service-gouwu">立即抢购</view>
+                      </view>
+                      <view id="gouwu{{item.gid}}" data-gid="{{item.gid}}" class="buy-response" wx:if="{{sta=='即将开抢'}}" catchtap="addCar"></view>
+                      <view id="gouwu{{item.gid}}" data-gid="{{item.gid}}" class="buy-response" wx:else></view>
+                  </view>
+              </navigator>
+          </view>
+      </view>
+  </view>
+

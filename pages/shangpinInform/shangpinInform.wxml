@@ -1,0 +1,114 @@
+<!--pages/dingdanInform/dingdanInform.wxml-->
+<import src="../../dist/toast/index.wxml" />
+<!--引入模板  -->
+<template is="zan-toast" data="{{ zanToast }}"></template>
+<view class="container">
+    <!--等待  -->
+    <view class="fukaun">
+        <view class="left1">
+            <image src="https://qncdn.playonwechat.com/shangcheng/pay.png" mode="widthFix"></image>
+        </view>
+        <view class="left2">
+            <text style="color:#000"  wx:if="{{list.status == 'payment'}}"> 等待买家付款</text>
+            <text style="color:#000"  wx:elif="{{list.status == 'deliver'}}"> 等待卖家发货</text>
+            <text style="color:#000"  wx:elif="{{list.status == 'receipt'}}"> 等待买家收货</text>
+            <text style="color:#000"  wx:elif="{{list.status == 'finish'}}"> 已完成</text>
+            <text style="color:#000"  wx:elif="{{list.status == 'group'}}"> 拼团中</text>
+            <text style="color:#000"  wx:else="{{list.status == 'close'}}"> 交易关闭</text>
+            <text wx:if="{{list.status !='payment'}}">订单编号：{{list.out_trade_no}}</text>
+            <text wx:if="{{list.status == 'payment'}}" 
+                  wx:for="{{Countdown}}">请于{{item.min}}分{{item.sec}}秒内付款，超时订单将自动关闭</text>
+            <!--wx:for="{{Countdown}}">{{item.day}}天{{item.hr}}时{{item.min}}分{{item.sec}}秒  -->
+        </view>
+    </view>
+    <!--地址 bindtap="nextAddress" -->
+    <view class="address">
+        <view class="inform">
+            <view class="left">
+                <image src="https://qncdn.playonwechat.com/shangcheng/address.png" mode="widthFix"></image>
+                收货人：{{list.receiver}}
+            </view>
+            <view class="right">
+                {{list.receiver_phone}}
+            </view>
+        </view>
+        <view class="dizhi">
+            收货地址：{{list.receiver_address}}
+        </view>
+        <!-- <view class="next">
+            <image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"></image>
+        </view> -->
+    </view>
+    <view class="line">
+        <image src="https://qncdn.playonwechat.com/shangcheng/line.png" mode="widthFix"></image>
+    </view>
+    <!--店铺  -->
+    <view class="shop">
+        <view class="checkbox">
+            <label class="radio">
+                <image src="https://qncdn.playonwechat.com/shangcheng/shop.png" mode="widthFix"></image>店铺
+            </label>
+        </view>
+    </view>
+    <!--商品  -->
+    <view class="shangpin">
+        <view class="service-list" wx:for="{{goods_list}}">
+            <view class="service-item">
+                <view class="service-img">
+                    <image src="{{item.figure}}" mode="aspectFill"></image>
+                </view>
+                <view class="service-text">
+                    <view class="service-tite">{{item.good_name}}</view>
+                    <view class="fenlei"> {{item.attribute_value}}</view>
+                    <view class="caozuo">
+                        <text class="service-price">￥{{item.price}}</text>
+                        <view class="service-gouwu">x{{item.number}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="controllist">
+        <view class="left">配送方式</view>
+        <view class="right">免运费</view>
+    </view>
+    <view class="control">
+        <view class="left">留言</view>
+        <view class="right"><input class="liuyan" name="userMes" type="text" placeholder="" value="{{list.message}}" disabled/></view>
+    </view>
+     <view class="controllist">
+        <view class="left">合计</view>
+        <view class="right color">￥{{list.total_fee}}</view>
+    </view> 
+    <!-- <view class="controllist youhui top">
+        <view class="left">优惠</view>
+        <view class="right">优惠￥5</view>
+    </view> -->
+    <!-- <view class="controllist top" style="padding:10rpx 20rpx;">
+        <view class="left" style="position:relative;top:13rpx;">短信通知收件人</view>
+        <view class="right">
+            <view class="page-section page-section-gap">
+              <switch name="switch" bindchange="listenerSwitch" />
+            </view>
+        </view>
+    </view> -->
+    <view class="jine top" style="margin-bottom:120rpx;">
+       <view class="controllist ">
+          <view class="left">商品金额</view>
+          <view class="right color">￥{{list.total_fee}}</view>
+      </view>
+      <view class="controllist">
+          <view class="left">运费</view>
+          <view class="right color">免运费</view>
+      </view>
+    </view>
+    
+    <!--foot  -->
+    <view class="fixed">
+        <view class="heji">合计：<text>￥{{list.total_fee}}</text> </view>
+        <!--如果status1=待支付就显示去支付  -->
+        <form wx:if="{{status1 == 'payment'}}" report-submit="true" bindsubmit="formSubmit" class="formSubmit">
+            <button class="submit" formType="submit">去支付</button>
+        </form>
+    </view>
+</view>

@@ -1,0 +1,83 @@
+<!--pages/search/search.wxml-->
+<import src="../../dist/toast/index.wxml" />
+<!--引入模板  -->
+<template is="zan-toast" data="{{ zanToast }}"></template>
+<!--搜索  -->
+<view class="sousuo">
+    <view class="search" bindtap="search">
+        <view class="icon-search"><image src="https://qncdn.playonwechat.com/shangcheng/search.png"></image></view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+                <input class="weui-input" auto-focus placeholder="搜索商品" bindinput="inputValue"/>
+            </view>
+        </view>
+    </view>
+    <view class="quxiao" bindtap="searchBtn">搜索</view>
+</view>
+<!--content -->
+<view class='list' wx:if="{{main_content}}">
+    <view class="service-list" wx:if="{{main_content.length != 0}}">
+      <navigator class="service-item" wx:for="{{main_content}}" wx:key="{{item.gid}}" url="../inform/inform?gid={{item.gid}}">
+            <view class="service-img">
+                <image src="{{item.picture}}" mode="aspectFill"></image>
+            </view>
+            <view class="service-text">
+                <view class="service-tite">{{item.good_name}}</view>
+                <view class="caozuo">
+                    <text class="service-price">￥{{item.price}}</text>
+                    <view class="service-gouwu"><image src="https://qncdn.playonwechat.com/shangcheng/car.png"></image></view>
+                </view>
+                <view id="gouwu{{item.gid}}" data-gid="{{item.gid}}" class="buy-response" catchtap="addCar"></view>
+            </view>
+        </navigator>
+    </view>
+    <view wx:else>
+        <view style="text-align:center;font-size:24rpx;padding:30rpx;"> 没有找到相关商品 </view>
+    </view>
+</view>
+ <!--购物车弹窗  -->
+    <view class="bg {{addCar?'show':'hidden'}}"></view> 
+    <view class="carBox {{addCar?'show':'hidden'}}">
+        <view class="padding">
+            <view class="top">
+                <view class="left">
+                     <!-- <image src="{{inform.picture[0]}}"></image>  -->
+                    <image src="{{figure}}"></image>
+                </view>
+                <view class="right">
+                    <text class="shuoming">{{inform.good_name}}</text>
+                    <text class="price">
+                        <text wx:if="{{low_price == high_price}}">￥{{low_price}}</text> 
+                        <text wx:else>￥{{low_price}}~{{high_price}}</text>
+                    </text>
+                </view>
+                <view class="del" bindtap="closeCar">
+                    <image src="https://qncdn.playonwechat.com/shangcheng/icon_close.png" mode="widthFix"></image>
+                </view>
+            </view>
+            <view class="kuanshi"  wx:for="{{inform.attribute}}" wx:key="{{index}}">
+                <view class="title" data-anid="{{item.anid}}" data-attribute_name="{{item.attribute_name}}">{{item.attribute_name}}：</view>
+                <view class="leibie" data-anid="{{item.anid}}"  bindtap="leibieall" data-index="{{index}}">
+                    <view  wx:for="{{item.attribute_value}}" wx:key="{{index}}"  
+                          wx:for-item="attr" data-avid="{{attr.avid}}" data-value="{{attr.attribute_value}}" data-active="{{attr.active}}"
+                          class="text white {{attr.active==true ? 'red':''}}" 
+                          bindtap="xuanze" >{{attr.attribute_value}}</view>
+                </view>
+            </view>
+            <view class="mid">
+                <view class="buy">
+                    <text>购买数量：{{price}}</text>
+                    <text class="gray">剩余{{inform.total_stock-price}}件</text>
+                </view>
+                <view class="num">
+                    <button class="reduce {{minusStatus}}" bindtap="bindMinus">-</button>
+                    <input type="number"  bindchange="bindManual" value="{{price}}" readonly="readonly"/>
+                    <button class="add normal" bindtap="bindPlus">+</button>
+                </view>
+            </view>
+        </view>
+        <view class="btn">
+            <button class="addCar" bindtap="addCars">加入购物车</button>
+            <!-- <button class="buy" bindtap="buy" >立即购买</button> -->
+        </view>
+    </view>

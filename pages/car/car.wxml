@@ -1,0 +1,78 @@
+<!--pages/car/car.wxml-->
+<import src="../../dist/toast/index.wxml" />
+<!--引入模板  -->
+<template is="zan-toast" data="{{ zanToast }}"></template>
+<view class="container">
+    <view class="service-list" wx:if="{{carts.length == 0}}" style="text-align:center;padding:30rpx 0;font-size:24rpx;">
+        <view class="classname">您的购物车空空如也~~~</view>
+        <view class="guanguang" bindtap="guanguang" style="margin-top:40rpx;border:1px solid #ff4444;padding:6rpx 20rpx;display:inline-block;border-radius:6rpx;">
+            去逛逛
+        </view>
+    </view>
+    <view wx:else id="car">
+        <!--店铺  -->
+        <view class="shop">
+            <view class="checkbox">
+                <label class="radio">
+                    <text bindtap="selectAreaOk" areaId="all" id="all">{{area.name}}</text> 
+                      <icon wx:if="{{selectAllStatus}}" type="success" size="20" color="#ff4444" bindtap="selectAll"/>
+                    <icon wx:else type="circle" bindtap="selectAll" size="20"/>
+                    <image src="https://qncdn.playonwechat.com/shangcheng/shop.png" mode="widthFix"></image>店铺
+                </label>
+            </view>
+            <view class="seting" bindtap="seting" id="{{ids}}">{{wenzi}}</view>
+        </view>
+        <!--商品  -->
+        <view class="spAll">
+            <view class="service-list">
+                <view class="service-item" wx:for="{{carts}}" wx:key="{{item.id}}" data-detail="{{item.attribute}}" data-gid="{{item.gid}}">
+                    <view class="radio-group">
+                        <icon wx:if="{{item.selected}}" type="success" size="20" color="#ff4444" bindtap="selectList" data-index="{{index}}" />
+                        <icon wx:else type="circle" bindtap="selectList" size="20" data-index="{{index}}"/>
+                    </view>
+                    <view class="service-img">
+                        <image src="{{item.figure}}" mode="aspectFill"></image>
+                    </view>
+                    <view class="service-text">
+                        <view class="service-tite service-tite1 {{set1?'show':'hidden'}}">{{item.good_name}}</view>
+                        <view class="service-tite service-tite1 service-tite3 {{set1?'show':'hidden'}}">{{item.attribute_value}}</view>
+                        <view class="service-tite service-tite2 {{set2?'show':'hidden'}}">
+                              <view class="num">
+                                  <button class="reduce" bindtap="minusCount" data-index="{{index}}">-</button>
+                                  <input type="number" value="{{item.number}}" readonly="readonly"/>
+                                  <button  class="add normal" bindtap="addCount" data-index="{{index}}">+</button>
+                              </view>
+                        </view> 
+                        <view class="caozuo">
+                            <text class="service-price">￥{{item.price}}</text>
+                            <view class="service-gouwu">x{{item.number}}</view>
+                        </view>
+                        <view class="del {{set2?'show':'hidden'}}" bindtap="delItem" data-index="{{index}}">删除</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <!--foot  -->
+        <view class="foot">
+            <view class="one checkbox flex">
+                <label class="radio">
+                    <text bindtap="selectAreaOk" areaId="all" id="all">{{area.name}}</text> 
+                    <icon wx:if="{{selectAllStatus}}" type="success" size="20" color="#ff4444" bindtap="selectAll"/>
+                    <icon wx:else type="circle" bindtap="selectAll" size="20"/>  <text class="quanxuan">全选</text>
+                </label>
+            </view>
+            <view class="two flex {{set1?'show':'hidden'}}" >
+                <view class="top">合计：￥{{totalPrice}}</view>
+                <view class="btm">不含运费</view>
+            </view>
+            <view class="three flex {{set1?'show':'hidden'}}" bindtap="jiesuan">
+                结算
+            </view>
+            <view class="three flex {{set2?'show':'hidden'}}" bindtap="shanchu">
+                删除
+            </view>
+        </view>
+    </view>
+</view>
+
+

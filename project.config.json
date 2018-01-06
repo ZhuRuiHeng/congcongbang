@@ -1,0 +1,153 @@
+{
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "1.5.4",
+	"appid": "wxc828404c5024d524",
+	"projectname": "%E5%AE%A0%E5%AE%A0%E9%82%A6",
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"current": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": [
+				{
+					"id": 0,
+					"name": "二维码",
+					"pathName": "pages/inform/inform",
+					"query": "gid=54&mid=97"
+				},
+				{
+					"id": 1,
+					"name": "首页",
+					"pathName": "pages/index/index",
+					"query": "scene=bargain_26"
+				},
+				{
+					"id": 2,
+					"name": "拼团",
+					"pathName": "pages/pintuanxiangqing/pintuanxiangqing",
+					"query": "mid=145&gid=43"
+				},
+				{
+					"id": 3,
+					"name": "秒杀",
+					"pathName": "pages/miaoshaInform/miaoshaInform",
+					"query": "mid=97&gid=63"
+				},
+				{
+					"id": 4,
+					"name": "拼团",
+					"pathName": "pages/pintuanInform/pintuanInform",
+					"query": "mid=145&gid=43"
+				},
+				{
+					"id": 5,
+					"name": "更多",
+					"pathName": "pages/more/more",
+					"query": "mid=145&cate_id=43"
+				},
+				{
+					"id": 6,
+					"name": "use",
+					"pathName": "pages/use/use",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "审核任务列表",
+					"pathName": "pages/workList/workList",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "做任务",
+					"pathName": "pages/work/work",
+					"query": ""
+				},
+				{
+					"id": 9,
+					"name": "bargainShare",
+					"pathName": "pages/bargainShare/bargainShare",
+					"query": "bargain_id=107"
+				},
+				{
+					"id": -1,
+					"name": "pet",
+					"pathName": "pages/pet/pet",
+					"query": ""
+				},
+				{
+					"id": 11,
+					"name": "bargainInform",
+					"pathName": "pages/bargainInform/bargainInform",
+					"query": "bargain_id=107&gid=140"
+				},
+				{
+					"id": -1,
+					"name": "my",
+					"pathName": "pages/my/my",
+					"query": "bargain_id=107&gid=139"
+				},
+				{
+					"id": -1,
+					"name": "tixian",
+					"pathName": "pages/tixian/tixian",
+					"query": "bargain_id=107&gid=139"
+				},
+				{
+					"id": -1,
+					"name": "inform",
+					"pathName": "pages/inform/inform",
+					"query": "gid=136"
+				},
+				{
+					"id": -1,
+					"name": "萌宠首页",
+					"pathName": "pages/pets/pets",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "海报",
+					"pathName": "pages/poster/poster",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "充值",
+					"pathName": "pages/chongzhi/chongzhi",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "money",
+					"pathName": "pages/money/money",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "coupon",
+					"pathName": "pages/coupon/coupon",
+					"query": ""
+				}
+			]
+		}
+	}
+}

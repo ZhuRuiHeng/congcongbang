@@ -1,0 +1,457 @@
+/* pages/dingdanInform/dingdanInform.wxss */
+.container {
+  padding: 0;
+  font-size: 24rpx;
+}
+.address{
+  width: 100%;
+  padding: 20rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction:column;
+  position: relative;
+}
+.address .next image{
+  position: absolute;
+  top:40rpx;
+  right:8rpx;
+}
+.address .inform{
+  display: flex;
+  justify-content:space-between;
+}
+.address .inform .left image{
+  width: 32rpx;
+  vertical-align: middle;
+}
+.address .inform .right{
+  padding:0 20rpx 0 0;
+}
+.address .dizhi{
+    margin-left:36rpx;
+    font-size: 22rpx;
+    color:#626262;    
+}
+.line,.line image{
+  width: 100%;
+}
+.shop{
+    width: 100%;
+    background: #fff;
+    display: flex;
+    justify-content:space-between;
+    font-size: 24rpx;
+    padding:0 20rpx;
+    box-sizing: border-box;
+    vertical-align: middle;
+}
+ .shop .seting button::after{
+    content:none;
+}
+.shop .radio icon{
+    position: relative;
+    top:13rpx;
+}
+.shop .checkbox .radio image{
+    width:42rpx;
+    vertical-align: middle;
+}
+/*列表  */
+.show{display:block;}
+.hidden{display:none;}
+.shangpin{
+  width: 100%;
+}
+.service-list{
+    padding: 20rpx 0 0 0;
+    background: #fff;
+}
+.service-item{
+	  display: flex;
+    position: relative;
+    background: #f6f6f6;
+    padding:0 20rpx;
+    box-sizing: border-box;
+}
+.service-img{
+	width: 180rpx;
+	height: 180rpx;
+}
+.service-item image{
+	width: 160rpx;
+	height: 160rpx;
+    margin:10rpx 0 0 0;
+}
+.service-text{
+	flex: 1;
+	margin-left: 20rpx;
+	width: 100%;
+}
+.service-text .service-tite{
+	color: #000000;
+	width: 100%;
+  font-size: 24rpx;
+  padding-top:20rpx;
+  height: 76rpx;
+  display: -webkit-box;  
+  display: -moz-box;  
+  overflow: hidden;  
+  text-overflow: ellipsis;  
+  word-break: break-all;  
+  -webkit-box-orient: vertical;  
+  -webkit-line-clamp:2;  
+}
+.service-tags{
+	margin: 6rpx 0;
+}
+.service-tags text{
+	padding: 6rpx 16rpx;
+	border: 1rpx solid #f7982a;
+	line-height: 1;
+	color: #f7982a;
+	font-size: 28rpx;
+	border-radius: 4rpx;
+	margin-right: 10rpx;
+	margin-bottom: 10rpx;
+	white-space: nowrap;
+}
+.service-city{
+	color: #666;
+}
+.caozuo{
+  display: flex;
+  justify-content:space-between;
+  height: 63rpx;
+  line-height: 63rpx;
+}
+.caozuo .service-price{
+    color:#ff4444;
+    font-size:26rpx;
+}
+.caozuo .service-gouwu{
+    font-size: 24rpx;
+    color:#626262;
+}
+.caozuo .service-gouwu image{
+    width: 56rpx;
+    height: 56rpx;
+    vertical-align: middle;
+}
+.service-text .buy-response {
+    position: absolute;
+    right: 0rpx;
+    bottom: 0rpx;
+    height: 120rpx;
+    width: 120rpx;
+    opacity: 0;
+}
+.controllist,.controllist{
+  padding:20rpx;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  justify-content:space-between;
+  background: #fff;
+  border-bottom:1px solid #f7f7f7;
+}
+.youhui{
+  position: relative;
+}
+.controllist.youhui.top .right{
+  padding-right:20rpx;
+}
+.youhui .right image,.address .next image{
+  width: 42rpx;
+  vertical-align: middle;
+}
+.youhui .right image{
+  position: absolute;
+  top:20rpx;
+  right:0rpx;
+}
+.control{
+  padding:10rpx 20rpx;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  background: #fff;
+  border-bottom:1px solid #f7f7f7;
+}
+.control .left{
+  line-height: 52rpx;
+  margin-right:30rpx;
+}
+.jine{
+  width:100%;
+  border-bottom:1px solid #f7f7f7;
+}
+.jine .controllist{
+  padding: 10rpx 20rpx;
+  border:none;
+}
+.fixed{
+  width: 100%;
+  position: fixed;
+  display: flex;
+  left:0;
+  bottom:0;
+  background: #fff;
+}
+.heji{
+  flex: 2;
+  text-align: right;
+  padding-right:20rpx;
+  padding:20rpx;
+  border-top:1px solid #f7f7f7;
+}
+.heji text{
+  color:#ff4444;
+}
+.submit{
+  flex:1;
+  background: #ff4444;
+  color:#fff;
+  text-align: center;
+  padding:20rpx;
+}
+.top{
+  margin-top: 20rpx;
+  border-top:1px solid #f7f7f7;
+}
+.liuyan{
+  position: relative;
+  top:6rpx;
+}
+.right.color{
+  color:#ff4444;
+}
+.bg{
+    width: 100%;
+    height: inherit;
+    background: #000;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    opacity: 0.6;
+    z-index: 6;
+    overflow: hidden;
+}
+.carBox{
+    width: 100%;
+    background: #fff;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 9;
+}
+.carBox .top{
+    display: flex;
+}
+.carBox .padding{
+    width: 90%;
+    margin: 0 auto
+}
+.carBox .top .left{
+    width: 140rpx;
+    height: 140rpx;
+}
+.carBox .top .left image{
+   border-radius: 10rpx;
+    border:1px solid #fff;
+    position: relative;
+    top:-20rpx;
+}
+.carBox .top .left image{
+   width: 140rpx;
+    height: 140rpx;
+}
+.carBox .top .del image{
+    width: 100%;
+    height:100%;
+}
+.carBox .top .right{
+    flex: 1;
+    padding:20rpx 0 0 0;
+}
+.carBox .top .right text,.carBox .mid .buy text{
+    display: block;
+    font-weight: normal;
+    font-size:24rpx;
+    line-height:40rpx;
+}
+.carBox .top .del{
+    width: 40rpx;
+    height: 40rpx; 
+    padding: 20rpx;  
+}
+.carBox .top .right{
+    display:block;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;width: 100%;
+    padding-left:20rpx;
+}
+.carBox .top .right text.price{
+    color:#ff4444;
+    padding-top:10rpx;
+}
+.carBox .top .shuoming{
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.carBox .mid{
+    display: flex;
+    justify-content:space-between;
+    padding: 20rpx 0;
+    position: relative;
+}
+.carBox .mid:after{
+    content:" ";
+    display: inline-block;
+    width:100%;
+    position:absolute;
+    top:0;
+    left:0;
+    border:1px solid #f7f7f7;
+    -webkit-transform:scaleY(0.5);
+    transform:scaleY(0.5);
+    -webkit-transform-origin:0 0;
+    transform-origin:0 0;
+    box-sizing:border-box;
+}
+.carBox .mid .num{
+    display: flex;
+    position:relative;
+    top:10rpx;
+}
+.carBox .mid .num button,.carBox .mid .num input{
+    display: inline-block;
+    width: 60rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    padding:0;
+    text-align: center;
+}
+.carBox .mid .num input{
+    font-size: 24rpx;
+    border:1rpx solid #f7f7f7;
+    border-left: 0;
+    border-right:0;
+    box-sizing: border-box;
+}
+.carBox .mid button{
+    border-radius:none;
+    font-size: 24rpx;
+    border:1rpx solid #f7f7f7; 
+}
+.carBox button::after{
+    content:none;
+}
+ .carBox .mid button.reduce{
+    border-radius: 5rpx 0 0 5rpx;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.carBox .mid button.add{
+    border-radius: 0 5rpx 5rpx 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+} 
+.normal{ 
+   color: black; 
+} 
+.disabled{ 
+   color: #ccc; 
+} 
+.carBox .mid .gray{
+   color:#949292;
+}
+.btn{
+    display: flex;
+}
+.btn button{
+    flex: 1;
+    width:100%;
+    font-size:30rpx;
+    padding:8rpx 0;
+}
+.btn .addcar{
+    background: #ff8855;
+    color:#fff;
+    border-radius: 0;
+}
+.btn .buy{
+    background: #ff4444;
+    color:#fff;
+    border-radius: 0;
+}
+.carBox .title{
+  text-align: center;
+  padding:20rpx;
+  font-size: 26rpx;
+}
+.carBox .coupon{
+    display: flex;
+    justify-content:space-between;
+    padding: 10rpx 0;
+    position: relative;
+}
+.carBox .coupon:after{
+    content:" ";
+    display: inline-block;
+    width:100%;
+    position:absolute;
+    top:0;
+    left:0;
+    border:1px solid #f7f7f7;
+    -webkit-transform:scaleY(0.5);
+    transform:scaleY(0.5);
+    -webkit-transform-origin:0 0;
+    transform-origin:0 0;
+    box-sizing:border-box;
+}
+.carBox .coupon:after{
+   content:" ";
+    display: inline-block;
+    width:100%;
+    position:absolute;
+    bottom:0;
+    left:0;
+    border:1px solid #f7f7f7;
+    -webkit-transform:scaleY(0.5);
+    transform:scaleY(0.5);
+    -webkit-transform-origin:0 0;
+    transform-origin:0 0;
+    box-sizing:border-box;
+}
+.fenlei{
+  font-size:20rpx;
+  color:#626262;
+}
+.formSubmit button:after{
+    content:none;
+}
+.formSubmit button{
+  font-size:24rpx;
+  border-radius: 0;
+  display: inline-block;
+  position: static;
+  line-height: inherit;
+  overflow: inherit;
+}
+.zan-toast {
+  position: fixed;
+  top: 35%;
+  left: 20%;
+  transform: translateZ(0) translateY(-100%);
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font-size: 14px;
+  width: 60%;
+  line-height: 1.5em;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 10px;
+  text-align: center;
+  border-radius: 4px;
+  z-index: 100;
+}
+
+switch{transform:scale(.8)}

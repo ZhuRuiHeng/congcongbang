@@ -1,0 +1,16 @@
+<view  wx:if="{{workList==false}}" style="text-align:center;font-size:24rpx;padding:30rpx;"> 暂无数据！ </view>
+<view class="contaion" wx:else>
+    <view class='item'>
+        <view class='left'>时间</view>
+        <view>任务比例</view>
+        <view class='right'>审核状态</view>
+    </view>
+    <view class='item' wx:for="{{workList}}" wx:key="{{index}}">
+        <view class='left'>{{item.add_time}}</view>
+        <view>{{item.return_ratio}}%</view>
+        <view class='right' wx:if="{{item.status==0}}">审核中</view>
+        <view class='right' wx:if="{{item.status==1}}">通过审核</view>
+        <view class='right' wx:if="{{item.status==2}}">未通过审核</view>
+    </view>
+</view>
+

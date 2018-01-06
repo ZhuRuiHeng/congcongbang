@@ -1,0 +1,491 @@
+.container {
+  padding: 0 20rpx;
+  overflow: hidden;
+  background: #fff;
+  margin-bottom: 50rpx;
+}
+.service-list{
+  width: 100%;
+	padding: 0 20rpx;
+}
+.service-item{
+	display: flex;
+    position: relative;
+}
+.service-item:after{
+  content:" ";
+  display: inline-block;
+  width:100%;
+  position:absolute;
+  top:0;
+  left:0;
+  border:1px solid #F7F7F7;
+  -webkit-transform:scaleY(0.5);
+  transform:scaleY(0.5);
+  -webkit-transform-origin:0 0;
+  transform-origin:0 0;
+  box-sizing:border-box;
+}
+.service-img{
+	width: 180rpx;
+	height: 180rpx;
+}
+.service-item image{
+	width: 160rpx;
+	height: 160rpx;
+  margin:12rpx 0 0 0;
+}
+.service-text{
+	flex: 1;
+	margin-left: 20rpx;
+	width: 100%;
+}
+.service-text .service-tite{
+	color: #000000;
+	width: 100%;
+	font-size: 24rpx;
+    padding-top:20rpx;
+    height: 68rpx;
+    display: -webkit-box;  
+    display: -moz-box;  
+    overflow: hidden;  
+    text-overflow: ellipsis;  
+    word-break: break-all;  
+    -webkit-box-orient: vertical;  
+    -webkit-line-clamp:2;  
+}
+.service-tags{
+	margin: 6rpx 0;
+}
+.service-tags text{
+	padding: 6rpx 16rpx;
+	border: 1rpx solid #f7982a;
+	line-height: 1;
+	color: #f7982a;
+	font-size: 28rpx;
+	border-radius: 4rpx;
+	margin-right: 10rpx;
+	margin-bottom: 10rpx;
+	white-space: nowrap;
+}
+.service-city{
+	color: #666;
+}
+.caozuo{
+  padding-top: 20rpx;
+  display: flex;
+  justify-content:space-between;
+  height: 63rpx;
+  line-height: 63rpx;
+}
+.caozuo .service-price{
+    color:#ff4444;
+    font-size:26rpx;
+}
+.caozuo .service-gouwu image{
+    width: 56rpx;
+    height: 56rpx;
+}
+.service-text .buy-response {
+    position: absolute;
+    right: 0rpx;
+    bottom: 0rpx;
+    height: 120rpx;
+    width: 120rpx;
+    opacity: 0;
+}
+/*购物车弹窗  */
+.bg{
+    width: 100%;
+    height: inherit;
+    background: #000;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    opacity: 0.6;
+    z-index: 6;
+    overflow: hidden;
+}
+.carBox{
+    width: 100%;
+    background: #fff;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 9;
+}
+.carBox .top{
+    display: flex;
+}
+.carBox .padding{
+    width: 90%;
+    margin: 0 auto
+}
+.carBox .top .left{
+    width: 140rpx;
+    height: 140rpx;
+}
+.carBox .top .left image{
+   border-radius: 10rpx;
+    border:1px solid #fff;
+    position: relative;
+    top:-20rpx;
+}
+.carBox .top .left image{
+   width: 140rpx;
+    height: 140rpx;
+}
+.carBox .top .del image{
+    width: 100%;
+    height:100%;
+}
+.carBox .top .right{
+    flex: 1;
+    padding:20rpx 0 0 0;
+}
+.carBox .top .right text,.carBox .mid .buy text{
+    display: block;
+    font-weight: normal;
+    font-size:24rpx;
+    line-height:40rpx;
+}
+.carBox .top .del{
+    width: 40rpx;
+    height: 40rpx; 
+    padding: 20rpx;  
+}
+.carBox .top .right{
+    display:block;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;width: 100%;
+    padding-left:20rpx;
+}
+.carBox .top .right text.price{
+    color:#ff4444;
+    padding-top:10rpx;
+}
+.carBox .top .shuoming{
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.carBox .mid{
+    display: flex;
+    justify-content:space-between;
+    padding: 20rpx 0;
+    position: relative;
+}
+.carBox .mid:after{
+    content:" ";
+    display: inline-block;
+    width:100%;
+    position:absolute;
+    top:0;
+    left:0;
+    border:1px solid #e5e5e5;
+    -webkit-transform:scaleY(0.5);
+    transform:scaleY(0.5);
+    -webkit-transform-origin:0 0;
+    transform-origin:0 0;
+    box-sizing:border-box;
+}
+.carBox .mid .num{
+    display: flex;
+    position:relative;
+    top:10rpx;
+}
+.carBox .mid .num button,.carBox .mid .num input{
+    display: inline-block;
+    width: 60rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    padding:0;
+    text-align: center;
+}
+.carBox .mid .num input{
+    font-size: 24rpx;
+    border:1rpx solid #e5e5e5;
+    border-left: 0;
+    border-right:0;
+    box-sizing: border-box;
+}
+.carBox .mid button{
+    border-radius:none;
+    font-size: 24rpx;
+    border:1rpx solid #e5e5e5; 
+}
+.carBox button::after{
+    content:none;
+}
+ .carBox .mid button.reduce{
+    border-radius: 5rpx 0 0 5rpx;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.carBox .mid button.add{
+    border-radius: 0 5rpx 5rpx 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+} 
+.normal{ 
+   color: black; 
+} 
+.disabled{ 
+   color: #ccc; 
+} 
+.carBox .mid .gray{
+   color:#949292;
+}
+.addCar{
+  background: #ff8855;
+  color:#ffffff;
+  border-radius:0;
+}
+.btn{
+    display: flex;
+}
+.btn button{
+    flex: 1;
+    width:100%;
+    font-size:30rpx;
+    padding:8rpx 0;
+}
+.btn .addcar{
+    background: #ff8855;
+    color:#fff;
+    border-radius: 0;
+}
+.btn .buy{
+    background: #ff4444;
+    color:#fff;
+    border-radius: 0;
+}
+.nextUrl{
+    width: 100%;
+}
+.kuanshi .title{
+    font-size: 28rpx;
+    padding: 20rpx 0;
+}
+.kuanshi .leibie{
+    margin:0 0 30rpx 0;
+}
+.kuanshi .leibie .text{
+    display: inline-block;
+    font-size: 24rpx;
+    border:1rpx solid #e5e5e5; 
+    border-radius: 6rpx;
+    padding: 10rpx 20rpx; 
+    box-sizing: border-box;
+    margin-right:10rpx;
+    position: relative;
+}
+.kuanshi .leibie .text.white{
+    background: #fff;
+    color:#000;
+}
+.kuanshi .leibie .text.red{
+    background: #ff4444;
+    border-color:#ff4444;
+    color:#fff;
+}
+.all{
+    font-size:26rpx;
+    text-align: center;
+    padding:20rpx;
+    background: #fff;
+    margin: 16rpx 0 100rpx 0;
+    color:#666666;
+}
+.modeList{
+    background: #fff;
+    width:100%;
+}
+.chakan{
+   width: 100%;
+}
+/*new  */
+.groupon{
+  background: #fff;
+}
+.groupon .gpList,.groupon{
+  text-align: center;
+  width: 100%;
+}
+.groupon .gpList{
+  padding:0 20rpx 5rpx 0rpx;
+  box-sizing:border-box;
+  display: -webkit-flex; /* Safari */
+    -webkit-justify-content: space-around; /* Safari 6.1+ */
+  display: flex;
+  justify-content: space-around;
+}
+.sort{
+  width: 100%;
+  background: #fff;
+  /* display: flex;
+  justify-content: space-around; */
+}
+.sort navigator{
+  display: inline-block;
+   width: 25%; 
+  text-align: center;
+}
+.sort navigator .image-text{
+  width: 100%;
+  padding:20rpx 0;
+}
+.sort navigator image{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+}
+.sort navigator text{
+  display: block;
+  font-size: 24rpx;
+  color:#666666;
+}
+.groupon1{
+  margin: 16rpx 0;
+  background: #fff;
+}
+.groupon .gpTitle{
+    text-align: left;
+    font-size: 26rpx;
+    padding: 10rpx;
+    background: #fff;
+}
+.groupon .gpTitle image{
+  width: 50rpx;
+  vertical-align: middle;
+}
+.groupon .gpTitle text{
+  display: inline-block;
+  line-height: 50rpx;
+  position: relative;
+  top:6rpx;
+  left:10rpx;
+  color:#666666;
+}
+.groupon .gpList navigator{
+  display: inline-block;
+  width: 100%;
+}
+.groupon2 .gpList{
+  padding:0 0rpx 5rpx 0rpx;
+}
+.groupon2 .gpList navigator:first-child{
+  padding-left:0;
+}
+.groupon1 .gpList navigator,.groupon .gpList navigator{
+  padding:10rpx 0rpx 0 20rpx;
+}
+.groupon1 .gpList navigator image{
+  width: 100%!important;
+  height:298rpx;
+}
+.groupon .gpList navigator image{
+  width: 100%;
+  height:298rpx;
+}
+.sptext{
+  font-size: 22rpx;
+  text-align: center;
+  height:62rpx;
+  display:-webkit-box;
+  display:-moz-box;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  word-break:break-all;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+}
+.center{
+  text-align: center;
+  padding: 10rpx 0;
+}
+.center.time{
+  font-size: 22rpx;
+  color: #702501;
+}
+.center.time text{
+  background: #702501;
+  color:#fff;
+  padding: 6rpx;
+  border-radius: 6rpx;
+  width: 36rpx;
+  box-sizing: border-box;
+}
+.center.countdown{
+ font-size: 26rpx;
+}
+.zan-toast {
+  position: fixed;
+  top: 35%;
+  left: 20%;
+  transform: translateZ(0) translateY(-100%);
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font-size: 14px;
+  width: 60%;
+  line-height: 1.5em;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 10px;
+  text-align: center;
+  border-radius: 4px;
+  z-index: 100;
+}
+.navigator-hover {
+  background-color:#fff;
+  opacity:1;
+}
+.miao,.xianshi{
+  display: flex;
+  justify-content: space-between;
+}
+.xianshi .left text{
+  font-size:22rpx;
+  display: block;
+}
+.Tall{
+  background:#fff9e4;
+  padding:10rpx 20rpx;
+  margin:0 20rpx 20rpx;
+  box-sizing: border-box;
+  border-radius: 10rpx;
+}
+.Tall .gpimage image {
+  height:198rpx;
+  border-radius: 10rpx;
+}
+.searchBox .img{
+  line-height:92rpx;
+  position: relative;
+  right:20rpx;
+}
+.like{
+  display: block;
+   width: 300rpx;
+  text-align: center;
+  margin:16rpx 0 0 0;
+  font-size: 24rpx;
+  color:#666666;
+  background: url(https://qncdn.playonwechat.com/shangcheng/line1.png) no-repeat center;
+   background-size: contain; 
+}
+.zan-toast {
+  position: fixed;
+  top: 35%;
+  left: 20%;
+  transform: translateZ(0) translateY(-100%);
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font-size: 14px;
+  width: 60%;
+  line-height: 1.5em;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 10px;
+  text-align: center;
+  border-radius: 4px;
+  z-index: 100;
+}
+.show{display:block;}
+.hidden{display:none;}

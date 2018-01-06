@@ -1,0 +1,87 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/friends/friends",
+    "pages/mingxi/mingxi",
+    "pages/invitation/invitation",
+    "pages/my/my",
+    "pages/pet/pet",
+    "pages/pets/pets",
+    "pages/car/car",
+    "pages/dingdanInform/dingdanInform",
+    "pages/TdingdanInform/TdingdanInform",
+    "pages/inform/inform",
+    "pages/informTuan/informTuan",
+    "pages/search/search",
+    "pages/more/more",
+    "pages/dingdan/dingdan",
+    "pages/coupon/coupon",
+    "pages/tuijian/tuijian",
+    "pages/help/help",
+    "pages/tuijianShare/tuijianShare",
+    "pages/shangpinInform/shangpinInform",
+    "pages/dingdanCar/dingdanCar",
+    "pages/pintuanInform/pintuanInform",
+    "pages/miaoshaInform/miaoshaInform",
+    "pages/pintuanxiangqing/pintuanxiangqing",
+    "pages/miaosha/miaosha",
+    "pages/pintuan/pintuan",
+    "pages/guize/guize",
+    "pages/shoucang/shoucang",
+    "pages/share/share",
+    "pages/poster/poster",
+    "pages/work/work",
+    "pages/workList/workList",
+    "pages/fenlei/fenlei",
+    "pages/bargainList/bargainList",
+    "pages/bargainShare/bargainShare",
+    "pages/bargainPay/bargainPay",
+    "pages/keep/keep",
+    "pages/chongzhi/chongzhi",
+    "pages/tixian/tixian",
+    "pages/bargainInform/bargainInform"     
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#000",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle":"#fff"
+  },
+  "tabBar": {
+    "backgroundColor": "#fff",
+    "color": "#8a8a8a",
+    "selectedColor": "#ff4444",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "pages/images/shouye.png",
+        "selectedIconPath": "pages/images/shouyeb.png"
+      },
+      {
+        "pagePath": "pages/pets/pets",
+        "text": "萌宠",
+        "iconPath": "pages/images/pet.png",
+        "selectedIconPath": "pages/images/peta.png"
+      },
+      {
+        "pagePath": "pages/car/car",
+        "text": "购物车",
+        "iconPath": "pages/images/gouwu.png",
+        "selectedIconPath": "pages/images/gouwub.png"
+      },
+      {
+        "pagePath": "pages/work/work",
+        "text": "任务",
+        "iconPath": "pages/images/work.png",
+        "selectedIconPath": "pages/images/workb.png"
+      },{
+        "pagePath": "pages/my/my",
+        "text": "我的",
+        "iconPath": "pages/images/wode.png",
+        "selectedIconPath": "pages/images/wodeb.png"
+      }
+    ]
+  },
+  "debug": false
+}

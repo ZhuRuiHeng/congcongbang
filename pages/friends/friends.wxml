@@ -1,0 +1,57 @@
+<!--pages/friends/friends.wxml-->
+<!--pages/mingxi/mingxi.wxml-->
+<view class="container">
+    
+    <view class='content'>
+        <view class="nav">
+            <!--员工会员中心  -->
+             <view class='one1' wx:if="{{identity == 1}}">
+               <view class="{{active == 0?'active':'default'}} oneflex" data-active="0" 
+                    data-order="" data-level="one" bindtap="tapKeyWorld">A级</view> 
+              <view class="{{active == 1?'active':'default'}} oneflex"  data-active="1" 
+                    data-order="fans" data-level="two" bindtap="tapKeyWorld">B级</view>
+              <view class="{{active == 2?'active':'default'}} oneflex"  data-active="2" 
+                    data-order="orders" data-level="three" bindtap="tapKeyWorld">C级</view>
+            </view> 
+            <!--分享达人会员中心  -->
+              <view class='one2' wx:if="{{identity == 2}}">
+                <view class="{{active == 0?'active':'default'}} oneflex"  data-active="0" 
+                      data-order="fans" data-level="one" bindtap="tapKeyWorld">B级</view>
+                <view class="{{active == 1?'active':'default'}} oneflex"  data-active="1" 
+                      data-order="orders" data-level="two" bindtap="tapKeyWorld">C级</view>
+             </view>  
+            <view class='two' bindtap="navList">
+                筛选    <image src='../images/shaixuan.png' mode='widthFix'></image> 
+                <view wx:if="{{navList==true}}" class='navList'>
+                      <view catchtap='screen' data-order="newest"><text>最新</text></view>
+                      <view catchtap='screen' data-order="share"><text>分享达人</text></view>
+                      <view catchtap='screen' data-order="consume"><text>消费达人</text></view>
+                </view>
+            </view>
+        </view>
+        <view class='noOrder' wx:if="{{friendList.length==0}}">
+            <view class="noOrder2" style="font-size:26rpx;text-align:center;padding:20rpx;margin-top:0;box-sizing:border-box;">
+                暂时没有数据！ 
+            </view>
+        </view>
+        <view id='mingxi'  wx:else>
+            <view class='list' wx:for="{{friendList}}" wx:key="{{item.index}}">
+                <view class='left'>
+                    <image src='{{item.avatarurl}}' mode='widthFix'></image>
+                </view>
+                <view class="center">
+                    <view class='h4'><image src="../images/star.png" mode='widthFix'></image>{{item.wx_name}}</view>
+                    <view class='name'>成为代理商时间：{{item.sharer_time}}</view>
+                </view>
+                <view class="right">  
+                    <view class='h4'>
+                        <view>消费</view>
+                        <view wx:if="{{!item.consume}}"><text style="text-align:center;">0</text>元</view>
+                        <view wx:else><text style="text-align:center;">{{item.consume}}</text>元</view>
+                    </view>
+                </view>
+            </view> 
+        </view> 
+    </view>
+</view>
+

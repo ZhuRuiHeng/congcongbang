@@ -1,0 +1,149 @@
+<!--pages/dingdanInform/dingdanInform.wxml-->
+<import src="../../dist/toast/index.wxml" />
+<!--引入模板  -->
+<template is="zan-toast" data="{{ zanToast }}"></template>
+<view class="container">
+    <!--地址  -->
+    <view class="address kong" bindtap="nextAddress" wx:if="{{dizhi.length == 0}}"><image src="../images/add.png" mode="widthFix"></image>新增收货地址</view>
+    <!--地址  -->
+    <view class="address" bindtap="nextAddress" wx:else>
+        <view class="inform">
+            <view class="left">
+                <image src="https://qncdn.playonwechat.com/shangcheng/address.png" mode="widthFix"></image>
+                收货人：{{dizhi.userName}}
+            </view>
+            <view class="right">
+                {{dizhi.telNumber}}
+            </view>
+        </view>
+        <view class="dizhi">
+            收货地址：{{dizhi.provinceName}}{{dizhi.cityName}}{{dizhi.countyName}}{{dizhi.detailInfo}}
+        </view>
+        <view class="next" bindtap="nextAddress">
+            <image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"></image>
+        </view>
+    </view>
+   
+    <view class="line">
+        <image src="https://qncdn.playonwechat.com/shangcheng/line.png" mode="widthFix"></image>
+    </view>
+    <!--店铺  -->
+    <view class="shop">
+        <view class="checkbox">
+            <label class="radio">
+                <image src="https://qncdn.playonwechat.com/shangcheng/shop.png" mode="widthFix"></image>店铺
+            </label>
+        </view>
+    </view>
+    <!--商品  -->
+    <view class="shangpin">
+        <view class="service-list">
+            <view class="service-item">
+                <view class="service-img">
+                    <image src="{{inform.picture[0]}}" mode="aspectFill"></image>
+                </view>
+                <view class="service-text">
+                    <view class="service-tite">{{inform.good_name}}</view>
+                    <view class="fenlei"> {{types}}</view>
+                    <view class="caozuo">
+                        <text class="">砍价商品</text>
+                        <view class="service-gouwu">x1</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="jianjie xuanze 1" bindtap="addCar" id="gouwu{{inform.gid}}" data-gid="{{inform.gid}}">
+        <view class="classname">选择：<text wx:for="{{all}}">{{item}}</text></view>
+        <view class="nextImg">
+            <image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"/>
+        </view>
+    </view>
+    <view class="controllist">
+        <view class="left">配送方式</view>
+        <view class="right">免运费</view>
+    </view>
+    <view class="control">
+        <view class="left">留言</view>
+        <view class="right"><input class="liuyan" name="userMes" type="text" placeholder="点击给商家留言" bindinput="userMesInput"/></view>
+    </view>
+    <!-- <view class="controllist">
+        <view class="left">合计</view>
+        <view class="right color">￥{{low_price*price}}</view>
+    </view> -->
+    <!-- <view class="controllist youhui top" bindtap="coupon" wx:if="{{type == 0}}">
+        <view class="left">优惠</view>
+        <view class="right">使用优惠卷￥{{amount}}<image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"></image></view>
+    </view> -->
+    <!-- <view class="controllist top" style="padding:10rpx 20rpx;">
+        <view class="left" style="position:relative;top:13rpx;">短信通知收件人</view>
+        <view class="right">
+            <view class="page-section page-section-gap">
+              <switch name="switch" bindchange="listenerSwitch" />
+            </view>
+        </view>
+    </view> -->
+    <view class="jine top">
+       <!-- <view class="controllist ">
+          <view class="left">商品金额</view>
+          <view class="right color">￥{{low_price}}</view>
+      </view> -->
+      <view class="controllist">
+          <view class="left">运费</view>
+          <view class="right color">免运费</view>
+      </view>
+    </view>
+     <!--购物车弹窗  -->
+    <view class="bg {{addCar?'show':'hidden'}}"></view>
+        <view class="carBox {{addCar?'show':'hidden'}}">
+            <view class="padding">
+                <view class="top">
+                    <view class="left">
+                        <image src="{{figure}}"></image>
+                    </view>
+                    <view class="right">
+                        <text class="shuoming">{{inform.good_name}}</text>
+                        <text class="price">
+                            <text wx:if="{{low_price == high_price}}">￥{{low_price}}</text> 
+                            <text wx:else>￥{{low_price}}~{{high_price}}</text>
+                        </text>
+                    </view>
+                    <view class="del" bindtap="closeCar">
+                        <image src="https://qncdn.playonwechat.com/shangcheng/icon_close.png" mode="widthFix"></image>
+                    </view>
+                </view>
+                <view class="kuanshi"  wx:for="{{inform.attribute}}" wx:key="{{index}}">
+                    <view class="title" style="text-align:left" data-anid="{{item.anid}}" data-attribute_name="{{item.attribute_name}}">{{item.attribute_name}}：</view>
+                    <view class="leibie" data-anid="{{item.anid}}"  bindtap="leibieall" data-index="{{index}}" >
+                        <view wx:for="{{item.attribute_value}}" wx:key="{{index}}" data-value="{{attr.attribute_value}}" 
+                              wx:for-item="attr" data-avid="{{attr.avid}}" data-active="{{attr.active}}"
+                              class="text white {{attr.active==true ? 'red':''}}" 
+                              bindtap="xuanze" >{{attr.attribute_value}}</view>
+                    </view>
+                </view>
+                <view class="mid">
+                    <view class="buy">
+                        <text>购买数量：1</text>
+                    </view>
+                    <view class="num">
+                        <button class="reduce {{minusStatus}}" bindtap="bindMinus" disabled>-</button>
+                        <input type="number"  bindchange="bindManual" value="1" disabled/>
+                        <button class="add normal" bindtap="bindPlus" disabled>+</button>
+                    </view>
+                </view>
+            </view>
+            <view class="btn" bindtap="addCars">
+                <button class="ok">确定</button>
+            </view>
+        </view>
+    <!--foot  -->
+    <view class="fixed">
+        <!-- <view class="heji">合计：<text>￥{{low_price*num}}</text>
+         <text><text style="color:#000;">优惠券:</text >￥{{amount}}</text>实付：<text>￥{{low_price*num-amount}}</text>  
+         </view> -->
+        <form report-submit="true" bindsubmit="formSubmit" class="formSubmit">
+            <button class="submit" formType="submit">提交订单</button>
+        </form>
+        <!-- <view class="submit">提交订单</view> -->
+    </view>
+</view>

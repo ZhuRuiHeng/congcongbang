@@ -1,0 +1,40 @@
+<!--pages/pintuan/pintuan.wxml-->
+<view class="main">
+      <view class="pintuanAll">
+          <scroll-view class="search_world" scroll-x="true">
+            <view class="search_w_box" style="width:{{w_width}}rpx">
+              <view wx:for="{{search_word}}" wx:key="{{index}}"
+              class="search_item {{item.active == true?'red':'default'}} {{ontap == true?'red':'default'}}" 
+              data-cate="{{item.cate_id}}" 
+              bindtap="tapKeyWorld" data-active="{{item.active}}" data-ontap="{{item.cate_id}}"
+              data-inx="{{index}}">{{item.cate_name}}</view>
+            </view>
+          </scroll-view>
+          <view class="service-list" wx:if="{{main_content.length>0}}">
+               <navigator wx:for="{{main_content}}"  wx:key="{{index}}" class="service-item" url="../pintuanInform/pintuanInform?gid={{item.gid}}">
+                    <view class="service-img">
+                        <image src="{{item.picture}}" mode="aspectFill"></image>
+                    </view>
+                    <view class="service-text">
+                        <view class="service-tite service-tite1">{{item.good_name}}</view>
+                        <view class="member" >
+                          <view style="display:inline-block" wx:for="{{item.avatarurl_arr}}" wx:key="{{index}}" wx:for-item="v"  >
+                            <image wx:if="{{v.avatarurl == null}}" src="https://qncdn.playonwechat.com/shangcheng/bg.png" mode="widthFix">
+                            </image>
+                            <image  wx:else="{{v.avatarurl != null}}" src="{{v.avatarurl}}" mode="widthFix">
+                            </image>
+                          </view>
+                            <text>已团{{item.on_shelf}}件</text>
+                        </view>
+                        <view class="caozuo">
+                            <view> <text class="service-price">￥{{item.group_price}}</text> <text class="old service-price">￥{{item.price}}</text></view>
+                            <view class="service-gouwu">去开团</view>
+                        </view>
+                    </view>
+                </navigator>
+          </view>
+          <view class="service-list" wx:else style="text-align:center;font-size:26rpx;padding:20rpx;">
+            此分类暂时没有数据！
+          </view>
+      </view>
+  </view>

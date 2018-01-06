@@ -1,0 +1,38 @@
+<!--pages/invitation/invitation.wxml-->
+
+<view class="container">
+    <view class="inform">
+        <view class='bgcolor'></view>
+        <view class='user'>
+            <view class='left'>
+                <image src='{{userInfo.userImg}}' mode='widthFix'></image>
+            </view>
+            <view class='right'>
+                <view class='h4'>{{userInfo.nickName}}</view>
+                <view class='name' wx:if="{{inviter==null}}">推荐人：总店</view>
+                <view class='name' wx:else>推荐人：{{inviter}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="listAll">
+        <view class="list">
+            <view class="flex" wx:for="{{list}}" >
+                <view bindtap="userinform{{index}}" class="flex{{index}}" data-id="{{index}}">
+                    <image class="image{{index}}" src="{{item.pic}}" mode="widthFix"></image>
+                    <text>{{item.title}}</text>
+                    <text class="sum">{{item.sum}}{{item.text}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class='allXuan'>
+        <view class="xuanze">
+            <view class="classname"><image src="../images/show.png" mode="widthFix"></image>可提现佣金</view>
+            <view class="nextImg">{{wallet}}元<image style="visibility: hidden;" src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"/></view> 
+        </view>
+        <view class="xuanze" bindtap="mingxi">
+            <view class="classname"><image src="../images/mingxi.png" mode="widthFix"></image>佣金明细</view>
+            <view class="nextImg">{{countCommission}}笔<image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"/></view> 
+        </view>
+    </view>
+</view>

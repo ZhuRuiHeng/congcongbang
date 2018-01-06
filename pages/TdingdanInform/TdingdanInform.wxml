@@ -1,0 +1,87 @@
+<!--pages/dingdanInform/dingdanInform.wxml-->
+<import src="../../dist/toast/index.wxml" />
+<!--引入模板  -->
+<template is="zan-toast" data="{{ zanToast }}"></template>
+<view class="container">
+    <!--地址  -->
+    <view class="address" bindtap="nextAddress">
+        <view class="inform">
+            <view class="left">
+                <image src="https://qncdn.playonwechat.com/shangcheng/address.png" mode="widthFix"></image>
+                收货人：{{dizhi.userName}}
+            </view>
+            <view class="right">
+                {{dizhi.telNumber}}
+            </view>
+        </view>
+        <view class="dizhi">
+            收货地址：{{dizhi.provinceName}}{{dizhi.cityName}}{{dizhi.countyName}}{{dizhi.detailInfo}}
+        </view>
+        <view class="next">
+            <image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"></image>
+        </view>
+    </view>
+    <view class="line">
+        <image src="https://qncdn.playonwechat.com/shangcheng/line.png" mode="widthFix"></image>
+    </view>
+    <!--店铺  -->
+    <view class="shop">
+        <view class="checkbox">
+            <label class="radio">
+                <image src="https://qncdn.playonwechat.com/shangcheng/shop.png" mode="widthFix"></image>店铺
+            </label>
+        </view>
+    </view>
+    <!--商品  -->
+    <view class="shangpin">
+        <view class="service-list">
+            <view class="service-item">
+                <view class="service-img">
+                    <image src="{{inform.picture}}" mode="aspectFill"></image>
+                </view>
+                <view class="service-text">
+                    <view class="service-tite">{{inform.good_name}}</view>
+                    <view class="fenlei"> {{types}}</view>
+                    <view class="caozuo">
+                        <text class="service-price">￥{{inform.group_price}}</text>
+                        <view class="service-gouwu">x1</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="controllist">
+        <view class="left">配送方式</view>
+        <view class="right">免运费</view>
+    </view>
+    <view class="control">
+        <view class="left">留言</view>
+        <view class="right"><input class="liuyan" name="userMes" type="text" placeholder="点击给商家留言" bindinput="userMesInput"/></view>
+    </view>
+    <view class="controllist top" style="padding:10rpx 20rpx;">
+        <view class="left" style="position:relative;top:13rpx;">短信通知收件人</view>
+        <view class="right">
+            <view class="page-section page-section-gap">
+              <switch name="switch" bindchange="listenerSwitch" />
+            </view>
+        </view>
+    </view>
+    <view class="jine top">
+       <view class="controllist ">
+          <view class="left">商品金额</view>
+          <view class="right color">￥{{inform.group_price}}</view>
+      </view>
+      <view class="controllist">
+          <view class="left">运费</view>
+          <view class="right color">免运费</view>
+      </view>
+    </view>
+    <!--foot  -->
+    <view class="fixed">
+        <view class="heji">合计：<text>￥{{inform.group_price}}</text> </view>
+        <form report-submit="true" bindsubmit="formSubmit" class="formSubmit">
+            <button class="submit" formType="submit">提交订单</button>
+        </form>
+        <!-- <view class="submit">提交订单</view> -->
+    </view>
+</view>

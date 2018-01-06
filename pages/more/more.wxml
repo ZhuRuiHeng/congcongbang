@@ -1,0 +1,19 @@
+<!--pages/more/more.wxml-->
+<view class="container">
+    <view class="boxList" wx:if="{{goodsList.length != 0}}">
+        <view class="chose-list" >
+            <navigator wx:for="{{main_content}}" class="chose-item" url="../inform/inform?gid={{item.gid}}">
+                <view class="chose-img">
+                    <image src="{{item.picture}}" mode="aspectFill"></image>
+                </view>
+                <view class="chose-text">
+                    <view class="chose-title">{{item.good_name}}</view>
+                    <view class="price">￥{{item.price}}</view>
+                </view>
+            </navigator>
+        </view> 
+    </view> 
+    <view wx:else>
+        <view style="text-align:center;font-size:24rpx;padding:30rpx;"> 此分类暂时没有数据！ </view>
+    </view>
+</view>

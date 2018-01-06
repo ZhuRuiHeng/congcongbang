@@ -1,0 +1,31 @@
+<view  wx:if="{{workList==false}}" style="text-align:center;font-size:24rpx;padding:30rpx;"> 暂无账户信息！ </view>
+<!--  -->
+<view class="contaion" wx:else>
+    <view class='item'>
+        <view class='left'>宠物</view>
+        <view>总金额</view>
+        <view>已返金额</view>
+        <view class='right'>已提现</view>
+    </view>
+    <view class='item' wx:for="{{workList}}" wx:key="{{index}}" bindtap='itemTap' data-pet_id='{{item.pet_id}}'>
+        <view class='left'>
+            <image src="{{item.thumb}}" mode='widthFix'></image>
+            <view>{{item.pet_name}}</view>
+        </view>
+        <view class='view'>{{item.total_money}}</view>
+        <view class='view'>{{item.get_money}}</view>
+        <view class='view'>{{item.return_money}}</view>
+    </view>
+    <!-- <view class='item'>
+        <view class='left'>
+            <image src="https://pet.zealcdn.cn/assets/images/icons/category/644520171216110546.png" mode='widthFix'></image>
+            <view>{{item.pet_name}}efd</view>
+        </view>
+        <view class='view'>{{item.total_money}}22</view>
+        <view class='view'>{{item.get_money}}11</view>
+        <view class='view'>{{item.return_money}}22</view>
+        <view class='view' bindtap='goPay'>去提现</view>
+    </view> -->
+</view>
+
+

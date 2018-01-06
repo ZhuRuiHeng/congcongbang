@@ -1,0 +1,113 @@
+<!--index.wxml-->
+<import src="../../dist/toast/index.wxml" />
+<!--引入模板  -->
+<template is="zan-toast" data="{{ zanToast }}"></template>
+<view class="container">
+     <!--搜索  -->
+    <view class="searchBox">
+        <view class="search" bindtap="search">
+            <view class="icon-search"><image src="https://qncdn.playonwechat.com/shangcheng/search.png"></image></view>
+            <view class="weui-cells weui-cells_after-title">
+                <view class="weui-cell weui-cell_input">
+                    <input class="weui-input"  placeholder="搜索商品" readonly="readonly"/>
+                </view>
+            </view>
+        </view> 
+        <view class="img" >
+          <image src="../images/chart.png" mode="widthFix" style="width:40rpx;vertical-align: middle;"></image>
+          <contact-button class="contact" type="default-light" size="12" session-from="weapp" style="opacity:0;position:absolute;top:20rpx;right:10rpx;">  
+          </contact-button>  
+          <contact-button class="contact" type="default-light" size="12" session-from="weapp" style="opacity:0;position:absolute;top:20rpx;right:0rpx;">  
+          </contact-button>
+        </view>
+    </view>
+    <!--轮播图 -->
+    <swiper class="swiper" wx:if="{{lunbo.length !=0}}"  bindtap="imgPreview"  indicator-dots="{{indicatorDots}}" 
+            autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color="#ff4444" 
+            indicator-active-color="#fff">
+        <block wx:for="{{lunbo}}">
+          <swiper-item>
+            <image src="{{item.icon}}" class="slide-image" mode="aspectFill" id="{{item.gid}}" catchtap="swipclick"/>
+          </swiper-item>
+        </block>
+    </swiper>
+    <!--分类 新增star -->
+    <view class="sort">
+        <view wx:for="{{modules}}" data-allindex="{{index}}" wx:key="{{item.id}}" data-cate_id='{{item.cate_id}}'                             bindtap='petTab' data-cate_name='{{item.cate_name}}' class='navigator'>
+            <view class="image-text">
+                <image src="{{item.icon}}" mode="scaleToFill"  binderror="errorFunction"></image>
+                <text>{{item.cate_name}}</text>
+            </view>
+        </view>
+    </view>
+    <!--nav -->
+    <view class="main">
+        <view class="nav bc_white">
+             <view class="{{state == 0?'red':'default'}}" bindtap="tapKeyWorld" data-ontap="hot" data-cate="0" data-state = "0"><span>最热</span></view>
+             <view class="{{state == 1?'red':'default'}}" bindtap="tapKeyWorld" data-ontap="newest" data-cate="0" data-state = "1"><span>最新</span></view> 
+        </view>
+        <!--content -->
+        <block class="boxList" wx:if="{{main_content.length != 0}}">
+            <view class="chose-list" >
+                <navigator wx:for="{{main_content}}" class="chose-item" url="../inform/inform?gid={{item.gid}}">
+                    <view class="chose-img">
+                        <image src="{{item.picture}}" mode="aspectFill"></image>
+                    </view>
+                    <view class="chose-text">
+                        <view class="chose-title">{{item.good_name}}</view>
+                        <view class="price">￥{{item.price}}</view>
+                    </view>
+                </navigator>
+            </view> 
+        </block> 
+        <view wx:else>
+            <view style="text-align:center;font-size:24rpx;padding:30rpx;"> 此分类暂时没有数据！ </view>
+        </view>
+    </view>
+    <!--养宠计划  -->
+    <view class="all chakan" wx:if="{{modulesPet}}">养宠套餐</view>
+    <view class='allPackage'>
+        <view class='Package' wx:for="{{modulesPet}}" wx:key="{{index}}" bindtap='petTab' 
+              data-allindex="{{index}}"  data-cate_id='{{item.cate_id}}' data-cate_name='{{item.cate_name}}'>
+            <view class='packageText'>
+                <view class='packageTitle'>{{item.cate_name}}</view>
+                <view class='packageLittle'>{{item.desc}}</view>
+            </view>
+            <view class='packageImg'>
+                <image src="{{item.icon}}" mode='aspectFill'></image>
+            </view>
+        </view>
+    </view>
+    <!-- m秒杀 -->
+    <view class="groupon groupon2" wx:if="{{currentSeckillTime != null}}">
+        <view class="gpTitle miao">
+            <view class="classname"><text>特价福利 </text><image style="margin-left:20rpx;width:40rpx" src="../images/times.png" mode="widthFix"></image></view>
+           <navigator url="../miaosha/miaosha?gid={{item.gid}}" style="display:inline;color:#ff4444;font-size:24rpx;">
+                查看更多<image src="../images/nexta.png" mode="widthFix"/>
+            </navigator>
+        </view>
+        <!-- <view class="center time" >暂时没有秒杀场次</view> -->
+        <view class="Tall">
+            <view class="xianshi">
+                <view class="left">
+                    <text class="classname" style="color:#000000;font-weight:bold;font-size:26rpx">限时秒杀</text>
+                    <text class="classname" style="color:#666666">包邮抢购中</text>
+                </view>
+                <view class="right">
+                    <view class="center time" wx:for="{{Countdown}}">{{currentSeckillTime}}场结束仅剩 
+                                            <text>{{item.hr}}</text>：
+                                            <text>{{item.min}}</text>：
+                                            <text>{{item.sec}}</text></view>
+                    <!-- <view class="center countdown" wx:for="{{Countdown}}">{{item.hr}}时{{item.min}}分{{item.sec}}秒</view> -->
+                </view>
+            </view>
+            <view class="gpList">
+                <navigator wx:for="{{seckills}}" wx:key="{{item.index}}" class="gpimage" url="../miaosha/miaosha?gid={{item.gid}}">
+                    <image style="height:198rpx;" src="{{item.picture}}" mode="aspectFill"></image>
+                </navigator>
+            </view>
+        </view>
+    </view>
+    <!--查看全部  -->
+    <view class="all chakan" bindtap="seeAll" style='margin-bottom:100rpx;'>查看全部</view>
+</view>

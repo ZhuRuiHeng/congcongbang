@@ -1,0 +1,30 @@
+.contaion{
+  width: 100%;
+  overflow: hidden;
+  background: #fff;
+}
+.contaion .item{
+    width: 100%;
+    font-size: 28rpx;
+    padding: 20rpx 0;
+    position: relative;
+    text-align: center;
+}
+.contaion .item view{
+    display: inline-block;
+    width: 33.3%;
+}
+.contaion .item:after{
+    content:" ";
+    display: inline-block;
+    width:100%;
+    position:absolute;
+    bottom:0;
+    left:0;
+    border:1px solid #ddd;
+    -webkit-transform:scaleY(0.5);
+    transform:scaleY(0.5);
+    -webkit-transform-origin:0 0;
+    transform-origin:0 0;
+    box-sizing:border-box;
+}

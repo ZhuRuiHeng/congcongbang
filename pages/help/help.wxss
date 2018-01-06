@@ -1,0 +1,35 @@
+/* pages/help/help.wxss */
+.container {
+  padding:0 30rpx;
+  box-sizing: border-box;
+  background: #fff;
+  line-height: 50rpx;
+  min-height: 100%;
+  height: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+}
+.container:before{
+  content: "";
+  display: block;
+  width: 200%;
+  height: 200%;
+  border-top: 1px solid #ededed;
+  transform: scale(0.5);
+  transform-origin: 0 0;
+  position: absolute;
+  top: 0;
+  left: 0;  
+}
+.container .h1{
+    font-size: 30rpx;
+    margin-bottom: 40rpx;
+    margin-top: 20rpx;
+}
+.container .content{
+    font-size: 28rpx;
+    padding:0rpx;
+    box-sizing: border-box;
+}

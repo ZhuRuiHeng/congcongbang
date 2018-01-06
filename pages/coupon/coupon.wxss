@@ -1,0 +1,25 @@
+/* pages/coupon/coupon.wxss */
+.container{
+  font-size: 24rpx;
+  overflow: hidden;
+}
+.help{
+  padding: 20rpx 0 0;
+  font-size: 26rpx;
+}
+/*newnew  */
+.stamp {width: 90%;height: 200rpx;padding: 0 20rpx;position: relative;overflow: hidden;margin:20rpx 0;}
+.stamp:before {content: '';position: absolute;top:0;bottom:0;left:10rpx;right:10rpx;z-index: -1;}
+.stamp:after {content: '';position: absolute;left: 10rpx;top: 10rpx;right: 10rpx;bottom: 10rpx;box-shadow: 0 0 20rpx 1px rgba(0, 0, 0, 0.5);z-index: -2;}
+.stamp text{position: absolute;right: -10%;top: 45rpx;height: 190rpx;width: 390rpx;background-color: rgba(255,255,255,.15);transform: rotate(-30deg);}
+.stamp .par{float: left;padding: 16rpx 15rpx;width:50%;border-right:2rpx dashed rgba(255,255,255,.3);text-align: left;}
+.stamp .par view{color:#fff;padding:6rpx 0;}
+.stamp .par text{font-size: 36rpx;color:#fff;margin-right: 5rpx;}
+.stamp .par .sign{font-size: 34rpx;}
+.stamp .par text{position: relative;top:-5rpx;}
+.stamp .copy{display: inline-block;padding:21rpx 14rpx;width:40%;vertical-align: text-bottom;font-size: 30rpx;color:rgb(255,255,255);}
+.stamp .copy view{font-size: 24rpx;margin-top: 8rpx;}
+.stamp02{background: #D24161;background: radial-gradient(transparent 0, transparent 5rpx, #D24161 5rpx);background-size: 15rpx 15rpx;background-position: 9rpx 3rpx;}
+.stamp02:before{background-color:#D24161;}
+.midd text{left:0;background-color:none;}
+.stamp .midd text{background-color:#D24161;}

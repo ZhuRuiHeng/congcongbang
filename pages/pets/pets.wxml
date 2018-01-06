@@ -1,0 +1,40 @@
+<!--index.wxml-->
+<import src="../../dist/toast/index.wxml" />
+<template is="zan-toast" data="{{ zanToast }}"></template>
+<view class="container">
+    <view class='navBar'>
+        <view class='navItem' data-name='price' data-type='price_sort' bindtap='navItem'>
+            价格 <image src="../img/rols.png" mode='widthFix'></image>
+        </view>
+        <view class='navItem two' data-name='sort' data-type='sort' bindtap='navItem'>
+            排序<image src="../img/rols.png" mode='widthFix'></image>
+        </view>
+        <!-- <view class='navItem' data-name='out' data-type='out' bindtap='navItem'>
+            筛选 <image src="../img/rols.png" mode='widthFix'></image>
+        </view> -->
+    </view>
+    <view class='box'>
+        <view class="boxList" wx:if="{{main_content.length != 0}}">
+            <view class="chose-list" >
+                <navigator wx:for="{{main_content}}" class="chose-item" url="../inform/inform?gid={{item.gid}}">
+                    <view class="chose-img">
+                        <image src="{{item.picture}}" mode="aspectFill"></image>
+                    </view>
+                    <view class="chose-text">
+                        <view class="chose-title">{{item.good_name}}</view>
+                        <view class="price">￥{{item.price}}</view>
+                    </view>
+                </navigator>
+            </view> 
+        </view>
+        <view wx:else>
+            <view style="text-align:center;font-size:24rpx;padding:30rpx;"> 此分类暂时没有数据！ </view>
+        </view>
+    </view>
+</view>
+<view class='footer' wx:if="{{screenList}}"> 
+    <view class='poster' wx:for="{{screenList}}" wx:key="{{item}}" data-id='{{item.id}}' data-type="{{type}}"
+          bindtap='posterItem'>{{item.name}}</view>
+    <view bindtap='cancel' class='cancel'>取消</view>
+</view>
+<view class='bg' wx:if="{{screenList}}" bindtap='cancel'></view>

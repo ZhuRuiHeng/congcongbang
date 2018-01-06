@@ -1,0 +1,50 @@
+/* pages/poster/poster.wxss */
+.poster{
+	width: 390rpx;
+	height: 688rpx;
+	margin:120rpx auto 116rpx auto;
+	display: block;
+  position: relative;
+  z-index: 3;
+}
+.container{
+   position: relative;
+} 
+ .bgcolor {
+    position: absolute;
+    background: #fff url(https://qncdn.playonwechat.com/shangcheng/bgcolor.png) no-repeat;
+    background-size: cover;
+    opacity: 0.5;
+    display: block;
+    width: 100%;
+    height: inherit;
+    z-index: -1;
+    -webkit-filter: blur(3px);
+} 
+
+.share {
+	width: 240rpx;
+	height: 70rpx;
+	line-height: 70rpx;
+	left: 50%;
+	margin-left: -120rpx;
+  margin-bottom:80rpx;
+  background: #ff4444;
+	color: #fff;
+}
+
+.page_title{
+	font-size:30rpx;
+  text-align:center;
+	color: #12441e;
+	margin-bottom: 32rpx;
+}
+
+.button_tip{
+	font-size: 30rpx;
+	text-align: center;
+	max-width: 80%;
+	margin:0 auto;
+	margin-bottom: 52rpx;
+	color: #000000;
+}

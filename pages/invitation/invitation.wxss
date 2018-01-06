@@ -1,0 +1,177 @@
+/* pages/invitation/invitation.wxss */
+.container{
+  overflow: hidden;
+}
+.inform{
+  width: 100%;
+}
+.user{
+   display: flex;
+   width: 100%;
+   padding: 15px;
+   box-sizing: border-box;
+}
+.user .left{
+    margin-right: 20rpx;
+    width: 120rpx;
+    height: 120rpx;
+    line-height: 120rpx;
+    text-align: center;
+}
+.user .left image{
+  width: 100%;
+  max-height: 100%;
+  vertical-align: top;
+}
+.user .right{
+  flex: 1;
+}
+.user .right .h4{
+   font-weight: 400;
+    font-size: 32rpx;
+    height: 70rpx;
+    line-height: 70rpx;
+    width: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break: break-all;
+}
+.user .right .name{
+   color: #333;
+   font-size:26rpx;
+}
+.inform .bgcolor{
+   position: absolute;
+    background: #fff url(https://qncdn.playonwechat.com/shangcheng/bgcolor.png) no-repeat;
+    background-size: cover;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    display: block;
+    width: 100%;
+    height: 90px;
+    z-index: -1;
+    -webkit-filter: blur(3px);
+}
+.listAll{
+    padding:0 0 20rpx 20rpx;
+    background: #fff;
+    width: 100%;
+}
+.listAll .list{
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    padding-top: 20rpx;
+}
+.listAll .list .flex{
+    flex: 1;
+    position: relative;
+}
+.listAll .list .flex text.num{
+  position:absolute;
+  right:60rpx;
+  height:1.6em;
+  min-width:1.6em;
+  line-height:1.6;
+  padding:0 .4em;
+  font-size:10px;
+  font-family:tahoma;
+  border-radius:.8em;
+  background:#FF4444;
+  color:#fff;
+  text-align:center;
+  white-space:nowrap;
+  transform:translateX(50%);
+  transform-origin:-10% center;
+  z-index:10;
+  box-shadow:0 0 0 1px #fff;
+  box-sizing:border-box;
+}
+.listAll .list .flex text{
+     display: block;
+     font-size: 24rpx;
+}
+.listAll .list .flex image{
+    width: 50rpx;    
+    margin-top:16rpx;
+}
+.listAll .list .flex image3{
+    width: 60rpx; 
+}
+.xuanze .carNum text{
+    background: #98a1a9;
+    color:#fff;
+    width: 30rpx;
+    padding:0 20rpx;
+    border-radius: 30rpx;
+}
+.bottom{
+    margin-bottom: 60rpx;
+}
+.xuanze{
+    margin-top: 20rpx;
+}
+.listAll{
+    border-bottom:1px solid #e5e5e5;
+}
+.xuanze,.listAll .list{
+  position: relative;
+}
+.xuanze:after,.listAll .list:after{
+    content:" ";
+    display: inline-block;
+    width:100%;
+    position:absolute;
+    top:0;
+    left:0;
+    border:1px solid #e5e5e5;
+    -webkit-transform:scaleY(0.5);
+    transform:scaleY(0.5);
+    -webkit-transform-origin:0 0;
+    transform-origin:0 0;
+    box-sizing:border-box;
+}
+.xuanze:before{
+    content:" ";
+    display: inline-block;
+    width:100%;
+    position:absolute;
+    bottom:-1px;
+    left:0;
+    border:1px solid #e5e5e5;
+    -webkit-transform:scale(0.5);
+    transform:scale(0.5);
+    -webkit-transform-origin:0 0;
+    transform-origin:0 0;
+    box-sizing:border-box;
+}
+.xuanze.borerNone:before{
+  content:none;
+}
+.xuanze{
+    font-size:26rpx;
+    display: flex;
+    justify-content:space-between;
+    color:#000;
+    padding: 20rpx;
+    background: #fff;
+}
+.xuanze .nextImg{
+   font-size: 24rpx;
+   color:#848484;
+}
+.xuanze .nextImg image{
+    width: 40rpx;
+    height: 40rpx;
+    vertical-align: middle;
+}
+.allXuan{
+  width: 100%;
+}
+.allXuan .xuanze .classname image{
+  vertical-align:middle;
+  margin-right:6rpx;
+  width: 40rpx;
+  height: 40rpx;
+}

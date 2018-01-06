@@ -1,0 +1,64 @@
+.h1{
+    font-size: 60rpx;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 40rpx;
+}
+.content {
+    background: #fad0d1;
+    color: #fff;
+    border-radius: 20rpx;
+    margin: 20rpx 10rpx;
+    padding: 40rpx 24rpx;
+    font-size: 26rpx;
+}
+.content.one view {
+    padding: 10px 0;
+}
+.content.two {
+    display: flex;
+    text-align: center;
+}
+.content.two .zf {
+    flex: 1;
+    cursor: pointer;
+}
+.content.two .zf view {
+    display: block;
+    margin: 20rpx 0;
+}
+.content.two .zf view.btn {
+    background: #ffcb4a;
+    color: #fff;
+    border-radius: 40rpx;
+    border: 1rpx solid #D9D9D9;
+    width: 180rpx;
+    margin: 0 auto;
+    padding: 12rpx 0;
+}
+.foot {
+    padding: 80rpx 0 120rpx 0;
+    text-align: center;
+}
+.content.two .zf view image {
+    width: 50px;
+}
+button.flex{
+  position:relative;
+  display:block;
+  margin: 0;
+  padding:0;
+  box-sizing:border-box;
+  font-size:26rpx;
+  text-align:center;
+  text-decoration:none;
+  line-height:inherit;
+  border-radius:0px;
+  -webkit-tap-highlight-color:transparent;
+  overflow:hidden;
+  color:#000000;
+  background: none;
+}
+button.flex::after{
+  content: none;
+}
