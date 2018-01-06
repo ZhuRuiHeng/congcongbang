@@ -137,14 +137,20 @@
 				},
 				{
 					"id": -1,
-					"name": "money",
-					"pathName": "pages/money/money",
+					"name": "coupon",
+					"pathName": "pages/coupon/coupon",
 					"query": ""
 				},
 				{
 					"id": -1,
-					"name": "coupon",
-					"pathName": "pages/coupon/coupon",
+					"name": "萌宠商城",
+					"pathName": "pages/shopMall/shopMall",
+					"query": ""
+				},
+				{
+					"id": 20,
+					"name": "每日优惠",
+					"pathName": "pages/discount/discount",
 					"query": ""
 				}
 			]

@@ -60,7 +60,7 @@ Page(Object.assign({}, Zan.Toast, {
       gid: gid
     })
     wx.request({
-      url: app.data.apiUrl + "/api/goods-detail?sign=" + sign,
+      url: app.data.apiUrl + "/api/goods-detail?sign=" + wx.getStorageSync('sign'),
       data: {
         gid: that.data.gid
       },
@@ -117,7 +117,7 @@ Page(Object.assign({}, Zan.Toast, {
     var num = that.data.price;
     console.log('gid', gid + 'num', num + 'attribute', attribute);
     wx.request({
-      url: app.data.apiUrl + "/api/add-carts?sign=" + sign,
+      url: app.data.apiUrl + "/api/add-carts?sign=" + wx.getStorageSync('sign'),
       method: "POST",
       data: {
         gid: that.data._gid,
@@ -484,22 +484,44 @@ Page(Object.assign({}, Zan.Toast, {
   onShow: function () {
     console.log('onshow');
     let that = this;
-    wx.request({
-      url: app.data.apiUrl + '/bargain/bargain-list?sign=' + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
-      header: {
-        'content-type': 'application/json'
-      },
-      method: "GET",
-      success: function (res) {
-        console.log("砍价列表", res)
-        // 获取用户名称及发表时间
-        var goodsList = res.data.data.goodsList;
-        that.setData({
-          main_content: goodsList
-        })
-        wx.hideLoading()
-      }
-    });
+    if (!wx.getStorageSync('sign')){
+      app.getAuth(function () {
+        wx.request({
+          url: app.data.apiUrl + '/bargain/bargain-list?sign=' + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+          header: {
+            'content-type': 'application/json'
+          },
+          method: "GET",
+          success: function (res) {
+            console.log("砍价列表", res)
+            // 获取用户名称及发表时间
+            var goodsList = res.data.data.goodsList;
+            that.setData({
+              main_content: goodsList
+            })
+            wx.hideLoading()
+          }
+        });
+      })
+    }else{
+      wx.request({
+        url: app.data.apiUrl + '/bargain/bargain-list?sign=' + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+        header: {
+          'content-type': 'application/json'
+        },
+        method: "GET",
+        success: function (res) {
+          console.log("砍价列表", res)
+          // 获取用户名称及发表时间
+          var goodsList = res.data.data.goodsList;
+          that.setData({
+            main_content: goodsList
+          })
+          wx.hideLoading()
+        }
+      });
+    }
+    
   },
 
 

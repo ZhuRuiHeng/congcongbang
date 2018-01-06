@@ -31,7 +31,8 @@ Page({
         wx.request({
           url: app.data.apiUrl+'/api/goods-list?sign=' + sign,
           data: {
-            cate_id: that.data.cate_id
+            cate_id: that.data.cate_id,
+            limit: 10
           },
           header: {
             'content-type': 'application/json'
@@ -67,7 +68,8 @@ Page({
         url: app.data.apiUrl + "/api/goods-list?sign=" + wx.getStorageSync('sign'),
         data: {
           page: reqPage,
-          cate_id: that.data.cate_id
+          cate_id: that.data.cate_id,
+          limit: 10
         },
         header: {
           'content-type': 'application/json'

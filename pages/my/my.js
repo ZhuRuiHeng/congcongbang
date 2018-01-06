@@ -62,6 +62,11 @@ Page({
         url: '../coupon/coupon'
       })
     },
+    balance(){
+      wx.navigateTo({
+        url: '../chongzhi/chongzhi'
+      })
+    },
     //推荐有奖
     tuijian:function(){
       wx.navigateTo({

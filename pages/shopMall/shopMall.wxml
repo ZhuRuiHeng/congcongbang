@@ -35,45 +35,9 @@
     <view class="sort">
         <view wx:for="{{modules}}" data-allindex="{{index}}" wx:key="{{item.id}}" data-cate_id='{{item.cate_id}}'                             bindtap='petTab' data-cate_name='{{item.cate_name}}' class='navigator'>
             <view class="image-text">
-                <image src="{{item.icon}}" mode="scaleToFill" ></image>
+                <image src="{{item.icon}}" mode="scaleToFill"  binderror="errorFunction"></image>
                 <text>{{item.cate_name}}</text>
             </view>
-        </view>
-         <navigator  url='../shopMall/shopMall' class='navigator'>
-            <view class="image-text">
-                <image src="../img/shop.png" mode="scaleToFill" ></image>
-                <text>萌宠商城</text>
-            </view>
-        </navigator>
-        <navigator url='../discount/discount' class='navigator'>
-            <view class="image-text">
-                <image src="../img/coupon.png" mode="scaleToFill"  ></image>
-                <text>每日优惠</text>
-            </view>
-        </navigator> 
-    </view>
-    <!--nav -->
-    <view class="main">
-        <view class="nav bc_white">
-             <view class="{{state == 0?'red':'default'}}" bindtap="tapKeyWorld" data-ontap="hot" data-cate="0" data-state = "0"><span>最热</span></view>
-             <view class="{{state == 1?'red':'default'}}" bindtap="tapKeyWorld" data-ontap="newest" data-cate="0" data-state = "1"><span>最新</span></view> 
-        </view>
-        <!--content -->
-        <block class="boxList" wx:if="{{main_content.length != 0}}">
-            <view class="chose-list" >
-                <navigator wx:for="{{main_content}}" wx:key="{{index}}" class="chose-item" url="../inform/inform?gid={{item.gid}}">
-                    <view class="chose-img">
-                        <image src="{{item.picture}}" mode="aspectFill"></image>
-                    </view>
-                    <view class="chose-text">
-                        <view class="chose-title">{{item.good_name}}</view>
-                        <view class="price">￥{{item.price}}</view>
-                    </view>
-                </navigator>
-            </view> 
-        </block> 
-        <view wx:else>
-            <view style="text-align:center;font-size:24rpx;padding:30rpx;"> 此分类暂时没有数据！ </view>
         </view>
     </view>
     <!--养宠计划  -->
@@ -90,6 +54,20 @@
             </view>
         </view>
     </view>
+    <!--火爆促销  -->
+    <!-- <view class="all chakan" wx:if="{{modulesPet}}">火爆促销</view>
+    <view class='allPackage'>
+        <view class='Package' wx:for="{{modulesPet}}" wx:key="{{index}}" bindtap='petTab' 
+              data-allindex="{{index}}"  data-cate_id='{{item.cate_id}}' data-cate_name='{{item.cate_name}}'>
+            <view class='packageText'>
+                <view class='packageTitle'>{{item.cate_name}}</view>
+                <view class='packageLittle'>{{item.desc}}</view>
+            </view>
+            <view class='packageImg'>
+                <image src="{{item.icon}}" mode='aspectFill'></image>
+            </view>
+        </view>
+    </view> -->
     <!-- m秒杀 -->
     <view class="groupon groupon2" wx:if="{{currentSeckillTime != null}}">
         <view class="gpTitle miao">

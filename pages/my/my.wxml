@@ -34,16 +34,23 @@
     </view>
 </view>
 <view class="allXuan">
-    <!-- <view class="xuanze" bindtap="coupon">
-        <view class="classname"><image style="margin-right:-1rpx;" src="../images/ka.png" mode="widthFix"></image> 优惠卡券</view>
-        <view class="nextImg"><image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"/></view> 
-    </view>
+    <!-- 
     <view class="xuanze" bindtap="tuijian">
         <view class="classname"><image src="../images/jiang.png" mode="widthFix"></image>推荐有奖</view>
         <view class="nextImg"><image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"/></view> 
     </view> -->
     <!-- <view class="xuanze" bindtap="userinform" wx:if="{{identity == 1 || identity == 2}}">
         <view class="classname"><image src="../images/jiang.png" mode="widthFix"></image>会员中心</view>
+        <view class="nextImg"><image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"/></view> 
+    </view> -->
+    <!-- <view class="xuanze" bindtap="balance">
+        <view class="classname"><image src="../images/money.png" mode="widthFix"></image>我的余额</view>
+        <view class="nextImg"><image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"/></view> 
+    </view>
+    <view class="xuanze" bindtap="coupon">
+        <view class="classname">
+          <image style="margin-right:-1rpx;" src="../images/ka.png" mode="widthFix"></image> 优惠卡券
+        </view>
         <view class="nextImg"><image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"/></view> 
     </view> -->
     <view class="xuanze" bindtap="work">
@@ -55,7 +62,7 @@
         <view class="nextImg"><image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"/></view> 
     </view>
     <view class="xuanze" bindtap="tixian">
-        <view class="classname"><image src="../images/money.png" mode="widthFix"></image>我的账户</view>
+        <view class="classname"><image src="../images/money.png" mode="widthFix"></image>任务账户</view>
         <view class="nextImg"><image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"/></view> 
     </view>
     <view class="xuanze bottom page-body-line" data-phone="{{service}}" bindtap='makePhone' style="position:relative">

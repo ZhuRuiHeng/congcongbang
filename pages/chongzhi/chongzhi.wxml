@@ -7,6 +7,5 @@
         <view class='title'>我的余额</view>
         <view class='money'>￥2211</view>
         <view class='button'>充值</view>
-        <view class='button bg' bindtap='tixian'>提现</view>
     </view>  
 </view> 

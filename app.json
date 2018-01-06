@@ -1,6 +1,8 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/shopMall/shopMall",
+    "pages/discount/discount",
     "pages/friends/friends",
     "pages/mingxi/mingxi",
     "pages/invitation/invitation",

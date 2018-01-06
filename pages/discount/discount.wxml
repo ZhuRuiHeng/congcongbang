@@ -1,0 +1,85 @@
+<!--index.wxml-->
+<import src="../../dist/toast/index.wxml" />
+<!--引入模板  -->
+<template is="zan-toast" data="{{ zanToast }}"></template>
+<view class="container">
+    <!--轮播图 -->
+    <swiper class="swiper" wx:if="{{lunbo.length !=0}}"  bindtap="imgPreview"  indicator-dots="{{indicatorDots}}" 
+            autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color="#ff4444" 
+            indicator-active-color="#fff">
+        <block wx:for="{{lunbo}}" wx:key="{{index}}">
+          <swiper-item>
+            <image src="{{item.icon}}" class="slide-image" mode="aspectFill" id="{{item.gid}}" catchtap="swipclick"/>
+          </swiper-item>
+        </block>
+    </swiper>
+    <!-- m秒杀 -->
+    <view class="groupon groupon2" wx:if="{{currentSeckillTime != null}}">
+        <view class="gpTitle miao">
+            <view class="classname"><text>特价福利 </text><image style="margin-left:20rpx;width:40rpx" src="../images/times.png" mode="widthFix"></image></view>
+           <navigator url="../miaosha/miaosha?gid={{item.gid}}" style="display:inline;color:#ff4444;font-size:24rpx;">
+                查看更多<image src="../images/nexta.png" mode="widthFix"/>
+            </navigator>
+        </view>
+        <!-- <view class="center time" >暂时没有秒杀场次</view> -->
+        <view class="Tall">
+            <view class="xianshi">
+                <view class="left">
+                    <text class="classname" style="color:#000000;font-weight:bold;font-size:26rpx">限时秒杀</text>
+                    <text class="classname" style="color:#666666">包邮抢购中</text>
+                </view>
+                <view class="right">
+                    <view class="center time" wx:for="{{Countdown}}" wx:key="{{index}}">{{currentSeckillTime}}场结束仅剩 
+                                            <text>{{item.hr}}</text>：
+                                            <text>{{item.min}}</text>：
+                                            <text>{{item.sec}}</text></view>
+                    <!-- <view class="center countdown" wx:for="{{Countdown}}">{{item.hr}}时{{item.min}}分{{item.sec}}秒</view> -->
+                </view>
+            </view>
+            <view class="gpList">
+                <navigator wx:for="{{seckills}}" wx:key="{{item.index}}" class="gpimage" url="../miaosha/miaosha?gid={{item.gid}}">
+                    <image style="height:198rpx;" src="{{item.picture}}" mode="aspectFill"></image>
+                </navigator>
+            </view>
+        </view>
+    </view>
+    <!--砍价  -->
+    <view class='content'>
+          <view class='now'>
+              <text wx:if="{{bargainList.length>0}}">正在进行中</text>
+              <text wx:else>砍价活动已结束</text>
+          </view>
+          <view class='produce' bindtap='receive' wx:if="{{bargainList.length>0}}"> 
+            <!--  -->
+              <image src="{{bargainList[0].picture}}" mode='aspectFill'></image>
+              <view class='text'>
+                  <view class='title'>{{bargainList[0].goods_title}}</view>
+                  <view class='price'>
+                      <view class='left'>
+                          <view>最低￥<text class='big'>0.00</text></view>   
+                          <text class='color'>原价￥{{bargainList[0].price}}</text>
+                      </view>
+                      <view class='right buttons' gid="{{bargainList[0].gid}}">
+                          <view class='button'>去砍价</view>
+                      </view>
+                  </view> 
+              </view>
+          </view>
+          <view class='produce'  wx:else bindtap='receive1'> 
+            <!--  -->
+              <image src="{{bargainList1[0].picture}}" mode='aspectFill'></image>
+              <view class='text'>
+                  <view class='title'>{{bargainList1[0].goods_title}}</view>
+                  <view class='price'>
+                      <view class='left'>
+                          <view>最低￥<text class='big'>xxx</text></view>   
+                          <text class='color'>原价￥{{bargainList1[0].price}}</text>
+                      </view>
+                      <view class='right buttons' gid="{{bargainList1[0].gid}}">
+                          <view class='button'>去砍价</view>
+                      </view>
+                  </view> 
+              </view>
+          </view>
+      </view>
+</view>

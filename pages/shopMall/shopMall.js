@@ -31,7 +31,58 @@ Page(Object.assign({}, Zan.Toast, {
     figure:'',
     i :0 ,
     activity: true, //帮砍价库存问题
-    bargain_id:''//砍价id
+    bargain_id:'',//砍价id
+    modulesList:[
+      {   cate_id:48,
+          cate_name:'狗狗',
+          icon:"https://pet.zealcdn.cn/assets/images/icons/category/363620171231130639.jpg"
+      },{
+          cate_id: 51,
+          cate_name: '猫猫',
+          icon: "https://pet.zealcdn.cn/assets/images/icons/category/363620171231130639.jpg"
+      }, {
+          cate_id: 148,
+          cate_name: '小宠',
+          icon: "https://pet.zealcdn.cn/assets/images/icons/category/363620171231130639.jpg"
+      }, {
+        cate_id: 148,
+        cate_name: '水族',
+        icon: "https://pet.zealcdn.cn/assets/images/icons/category/363620171231130639.jpg"
+      }, {
+        cate_id: 148,
+        cate_name: '狗粮',
+        icon: "https://pet.zealcdn.cn/assets/images/icons/category/363620171231130639.jpg"
+      }, {
+        cate_id: 148,
+        cate_name: '罐头',
+        icon: "https://pet.zealcdn.cn/assets/images/icons/category/363620171231130639.jpg"
+      }, {
+        cate_id: 148,
+        cate_name: '零食',
+        icon: "https://pet.zealcdn.cn/assets/images/icons/category/363620171231130639.jpg"
+      },
+      {
+        cate_id: 148,
+        cate_name: '保健',
+        icon: "https://pet.zealcdn.cn/assets/images/icons/category/363620171231130639.jpg"
+      }, {
+        cate_id: 148,
+        cate_name: '医疗',
+        icon: "https://pet.zealcdn.cn/assets/images/icons/category/363620171231130639.jpg"
+      }, {
+        cate_id: 148,
+        cate_name: '香波',
+        icon: "https://pet.zealcdn.cn/assets/images/icons/category/363620171231130639.jpg"
+      }, {
+        cate_id: 148,
+        cate_name: '用品',
+        icon: "https://pet.zealcdn.cn/assets/images/icons/category/363620171231130639.jpg"
+      }, {
+        cate_id: 148,
+        cate_name: '更多',
+        icon: "https://pet.zealcdn.cn/assets/images/icons/category/363620171231130639.jpg"
+      }
+    ]
 },
   //下拉刷新
   onPullDownRefresh: function () {
@@ -55,62 +106,19 @@ Page(Object.assign({}, Zan.Toast, {
   },
   //轮播图点击跳转
   swipclick: function (event) {
-      //console.log(event);
-      var gid = event.currentTarget.id
-      wx.navigateTo({ 
-        url: '../inform/inform?gid=' + gid 
-      })
-  },
+    //console.log(event);
+    var gid = event.currentTarget.id
+    wx.navigateTo({ 
+      url: '../inform/inform?gid=' + gid 
+    })
+},
   //搜索跳转
 search: function() {
   wx.navigateTo({
     url: '../search/search'
   })
 },
-//1最新最热
-tapKeyWorld: function (e) {
-  wx.showLoading({
-    title: '加载中',
-  })
-  var   that = this;
-  var   word = e.currentTarget.dataset.ontap;
-  var   cate = e.currentTarget.dataset.cate;
-  var  state = e.currentTarget.dataset.state;
-  var   sign = wx.getStorageSync('sign');
- // console.log(e.target.dataset.state) 
-  console.log("索引", cate);
-  console.log("关键字", word);
-  console.log('cate_id', cate)
-  this.setData({
-    searchword : word,
-        cateid : cate,
-        state: state 
-  })
-  wx.request({
-    url: app.data.apiUrl2+"/api/goods-list?sign=" +sign ,
-    data: {
-        order : that.data.searchword,
-      cate_id : that.data.cateid,
-      limit:4
-    },
-    header: {
-      'content-type': 'application/json'
-    },
-    method: "GET",
-    success: function (res) {
-      // 此处清空全局的数据
-      console.log("筛选2",res);
-      var main_content = [];
-      // 获取用户名称及发表时间
-      var contentTip = res.data.data.goodsList;
-      console.log('main_content', contentTip);
-      that.setData({
-        main_content: contentTip
-      })
-      wx.hideLoading()
-    }
-  })
-},
+
 // 获取索引默认加载引用
 suoyin: function (e) {
   var sign = wx.getStorageSync('sign');
@@ -121,63 +129,7 @@ suoyin: function (e) {
   });
   console.log("this.index", this.data.allindex);
 },
-//分类模块切换
-tapKeyWorld1: function (e) {
-  var sign = wx.getStorageSync('sign');
-  wx.showLoading({
-    title: '加载中',
-  })
-  var that = this;
-  var modules = that.data.modules;
-  var cate = e.currentTarget.dataset.cate;
-  that.setData({
-    cate_id: cate
-  })
-  setTimeout(function(){
-    var allindex = that.data.allindex;                   // 获取模块列表索引
-    var active1 = e.currentTarget.dataset.active;         // 获取当前商品的选中状态
-    var active1 = true;
-    var sonCategory = modules[allindex].sonCategory;
-    var _modules = that.data.modules;
-      for (var j = 0; j < sonCategory.length; j++) {
-        sonCategory[j].active = false;
-        if (cate == sonCategory[j].cate_id) {
-          sonCategory[j].active = true;
-        }
-      }
-      _modules[allindex].sonCategory = sonCategory;
-      that.setData({
-        modules: modules
-      })
-    wx.request({
-      url: app.data.apiUrl2+"/api/goods-list?sign=" + sign ,
-      data: {
-        cate_id: that.data.cate_id,
-        limit: 4
-      },
-      header: {
-        'content-type': 'application/json'
-      },
-      method: "GET",
-      success: function (res) {
-        // 此处清空全局的数据
-        console.log("cate_id", that.data.cate_id);
-        var typelist = [];
-        // 获取用户名称及发表时间
-        var contentTip = res.data.data.goodsList;
-        
-        modules[allindex].typelist = [];
-        modules[allindex].typelist = contentTip;
-        console.log('typelist', modules[allindex].typelist);
-        that.setData({
-          modules: modules
-        })
-        wx.hideLoading()
-      }
-    })
-  },300)
-      
-},
+
  //事件处理函数
 bindViewTap: function() {
     wx.navigateTo({
@@ -732,25 +684,6 @@ onShow: function () {
             })
           }
       });
-      //最热列表
-      wx.request({
-          url: app.data.apiUrl2+"/api/goods-list?sign=" + sign ,
-          data:{
-            limit: 4
-          },
-          header: {
-            'content-type': 'application/json'
-          },
-          method: "GET",
-          success: function (res) {
-            var main_content = [];
-            // 获取用户名称及发表时间
-            var contentTip = res.data.data.goodsList;
-            that.setData({
-              main_content: contentTip
-            })
-          }
-      });
       //获取普通分类
       wx.request({
           url: app.data.apiUrl2+'/api/get-category?sign=' + sign ,
@@ -764,20 +697,9 @@ onShow: function () {
             if (status==1){
               var alldata = res.data;
               var fenlei = res.data.categorys;
-              if (fenlei.length > 7){
-                let _fenlei = [];
-                for (let i = 0; i < fenlei.length-2;i++){
-                  _fenlei[i] = fenlei[i]
-                }
-                that.setData({
-                  modules: _fenlei
-                })
-                console.log(that.data.modules);
-              }else{
-                that.setData({
-                  modules: fenlei,
-                })
-              }
+              that.setData({
+                modules: fenlei,
+              })
               setTimeout(function () {
                 var modules = that.data.modules;
                 var sindex = [];
@@ -829,9 +751,15 @@ onShow: function () {
 // 养宠套餐
  // url="../fenlei/fenlei?cate_id={{item.cate_id}}&index={{index}}"
   petTab(e){
-      wx.navigateTo({
-        url: '../fenlei/fenlei?cate_id=' + e.currentTarget.dataset.cate_id + '&index=' + e.currentTarget.dataset.allindex,
-      })
+    if (e.currentTarget.dataset.cate_name =='每日优惠'){
+        wx.navigateTo({
+          url: '../bargainList/bargainList',
+        })
+    }else{
+        wx.navigateTo({
+          url: '../fenlei/fenlei?cate_id=' + e.currentTarget.dataset.cate_id + '&index=' + e.currentTarget.dataset.allindex,
+        })
+    }
   },
   // 搜索框
   inputSearch: function (e) {  //输入搜索文字
@@ -847,23 +775,5 @@ onShow: function () {
     wx.navigateTo({
       url: '../bargainList/bargainList'
     })
-  },
-  //设置分享
-   onShareAppMessage: function () {
-     var that = this;
-     var mid = wx.getStorageSync('mid');
-     console.log("getStorageSync:",mid);
-     return {
-       title: "宠宠邦",
-       path: '/pages/index/index?mid=' + mid,
-       success: function (res) {
-         console.log(res);
-         // 转发成功
-       },
-       fail: function (res) {
-         console.log(res);
-         // 转发失败
-       }
-     }
-   }
+  }
 }))

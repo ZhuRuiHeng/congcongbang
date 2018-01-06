@@ -61,7 +61,8 @@ Page(Object.assign({}, Zan.Toast, {
       wx.request({
         url: app.data.apiUrl + "/api/goods-list?sign=" + wx.getStorageSync('sign') ,
         data: {
-          cate_id: that.data.cate_id
+          cate_id: that.data.cate_id,
+          limit: 10
         },
         header: {
           'content-type': 'application/json'
@@ -393,59 +394,62 @@ Page(Object.assign({}, Zan.Toast, {
       title: '加载中',
     });
     var that = this;
-    //获取所有分类
-      wx.request({
-        url: app.data.apiUrl+'/api/get-category?sign=' + sign ,
-        method: "GET",
-        success: function (res) {
-          console.log("获取所有分类", res);
-          var alldata = res.data;
-          var fenlei = res.data.categorys;
-          that.setData({
-            modules: fenlei,
-          })
-         
-          var cate_id = that.data.cate_id;
-          var index = that.data.index;
-          var contentTip = that.data.modules[index];
-          var sonCategory = that.data.modules[index].sonCategory;
-          var Len = sonCategory.length + 2;
-          var width = 130 * Len;
-          that.setData({
-            modules: contentTip,
-            w_width: width
-          })
-          console.log("sonCategory:", sonCategory)
-          wx.hideLoading();
-          // // 默认渲染列表
-          // 默认渲染列表
-          setTimeout(function () {
+    console.log(wx.getStorageSync('sign'));
+    if (!wx.getStorageSync('sign')) {
+      app.getAuth(function () {
+        //获取所有分类
+        wx.request({
+          url: app.data.apiUrl + '/api/get-category?sign=' + sign,
+          method: "GET",
+          success: function (res) {
+            console.log("获取所有分类", res);
+            var alldata = res.data;
+            var fenlei = res.data.categorys;
+            that.setData({
+              modules: fenlei,
+            })
+
+            var cate_id = that.data.cate_id;
+            var index = that.data.index;
+            var contentTip = that.data.modules[index];
+            var sonCategory = that.data.modules[index].sonCategory;
+            var Len = sonCategory.length + 2;
+            var width = 130 * Len;
+            that.setData({
+              modules: contentTip,
+              w_width: width
+            })
+            console.log("sonCategory:", sonCategory)
+            wx.hideLoading();
+            // // 默认渲染列表
+            // 默认渲染列表
+            setTimeout(function () {
               var modules = that.data.modules;
               var lengths = modules.sonCategory.length;
-              if (lengths==0){
+              if (lengths == 0) {
                 console.log("无子cate_id：", that.data.cate_id);
-                  wx.request({
-                    url: app.data.apiUrl+"/api/goods-list?sign=" + sign ,
-                    data: {
-                      cate_id: that.data.cate_id
-                    },
-                    header: {
-                      'content-type': 'application/json'
-                    },
-                    method: "GET",
-                    success: function (res) {
-                      console.log("len0",res);
-                      that.setData({
-                        sonCategory: res.data.data.goodsList
-                      })
-                      wx.hideLoading()
-                    }
-                  })
-              }else{
+                wx.request({
+                  url: app.data.apiUrl + "/api/goods-list?sign=" + wx.getStorageSync('sign'),
+                  data: {
+                    cate_id: that.data.cate_id
+                  },
+                  header: {
+                    'content-type': 'application/json'
+                  },
+                  method: "GET",
+                  success: function (res) {
+                    console.log("len0", res);
+                    that.setData({
+                      sonCategory: res.data.data.goodsList
+                    })
+                    wx.hideLoading()
+                  }
+                })
+              } else {
                 var cate_id = modules.sonCategory[0].cate_id;
                 console.log('cate_id:', cate_id);
                 wx.request({
-                  url: app.data.apiUrl+"/api/goods-list?sign=" + sign ,
+                  url: app.data.apiUrl + "/api/goods-list?sign=" + wx.getStorageSync('sign'),
                   data: {
                     cate_id: cate_id
                   },
@@ -462,9 +466,85 @@ Page(Object.assign({}, Zan.Toast, {
                   }
                 })
               }
-           }, 300)
-       },
-    });
+            }, 300)
+          },
+        });
+      })
+    }else{
+      //获取所有分类
+      wx.request({
+        url: app.data.apiUrl + '/api/get-category?sign=' + sign,
+        method: "GET",
+        success: function (res) {
+          console.log("获取所有分类", res);
+          var alldata = res.data;
+          var fenlei = res.data.categorys;
+          that.setData({
+            modules: fenlei,
+          })
+
+          var cate_id = that.data.cate_id;
+          var index = that.data.index;
+          var contentTip = that.data.modules[index];
+          var sonCategory = that.data.modules[index].sonCategory;
+          var Len = sonCategory.length + 2;
+          var width = 130 * Len;
+          that.setData({
+            modules: contentTip,
+            w_width: width
+          })
+          console.log("sonCategory:", sonCategory)
+          wx.hideLoading();
+          // // 默认渲染列表
+          // 默认渲染列表
+          setTimeout(function () {
+            var modules = that.data.modules;
+            var lengths = modules.sonCategory.length;
+            if (lengths == 0) {
+              console.log("无子cate_id：", that.data.cate_id);
+              wx.request({
+                url: app.data.apiUrl + "/api/goods-list?sign=" + wx.getStorageSync('sign'),
+                data: {
+                  cate_id: that.data.cate_id
+                },
+                header: {
+                  'content-type': 'application/json'
+                },
+                method: "GET",
+                success: function (res) {
+                  console.log("len0", res);
+                  that.setData({
+                    sonCategory: res.data.data.goodsList
+                  })
+                  wx.hideLoading()
+                }
+              })
+            } else {
+              var cate_id = modules.sonCategory[0].cate_id;
+              console.log('cate_id:', cate_id);
+              wx.request({
+                url: app.data.apiUrl + "/api/goods-list?sign=" + wx.getStorageSync('sign'),
+                data: {
+                  cate_id: cate_id
+                },
+                header: {
+                  'content-type': 'application/json'
+                },
+                method: "GET",
+                success: function (res) {
+                  console.log("len1", res);
+                  that.setData({
+                    sonCategory: res.data.data.goodsList
+                  })
+                  wx.hideLoading()
+                }
+              })
+            }
+          }, 300)
+        },
+      });
+    }
+   
   },
   // 下拉分页
   onReachBottom: function () {
@@ -486,7 +566,8 @@ Page(Object.assign({}, Zan.Toast, {
       url: app.data.apiUrl + "/api/goods-list?sign=" + wx.getStorageSync('sign') ,
       data: {
         page: reqPage,
-        cate_id: that.data.cate_id
+        cate_id: that.data.cate_id,
+        limit:20
       },
       header: {
         'content-type': 'application/json'
@@ -525,7 +606,7 @@ Page(Object.assign({}, Zan.Toast, {
     var mid = wx.getStorageSync('mid');
     return {
       title: "更多",
-      path: '/pages/feilei/feilei?mid=' + mid,
+      path: '/pages/fenlei/fenlei?mid=' + mid + '&cate_id=' + that.data.cate_id + '&index=' + that.data.index,
       success: function (res) {
         console.log(res);
         // 转发成功

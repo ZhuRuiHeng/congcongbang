@@ -2,7 +2,8 @@
 <view class="container">
     <view class="boxList" wx:if="{{goodsList.length != 0}}">
         <view class="chose-list" >
-            <navigator wx:for="{{main_content}}" class="chose-item" url="../inform/inform?gid={{item.gid}}">
+            <navigator wx:for="{{main_content}}" class="chose-item" wx:key="{{index}}"
+                       url="../inform/inform?gid={{item.gid}}">
                 <view class="chose-img">
                     <image src="{{item.picture}}" mode="aspectFill"></image>
                 </view>

@@ -15,10 +15,5 @@ Page(Object.assign({}, Zan.Toast, {
       icon: 'loading'
     })
     wx.hideLoading()
-  },
-  tixian(e){
-    console.log(e);
-    var that = this;
-    that.showZanToast('请联系客服');
   }
 }))
