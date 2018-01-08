@@ -48,7 +48,7 @@
                 </navigator>
             </view>
         </view>
-        <view class="modeList" wx:else style="font-size:26rpx;text-align:center;padding:40rpx;margin-top:0;box-sizing:border-box;">暂时没有此分类商品！</view>
+        <view class="modeList" wx:else style="font-size:26rpx;text-align:center;padding:40rpx;margin-top:0;box-sizing:border-box;">暂时没有商品！</view>
     </view>
     <!--购物车弹窗  -->
     <view class="bg {{addCar?'show':'hidden'}}"></view> 
@@ -86,8 +86,8 @@
                 </view>
                 <view class="num">
                     <button class="reduce {{minusStatus}}" bindtap="bindMinus">-</button>
-                    <input type="number"  bindchange="bindManual" value="{{price}}" readonly="readonly"/>
-                    <button class="add normal" bindtap="bindPlus">+</button>
+                    <input type="number"  bindchange="bindManual" value="{{price}}" disabled/>
+                    <button class="add normal" bindtap="bindPlus" disabled="{{kucun}}">+</button>
                 </view>
             </view>
         </view>

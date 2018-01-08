@@ -18,10 +18,11 @@ Page(Object.assign({}, Zan.Toast, {
       closeCar: false,//关闭购物车
       price: 1,//购物车数量
       minusStatus: 'disabled',//数量为1禁用
+      kucun:false, //add
       sum: '',//购物车id
       _num: 1, //类型
       arr: [],
-      attrLen: '',
+      attrLen: '', 
       values: [], //型号
       shuxing:'',
       all:[],
@@ -51,7 +52,7 @@ Page(Object.assign({}, Zan.Toast, {
 
   onShow: function () {
     var that = this;
-    //app.getAuth(function () {
+    app.getAuth(function () {
       var sign = wx.getStorageSync('sign');
       var mid = wx.getStorageSync('mid');
       console.log('mid:', mid)
@@ -86,10 +87,19 @@ Page(Object.assign({}, Zan.Toast, {
             imgUrls: picture,
             shuxing: inform.attribute,
             is_collect: inform.is_collect,
-            is_membership: is_membership
+            is_membership: is_membership,
+            expenses: inform.expenses
           })
           if (that.data.informImg) {
             WxParse.wxParse('informImg', 'html', that.data.informImg, that, 5)
+          }
+          //库存为0 不能增加total_stock
+          console.log(that.data.inform.total_stock);
+          if (that.data.inform.total_stock<2){
+            console.log('truetrue');
+            that.setData({
+                kucun:true
+            })
           }
           var shuxing = that.data.shuxing;
           console.log("属性：",shuxing);
@@ -110,7 +120,7 @@ Page(Object.assign({}, Zan.Toast, {
           wx.hideLoading()
         }
       })
-    //})
+    })
   },
   // 取消
   cancel() {
@@ -270,7 +280,8 @@ Page(Object.assign({}, Zan.Toast, {
         that.setData({
           addbuy: true,
           inform: inform,
-          content: inform.content
+          content: inform.content,
+          is_alive: inform.is_alive
         })
         wx.hideLoading()
       }
@@ -470,15 +481,18 @@ Page(Object.assign({}, Zan.Toast, {
   bindPlus: function () {
       //console.log('+');
       var price = this.data.price;
+      let inform = this.data.inform;
       // 不作过多考虑自增1 
       price++;
-      // 只有大于一件的时候，才能normal状态，否则disable状态 
-      var minusStatus = price < 1 ? 'disabled' : 'normal';
+      console.log('库存：', kucun);
+      let kucun = inform.total_stock - price < 1 ? true : false;
+     // var minusStatus = price < 1 ? 'disabled' : 'normal';
       // 将数值与状态写回 
       this.setData({
           price: price,
-          minusStatus: minusStatus
+          kucun: kucun
       });
+      console.log('kucun:', this.data.kucun);
   },
   //加入购物车
    addCars: function (e) {
@@ -541,6 +555,7 @@ Page(Object.assign({}, Zan.Toast, {
     var types = "";
     var arr = that.data.arr;
     var values = that.data.values;
+    let is_alive = that.data.is_alive;
     for (var i = 0; i < arr.length; i++) {
       if (arr[i]) {
         attribute += arr[i] + ',';
@@ -555,21 +570,41 @@ Page(Object.assign({}, Zan.Toast, {
     var arrlen = that.data.arr.length; //数组长度
     console.log('获取attribute长度', attrLen);
     console.log('数组长度', arrlen); //bug 数组长度
-    if (attrLen > 0) {
-      if (arrlen == attrLen) {
-        console.log('../dingdanInform/dingdanInform ? gid = ' + that.data.gid + ' & price=' + that.data.price + ' & attr=' + attribute + ' & types=' + types + ' & low_price=' + that.data.low_price + ' & type=0')
-        wx.navigateTo({
-          url: '../dingdanInform/dingdanInform?gid=' + that.data.gid + '&price=' + that.data.price + '&attr=' + attribute + '&types=' + types + '&low_price=' + that.data.low_price + '&type=0'
-        })
-        console.log(attribute);
+    console.log('is_alive:', is_alive);
+    if (is_alive== 1){ //活体
+      if (attrLen > 0) {
+        if (arrlen == attrLen) {
+          console.log('../aliveInform/aliveInform ? gid = ' + that.data.gid + ' & price=' + that.data.price + ' & attr=' + attribute + ' & types=' + types + ' & low_price=' + that.data.low_price + ' & type=0' + '&expenses=' + that.data.expenses)
+          wx.navigateTo({
+            url: '../aliveInform/aliveInform?gid=' + that.data.gid + '&price=' + that.data.price + '&attr=' + attribute + '&types=' + types + '&low_price=' + that.data.low_price + '&type=0' + '&expenses=' + that.data.expenses
+          })
+          console.log(attribute);
+        } else {
+          that.showZanToast('请选择属性');
+        }
       } else {
-        that.showZanToast('请选择属性');
+        wx.navigateTo({
+          url: '../aliveInform/aliveInform?gid=' + that.data.gid + '&' + 'price=' + that.data.price + '&low_price=' + that.data.low_price + '&type=0' + '&expenses=' + that.data.expenses
+        })
       }
-    } else {
-      wx.navigateTo({
-        url: '../dingdanInform/dingdanInform?gid=' + that.data.gid + '&' + 'price=' + that.data.price + '&low_price=' + that.data.low_price + '&type=0'
-      })
+    }else{ //非活体
+      if (attrLen > 0) {
+        if (arrlen == attrLen) {
+          console.log('../dingdanInform/dingdanInform ? gid = ' + that.data.gid + ' & price=' + that.data.price + ' & attr=' + attribute + ' & types=' + types + ' & low_price=' + that.data.low_price + ' & type=0') + '&expenses=' + that.data.expenses
+          wx.navigateTo({
+            url: '../dingdanInform/dingdanInform?gid=' + that.data.gid + '&price=' + that.data.price + '&attr=' + attribute + '&types=' + types + '&low_price=' + that.data.low_price + '&type=0' + '&expenses=' + that.data.expenses
+          })
+          console.log(attribute);
+        } else {
+          that.showZanToast('请选择属性');
+        }
+      } else {
+        wx.navigateTo({
+          url: '../dingdanInform/dingdanInform?gid=' + that.data.gid + '&' + 'price=' + that.data.price + '&low_price=' + that.data.low_price + '&type=0' + '&expenses=' + that.data.expenses
+        })
+      }
     }
+    
     that.setData({
       arr: [],
       values: [],

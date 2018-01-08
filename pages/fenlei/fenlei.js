@@ -19,6 +19,7 @@ Page(Object.assign({}, Zan.Toast, {
     closeCar: true,//关闭购物车
     price: 1,//购物车数量
     minusStatus: 'disabled',//数量为1禁用
+    kucun:false, //add
     sum: '',//购物车id
     _num: "", //类型型号
     state: 0,
@@ -117,8 +118,17 @@ Page(Object.assign({}, Zan.Toast, {
           inform: inform,
           figure: inform.picture[0],
           low_price: inform.low_price,
-          high_price: inform.high_price
+          high_price: inform.high_price,
+          expenses: inform.expenses,
+          is_alive: inform.is_alive
         })
+        //库存为0 不能增加total_stock
+        console.log(that.data.inform.total_stock);
+        if (that.data.inform.total_stock < 2) {
+          that.setData({
+            kucun: true
+          })
+        }
         wx.hideLoading()
         console.log("inform详情", inform);
       }
@@ -198,31 +208,45 @@ Page(Object.assign({}, Zan.Toast, {
       }
     }
     attribute = attribute.substr(0, attribute.length - 1);
-    console.log("aaaaaa", attribute);
-    console.log("types", types);
     var carid = wx.getStorageSync("carid");
     var attrLen = that.data.inform.attribute.length;//获取attribute长度
     var arrlen = that.data.arr.length; //数组长度
-    console.log('获取attribute长度', attrLen);
-    console.log('cccccc', that.data.price + 'aaaa' + that.data.low_price + 'types' + attribute); //bug 数组长度
-
-    if (attrLen > 0) {
-      if (arrlen == attrLen) {
-        that.setData({
-          addCar: false
-        })
-        wx.navigateTo({
-          url: '../dingdanInform/dingdanInform?gid=' + carid + '&price=' + that.data.price + '&attr=' + attribute + '&types=' + types + '&low_price=' + that.data.low_price
-        })
-        console.log(attribute);
+    if (that.data.is_alive==1){ //活体
+      if (attrLen > 0) {
+        if (arrlen == attrLen) {
+          that.setData({
+            addCar: false
+          })
+          wx.navigateTo({
+            url: '../aliveInform/aliveInform?gid=' + carid + '&price=' + that.data.price + '&attr=' + attribute + '&types=' + types + '&low_price=' + that.data.low_price + '&expenses=' + that.data.expenses
+          })
+        } else {
+          that.showZanToast('请选择属性');
+        }
       } else {
-        that.showZanToast('请选择属性');
+        wx.navigateTo({
+          url: '../aliveInform/aliveInform?gid=' + carid + '&' + 'price=' + that.data.price + '&types=' + types + '&low_price=' + that.data.low_price + '&expenses=' + that.data.expenses
+        })
       }
-    } else {
-      wx.navigateTo({
-        url: '../dingdanInform/dingdanInform?gid=' + carid + '&' + 'price=' + that.data.price + '&types=' + types + '&low_price=' + that.data.low_price
-      })
+    }else{
+      if (attrLen > 0) {
+        if (arrlen == attrLen) {
+          that.setData({
+            addCar: false
+          })
+          wx.navigateTo({
+            url: '../dingdanInform/dingdanInform?gid=' + carid + '&price=' + that.data.price + '&attr=' + attribute + '&types=' + types + '&low_price=' + that.data.low_price + '&expenses=' + that.data.expenses
+          })
+        } else {
+          that.showZanToast('请选择属性');
+        }
+      } else {
+        wx.navigateTo({
+          url: '../dingdanInform/dingdanInform?gid=' + carid + '&' + 'price=' + that.data.price + '&types=' + types + '&low_price=' + that.data.low_price + '&expenses=' + that.data.expenses
+        })
+      }
     }
+    
     that.setData({
       arr: [],
       values: [],
@@ -360,13 +384,20 @@ Page(Object.assign({}, Zan.Toast, {
   },
   /* 点击加号 */
   bindPlus: function () {
+    //console.log('+');
     var price = this.data.price;
+    let inform = this.data.inform;
+    // 不作过多考虑自增1 
     price++;
-    var minusStatus = price < 1 ? 'disabled' : 'normal';
+    console.log('库存：', kucun);
+    let kucun = inform.total_stock - price < 1 ? true : false;
+    // var minusStatus = price < 1 ? 'disabled' : 'normal';
+    // 将数值与状态写回 
     this.setData({
       price: price,
-      minusStatus: minusStatus
+      kucun: kucun
     });
+    console.log('kucun:', this.data.kucun);
   },
 
   /* 输入框事件 */

@@ -48,7 +48,7 @@
                     <text>{{inform.good_name}}</text>
                 </view>
                 <view class="yunfei">
-                    <view class="">运费：￥{{inform.expenses}}</view>
+                    <view class="">运费：￥{{expenses}}</view>
                     <view class="now">剩余：{{inform.total_stock}}</view>
                 </view>
                 <!--规格  -->

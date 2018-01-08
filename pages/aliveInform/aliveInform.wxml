@@ -79,12 +79,17 @@
           <view class="left">商品金额</view>
           <view class="right color">￥{{low_price}}</view>
       </view>
+      <view class="controllist ">
+          <view class="left">商品定金</view>
+          <view class="right color">￥{{low_price}}</view>
+      </view>
       <view class="controllist">
           <view class="left">运费</view>
           <view class="right color">￥{{expenses}}</view>
       </view>
     </view>
-     <!--购物车弹窗  -->
+    <view class='notice'>*此商品为活体，请支付定金以后，与客服联系进行线下购买</view>
+    <!--购物车弹窗  -->
     <view class="bg {{addCar?'show':'hidden'}}" bindtap="close"></view> 
       <view class="carBox {{addCar?'show':'hidden'}}">
         <view class="padding">
@@ -122,7 +127,7 @@
             <!-- <text><text style="color:#000;">优惠券:</text >￥{{amount}}</text>实付：<text>￥{{low_price*num-amount}}</text>  -->
         </view>
         <form report-submit="true" bindsubmit="formSubmit" class="formSubmit">
-            <button class="submit" formType="submit">提交订单</button>
+            <button class="submit" formType="submit">支付定金</button>
         </form>
         <!-- <view class="submit">提交订单</view> -->
     </view>

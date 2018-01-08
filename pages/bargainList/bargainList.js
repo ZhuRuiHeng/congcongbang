@@ -311,7 +311,7 @@ Page(Object.assign({}, Zan.Toast, {
     var carid = wx.getStorageSync("carid");
     var attrLen = that.data.inform.attribute.length;//获取attribute长度
     var arrlen = that.data.arr.length; //数组长度
-    if (attrLen > 0) {
+    if (attrLen > 0) {  //有属性
       if (arrlen == attrLen) {
         that.setData({
           addCar: false
@@ -346,8 +346,32 @@ Page(Object.assign({}, Zan.Toast, {
       } else {
         that.showZanToast('请选择属性');
       }
-    } else {
-      
+    } else { //无属性
+      wx.request({
+        url: app.data.apiUrl + "/bargain/create-bargain?sign=" + wx.getStorageSync("sign"),
+        method: "GET",
+        data: {
+          goods_id: that.data.gid
+        },
+        success: function (res) {
+          //console.log("post", res);
+          var status = res.data.status;
+          if (status == 1) {
+            console.log('发起砍价成功', res.data.data)
+            wx.navigateTo({
+              url: '../bargainInform/bargainInform?bargain_id=' + res.data.data + '&gid=' + that.data.gid
+            })
+          } else {
+            that.showZanToast(res.data.msg);
+          }
+          that.setData({
+            arr: [],
+            values: [],
+            price: 1
+          })
+
+        }
+      })
     }
     that.setData({
       arr: [],

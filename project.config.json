@@ -112,10 +112,10 @@
 					"query": "bargain_id=107&gid=139"
 				},
 				{
-					"id": -1,
+					"id": 14,
 					"name": "inform",
 					"pathName": "pages/inform/inform",
-					"query": "gid=136"
+					"query": "gid=173"
 				},
 				{
 					"id": -1,
@@ -158,6 +158,12 @@
 					"name": "砍价列表",
 					"pathName": "pages/bargainList/bargainList",
 					"query": ""
+				},
+				{
+					"id": 22,
+					"name": "活体订单详情",
+					"pathName": "pages/aliveInform/aliveInform",
+					"query": "gid=173&low_price=2688.00&price=1&type=0"
 				}
 			]
 		}

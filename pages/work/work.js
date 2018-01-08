@@ -190,7 +190,8 @@ Page({
         index: index,
         dowork: false,
         listNum:'',
-        total_count:''
+        total_count:'',
+        width:0
       })
     }
     wx.request({

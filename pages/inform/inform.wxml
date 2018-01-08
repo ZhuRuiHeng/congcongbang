@@ -7,7 +7,7 @@
      <scroll-view scroll-y="true" bindscroll="scroll" scroll-top="{{scrollTop}}" style="position:absolute; top:0; left:0; right:0; bottom:0rpx;"> 
         <!--轮播图 -->
         <swiper class="swiper" bindtap="imgPreview"  indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="#fff">
-          <block wx:for="{{imgUrls}}">
+          <block wx:for="{{imgUrls}}" wx:key="{{index}}">
             <swiper-item>
               <image src="{{item}}" class="slide-image" bindtap="previewImage" mode='aspectFill'/>
             </swiper-item>
@@ -24,13 +24,13 @@
                     <view wx:else>￥{{inform.low_price}}~{{inform.high_price}}</view>
                 </view>
                 <view class="yunfei">
-                    <view class="">运费：￥{{inform.expenses}}</view>
+                    <view class="">运费：￥{{expenses}}</view>
                     <view class="now">剩余：{{inform.total_stock}}</view>
                 </view>
                 <!--规格  -->
                 <!-- wx:if="{{shuxings.length == 0}}"  -->
                 <view class="xuanze 1" bindtap="addCar" id="gouwu{{inform.gid}}" data-gid="{{inform.gid}}">
-                    <view class="classname">选择：<text wx:for="{{all}}">{{item}}</text></view>
+                    <view class="classname">选择：<text wx:for="{{all}}" wx:key="{{index}}">{{item}}</text></view>
                     <view class="nextImg">
                         <image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"/>
                     </view>
@@ -117,8 +117,8 @@
                     </view>
                     <view class="num">
                         <button class="reduce {{minusStatus}}" bindtap="bindMinus">-</button>
-                        <input type="number"  bindchange="bindManual" value="{{price}}" readonly="readonly"/>
-                        <button class="add normal" bindtap="bindPlus">+</button>
+                        <input type="number" disabled  bindchange="bindManual" value="{{price}}" readonly="readonly"/>
+                        <button class="add normal" disabled="{{kucun}}" bindtap="bindPlus">+</button>
                     </view>
                 </view>
             </view>
@@ -162,8 +162,8 @@
                     </view>
                     <view class="num">
                         <button class="reduce {{minusStatus}}" bindtap="bindMinus">-</button>
-                        <input type="number"  bindchange="bindManual" value="{{price}}" readonly="readonly"/>
-                        <button class="add normal" bindtap="bindPlus">+</button>
+                        <input type="number" disabled  bindchange="bindManual" value="{{price}}" readonly="readonly"/>
+                        <button class="add normal" disabled="{{kucun}}"  bindtap="bindPlus">+</button>
                     </view>
                 </view>
             </view>

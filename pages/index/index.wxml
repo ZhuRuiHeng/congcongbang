@@ -55,8 +55,8 @@
     <!--nav -->
     <view class="main">
         <view class="nav bc_white">
-             <view class="{{state == 0?'red':'default'}}" bindtap="tapKeyWorld" data-ontap="hot" data-cate="0" data-state = "0"><span>最热</span></view>
-             <view class="{{state == 1?'red':'default'}}" bindtap="tapKeyWorld" data-ontap="newest" data-cate="0" data-state = "1"><span>最新</span></view> 
+             <view class="{{state == 0?'red':'default'}}" bindtap="tapKeyWorld" data-ontap="hot" data-cate="0" data-state = "0"><span>人气狗狗</span></view>
+             <view class="{{state == 1?'red':'default'}}" bindtap="tapKeyWorld" data-ontap="newest" data-cate="0" data-state = "1"><span>人气猫咪</span></view> 
         </view>
         <!--content -->
         <block class="boxList" wx:if="{{main_content.length != 0}}">
@@ -120,6 +120,4 @@
             </view>
         </view>
     </view>
-    <!--查看全部  -->
-    <view class="all chakan" bindtap="seeAll" style='margin-bottom:100rpx;'>查看全部</view>
 </view>

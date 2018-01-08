@@ -41,7 +41,8 @@
     "pages/keep/keep",
     "pages/chongzhi/chongzhi",
     "pages/tixian/tixian",
-    "pages/bargainInform/bargainInform"     
+    "pages/bargainInform/bargainInform",  
+    "pages/aliveInform/aliveInform"   
   ],
   "window":{
     "backgroundTextStyle":"light",

@@ -83,7 +83,8 @@ Page(Object.assign({}, Zan.Toast, {
             informImg: informImg.toString(),
             imgUrls: picture,
             shuxing: inform.attribute,
-            is_membership: is_membership
+            is_membership: is_membership,
+            expenses: inform.expenses
           })
           if (that.data.informImg) {
             WxParse.wxParse('informImg', 'html', that.data.informImg, that, 5)
@@ -285,7 +286,8 @@ Page(Object.assign({}, Zan.Toast, {
         //infoem.attribute
         that.setData({
           addbuy: true,
-          inform: inform
+          inform: inform,
+          is_alive: inform.is_alive
         })
         wx.hideLoading()
       }
@@ -518,6 +520,7 @@ Page(Object.assign({}, Zan.Toast, {
     var types = "";
     var arr = that.data.arr;
     var values = that.data.values;
+    let is_alive = that.data.is_alive;
     for (var i = 0; i < arr.length; i++) {
       if (arr[i]) {
         attribute += arr[i] + ',';
@@ -525,34 +528,47 @@ Page(Object.assign({}, Zan.Toast, {
       }
     }
     attribute = attribute.substr(0, attribute.length - 1);
-    console.log("attribute:", attribute);
-    console.log("types:", types);
-    console.log("low_group_price:", that.data.low_group_price);
     //var carid = wx.getStorageSync("carid");
     var attrLen = that.data.inform.attribute.length;//获取attribute长度
     var arrlen = that.data.arr.length; //数组长度
-    console.log('获取attribute长度', attrLen);
-    console.log('数组长度', arrlen); //bug 数组长度
-    if (attrLen > 0) {
-      if (arrlen == attrLen) {
-        console.log("low_group_price11:", that.data.low_group_price);
-        wx.navigateTo({
-          url: '../dingdanInform/dingdanInform?gid=' + that.data.gid + '&price=' + that.data.price + '&attr=' + attribute + '&types=' + types + '&low_price=' + that.data.low_group_price + '&type=2'
-        })
-        console.log(attribute);
+    if (is_alive == 1) { //活体
+      if (attrLen > 0) {
+        if (arrlen == attrLen) {
+          wx.navigateTo({
+            url: '../aliveInform/aliveInform?gid=' + that.data.gid + '&price=' + that.data.price + '&attr=' + attribute + '&low_price=' + that.data.low_price + '&type=2' + '&expenses=' + that.data.expenses
+          })
+          console.log(attribute);
+        } else {
+          that.showZanToast('请选择属性');
+        }
       } else {
-        // wx.showToast({
-        //   title: '请选择属性',
-        //   image: '../images/false.png'
-        // }); 
-        that.showZanToast('请选择属性');
+        wx.navigateTo({
+          url: '../aliveInform/aliveInform?gid=' + that.data.gid + '&' + 'price=' + that.data.price + '&low_price=' + that.data.low_price + '&type=2' + '&expenses=' + that.data.expenses
+        })
       }
-    } else {
-      console.log("low_group_price222:", that.data.low_group_price);
-      wx.navigateTo({
-        url: '../dingdanInform/dingdanInform?gid=' + that.data.gid + '&price=' + that.data.price + '&low_price=' + that.data.low_group_price + '&type=2'
-      })
+    }else { //非活体
+      if (attrLen > 0) {
+        if (arrlen == attrLen) {
+          console.log("low_group_price11:", that.data.low_group_price);
+          wx.navigateTo({
+            url: '../dingdanInform/dingdanInform?gid=' + that.data.gid + '&price=' + that.data.price + '&attr=' + attribute + '&low_price=' + that.data.low_group_price + '&type=2'+'&expenses='+that.data.expenses
+          })
+          console.log(attribute);
+        } else {
+          // wx.showToast({
+          //   title: '请选择属性',
+          //   image: '../images/false.png'
+          // }); 
+          that.showZanToast('请选择属性');
+        }
+      } else {
+        console.log("low_group_price222:", that.data.low_group_price);
+        wx.navigateTo({
+          url: '../dingdanInform/dingdanInform?gid=' + that.data.gid + '&price=' + that.data.price + '&low_price=' + that.data.low_group_price + '&type=2' + '&expenses=' + that.data.expenses
+        })
+      }
     }
+    
     that.setData({
       arr: [],
       values: [],
