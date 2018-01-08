@@ -152,6 +152,12 @@
 					"name": "每日优惠",
 					"pathName": "pages/discount/discount",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "砍价列表",
+					"pathName": "pages/bargainList/bargainList",
+					"query": ""
 				}
 			]
 		}
