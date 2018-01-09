@@ -176,143 +176,172 @@ Page(Object.assign({}, Zan.Toast, {
     }
     console.log('sharer_id:', sharer_id);
     if (dizhi.length == 0) {
-      // wx.showToast({
-      //   title: '请选择收货地址',
-      //   image: '../images/false.png'
-      // });
       that.showZanToast('请选择收货地址');
     } else {
       wx.request({
-        url: app.data.apiUrl+'/api/create-order?sign=' + sign,
-        data: {
-          form_id: e.detail.formId,
-          receiver: that.data.dizhi.userName,
-          message: that.data.userMes,//留言
-          receiver_address: that.data.dizhi.provinceName + that.data.dizhi.cityName + that.data.dizhi.countyName + that.data.dizhi.detailInfo,
-          receiver_phone: that.data.dizhi.telNumber, //'18749830459'
-          detail: that.data.detailall,
-          sharer_id: sharer_id
+        url: app.data.apiUrl2 + "/bargain/my-wallet?sign=" + sign,
+        header: {
+          'content-type': 'application/json'
         },
-        //detail:"gid -   attribute   - number"
-        //detail:" 1  -  1:2,2:4,3:6  - 1"
-        method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-        // header: {}, // 设置请求的 header
+        method: "GET",
         success: function (res) {
-          // success
-          console.log(res);
-          var status = res.data.status;
+          let status = res.data.status;
           if (status == 1) {
-            // 调用支付
-            wx.requestPayment({
-              timeStamp: res.data.data.timeStamp,
-              nonceStr: res.data.data.nonceStr,
-              package: res.data.data.package,
-              signType: res.data.data.signType,
-              paySign: res.data.data.paySign,
-              'success': function (res) {
-                setTimeout(function () {
-                  that.setData({
-                    gouwu: []
-                  })
-                  console.log('gouwulast',that.data.gouwu);
-                  // 支付成功跳转
-                  wx.navigateTo({
-                    url: '../dingdan/dingdan?status='
-                  })
-                }, 300)
-              },
-              'fail': function (res) {
-                  console.log(res);
-                  that.setData({
-                    gouwu: []
-                  })
-                  console.log('gouwulast', that.data.gouwu);
-                  setTimeout(function () {
-                    // 支付成功跳转
-                    wx.navigateTo({
-                      url: '../dingdan/dingdan?status='
-                    })
-                  }, 300)
-              }
-            })
-            // 重置属性
+            console.log("余额", res.data.data);
             that.setData({
-              attr: "",//属性
-              types: "", //类型
-              userMes: '',//留言信息
-              num: '', //数量
-              detail: ''
+              money: res.data.data 
             })
-
+            let money = res.data.data;
+            let totalPrice = that.data.totalPrice;
+            let expenses = that.data.expenses;
+            if (money < totalPrice * 1 + expenses){
+              wx.request({
+                url: app.data.apiUrl2 + '/api/create-order?sign=' + sign,
+                data: {
+                  form_id: e.detail.formId,
+                  receiver: that.data.dizhi.userName,
+                  message: that.data.userMes,//留言
+                  receiver_address: that.data.dizhi.provinceName + that.data.dizhi.cityName + that.data.dizhi.countyName + that.data.dizhi.detailInfo,
+                  receiver_phone: that.data.dizhi.telNumber, //'18749830459'
+                  detail: that.data.detailall, //detail:"gid -   attribute   - number"
+                  sharer_id: sharer_id,
+                  pay_type: 'cash'
+                },
+                method: 'POST',
+                success: function (res) {
+                  // success
+                  var status = res.data.status;
+                  if (status == 1) {
+                    // 调用支付
+                    wx.requestPayment({
+                      timeStamp: res.data.data.timeStamp,
+                      nonceStr: res.data.data.nonceStr,
+                      package: res.data.data.package,
+                      signType: res.data.data.signType,
+                      paySign: res.data.data.paySign,
+                      'success': function (res) {
+                        setTimeout(function () {
+                          that.setData({
+                            gouwu: []
+                          })
+                          console.log('gouwulast', that.data.gouwu);
+                          // 支付成功跳转
+                          wx.navigateTo({
+                            url: '../dingdan/dingdan?status='
+                          })
+                        }, 300)
+                      },
+                      'fail': function (res) {
+                        that.showZanToast(res.data.msg);
+                        that.setData({
+                          gouwu: []
+                        })
+                        console.log('gouwulast', that.data.gouwu);
+                        setTimeout(function () {
+                          // 支付成功跳转
+                          wx.navigateTo({
+                            url: '../dingdan/dingdan?status='
+                          })
+                        }, 300)
+                      }
+                    })
+                    // 重置属性
+                    that.setData({
+                      attr: "",//属性
+                      types: "", //类型
+                      userMes: '',//留言信息
+                      num: '', //数量
+                      detail: ''
+                    })
+                  } else {
+                    that.showZanToast(res.data.msg);
+                  }
+                  that.setData({
+                    // gouwu: []
+                  })
+                },
+                fail: function (res) {
+                  console.log(res)
+                },
+              })
+            }else{
+              wx.request({
+                url: app.data.apiUrl2 + '/api/create-order?sign=' + sign,
+                data: {
+                  form_id: e.detail.formId,
+                  receiver: that.data.dizhi.userName,
+                  message: that.data.userMes,//留言
+                  receiver_address: that.data.dizhi.provinceName + that.data.dizhi.cityName + that.data.dizhi.countyName + that.data.dizhi.detailInfo,
+                  receiver_phone: that.data.dizhi.telNumber, //'18749830459'
+                  detail: that.data.detailall, //detail:"gid -   attribute   - number"
+                  sharer_id: sharer_id,
+                  pay_type: 'wallet'
+                },
+                method: 'POST',
+                success: function (res) {
+                  // success
+                  var status = res.data.status;
+                  if (status == 1) {
+                    // 调用支付
+                    wx.requestPayment({
+                      timeStamp: res.data.data.timeStamp,
+                      nonceStr: res.data.data.nonceStr,
+                      package: res.data.data.package,
+                      signType: res.data.data.signType,
+                      paySign: res.data.data.paySign,
+                      'success': function (res) {
+                        setTimeout(function () {
+                          that.setData({
+                            gouwu: []
+                          })
+                          console.log('gouwulast', that.data.gouwu);
+                          // 支付成功跳转
+                          wx.navigateTo({
+                            url: '../dingdan/dingdan?status='
+                          })
+                        }, 300)
+                      },
+                      'fail': function (res) {
+                        that.showZanToast(res.data.msg);
+                        that.setData({
+                          gouwu: []
+                        })
+                        console.log('gouwulast', that.data.gouwu);
+                        setTimeout(function () {
+                          // 支付成功跳转
+                          wx.navigateTo({
+                            url: '../dingdan/dingdan?status='
+                          })
+                        }, 300)
+                      }
+                    })
+                    // 重置属性
+                    that.setData({
+                      attr: "",//属性
+                      types: "", //类型
+                      userMes: '',//留言信息
+                      num: '', //数量
+                      detail: ''
+                    })
+                  } else {
+                    that.showZanToast(res.data.msg);
+                  }
+                  that.setData({
+                    // gouwu: []
+                  })
+                },
+                fail: function (res) {
+                  console.log(res)
+                },
+              })
+            }
           } else {
-            var msg = res.data.msg;
-            that.showZanToast(msg);
-            console.log('gouwulast', that.data.gouwu);
+            //tips.alert(res.data.msg);
           }
-          that.setData({
-           // gouwu: []
-          })
-        },
-        fail: function (res) {
-          // fail
-          console.log(res)
-        },
-        complete: function () {
-          // complete
         }
       })
+      
     }
-  },
-  //支付
-  requestPayment: function () {
-    var self = this
-    
-    self.setData({
-      loading: true
-    })
-    // 此处需要先调用wx.login方法获取code，然后在服务端调用微信接口使用code换取下单用户的openId
-    // 具体文档参考https://mp.weixin.qq.com/debug/wxadoc/dev/api/api-login.html?t=20161230#wxloginobject
-    app.getUserOpenId(function (err, openid) {
-      if (!err) {
-        wx.request({
-          url: paymentUrl,
-          data: {
-            openid
-          },
-          method: 'POST',
-          success: function (res) {
-            console.log('unified order success, response is:', res)
-            var payargs = res.data.payargs
-            wx.requestPayment({
-              timeStamp: payargs.timeStamp,
-              nonceStr: payargs.nonceStr,
-              package: payargs.package,
-              signType: payargs.signType,
-              paySign: payargs.paySign,
-              'success': function (res) {
-                setTimeout(function () {
-                  // 支付成功跳转
-                  wx.navigateTo({
-                    url: '../dingdan/dingdan?status='
-                  })
-                }, 300)
-              },
-              'fail': function (res) {
-              }
-            })
-
-            self.setData({
-              loading: false
-            })
-          }
-        })
-      } else {
-        console.log('err:', err)
-        self.setData({
-          loading: false
-        })
-      }
-    })
   },
   /**
    * 生命周期函数--监听页面隐藏
