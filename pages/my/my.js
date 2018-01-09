@@ -62,11 +62,11 @@ Page({
         url: '../coupon/coupon'
       })
     },
-    balance(){
-      wx.navigateTo({
-        url: '../chongzhi/chongzhi'
-      })
-    },
+    // balance(){
+    //   wx.navigateTo({
+    //     url: '../chongzhi/chongzhi'
+    //   })
+    // },
     //推荐有奖
     tuijian:function(){
       wx.navigateTo({
@@ -163,6 +163,25 @@ Page({
               //coupon_info: mine.coupon_info,
               identity: mine.identity
             })
+          }
+          wx.hideLoading()
+        }
+      }),
+      wx.request({
+        url: app.data.apiUrl2 + "/bargain/my-wallet?sign=" + sign,
+        header: {
+          'content-type': 'application/json'
+        },
+        method: "GET",
+        success: function (res) {
+          let status = res.data.status;
+          if (status == 1) {
+            console.log("余额", res.data.data);
+            that.setData({
+              money: res.data.data
+            })
+          } else {
+            tips.alert(res.data.msg);
           }
           wx.hideLoading()
         }

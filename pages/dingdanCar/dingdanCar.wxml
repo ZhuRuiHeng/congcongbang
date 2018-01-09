@@ -82,8 +82,8 @@
           <view class="right color">￥{{totalPrice}}</view>
       </view>
       <view class="controllist bottom">
-          <view class="left">运费{{expenses}}</view>
-          <view class="right color">￥{{}}</view>
+          <view class="left">运费</view>
+          <view class="right color">￥{{expenses}}</view>
       </view>
     </view>
      <!--购物车弹窗  -->
@@ -108,7 +108,7 @@
     </view>
     <!--foot  -->
     <view class="fixed">
-        <view class="heji">合计：<text>￥{{totalPrice}}</text> </view>
+        <view class="heji">合计：<text>￥{{totalPrice*1 + expenses}}</text> </view>
         <form report-submit="true" bindsubmit="formSubmit" class="formSubmit">
             <button class="submit" formType="submit">提交订单</button>
         </form>

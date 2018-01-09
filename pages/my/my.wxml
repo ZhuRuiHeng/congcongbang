@@ -24,7 +24,7 @@
 </view>   
 <view class="listAll">
     <view class="list">
-        <navigator class="flex"  url="../dingdan/dingdan?status={{item.status}}" wx:for="{{list}}">
+        <navigator class="flex"  url="../dingdan/dingdan?status={{item.status}}" wx:for="{{list}}" wx:key="{{index}}">
             <view class="" data-id="{{index}}">
                 <text class="num" wx:if="{{item.num != 0}}">{{item.num}}</text>
                 <image class="image{{index}}" src="{{item.pic}}" mode="widthFix"></image>
@@ -45,7 +45,7 @@
     </view> -->
     <view class="xuanze" bindtap="balance">
         <view class="classname"><image src="../images/money.png" mode="widthFix"></image>我的余额</view>
-        <view class="nextImg"><image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"/></view> 
+        <view class="nextImg">￥{{money}}</view> 
     </view>
     <!-- 
     <view class="xuanze" bindtap="coupon">

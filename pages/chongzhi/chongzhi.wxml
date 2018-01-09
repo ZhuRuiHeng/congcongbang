@@ -5,7 +5,6 @@
     <view class='box'>
         <image src="../img/money.png" mode='widthFix'></image>
         <view class='title'>我的余额</view>
-        <view class='money'>￥2211</view>
-        <view class='button'>充值</view>
+        <view class='money'>￥{{money}}</view>
     </view>  
 </view> 

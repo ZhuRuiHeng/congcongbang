@@ -72,6 +72,8 @@ Page(Object.assign({}, Zan.Toast, {
       let gouwuLen = that.data.gouwu;
       let gidLen   = ''; //string
       let _gidLen = []; //arr
+      let gidMoney = []; //arr运费
+      let expenses = 0;
       for (let i = 0; i < gouwuLen.length;i++){
         gidLen += gouwuLen[i].gid + ','; 
       }
@@ -91,25 +93,12 @@ Page(Object.assign({}, Zan.Toast, {
           console.log("freight:", freight);
           //JSON.stringify
           for (i in freight) {
-            _gidLen.push(i);
-          };
-         
-          function slice(obj) {
-            var arr = [];
-            var len = obj.length; // length 正好对应伪数组中的length属性
-            for (var i = 0; i < len; i++) {
-              arr.push[i] = obj[i]; // i 正好对应伪数组中的索引值
-            }
-           // console.log(arr,000);
-            return arr;
-          } 
-          slice(freight);
-          let expenses ='';
-          // for (let j = 0; j < _gidLen.length;j++){
-          //   console.log(freight[j]._gidLen[j]);
-          //   expenses += freight[j]._gidLen[j]
-          // }
-          console.log("expenses:", expenses);
+            _gidLen.push(i);//属性数组
+            gidMoney.push(freight[i]); //值数组
+          }; 
+          for (let j=0;j < gidMoney.length;j++){
+            expenses += gidMoney[j]*1;
+          }
           that.setData({
             expenses :expenses
           })

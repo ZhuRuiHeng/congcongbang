@@ -34,15 +34,15 @@
                         <image src="{{item.figure}}" mode="aspectFill"></image>
                     </view>
                     <view class="service-text">
-                        <view class="service-tite service-tite1 {{set1?'show':'hidden'}}">{{item.good_name}}</view>
-                        <view class="service-tite service-tite1 service-tite3 {{set1?'show':'hidden'}}">{{item.attribute_value}}</view>
-                        <view class="service-tite service-tite2 {{set2?'show':'hidden'}}">
+                        <view class="service-tite service-tite1 ">{{item.good_name}}</view>
+                        <view class="service-tite service-tite1 service-tite3 ">{{item.attribute_value}}</view>
+                        <!-- <view class="service-tite service-tite2 {{set2?'show':'hidden'}}">
                               <view class="num">
                                   <button class="reduce" bindtap="minusCount" data-index="{{index}}">-</button>
-                                  <input type="number" value="{{item.number}}" readonly="readonly"/>
+                                  <input type="number" value="{{item.number}}" disabled/>
                                   <button  class="add normal" bindtap="addCount" data-index="{{index}}">+</button>
                               </view>
-                        </view> 
+                        </view>  -->
                         <view class="caozuo">
                             <text class="service-price">￥{{item.price}}</text>
                             <view class="service-gouwu">x{{item.number}}</view>
