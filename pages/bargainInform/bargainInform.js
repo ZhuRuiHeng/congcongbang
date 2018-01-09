@@ -43,11 +43,12 @@ Page({
         },
         method: "GET",
         success: function (res) {
-          // console.log("商品详情", res.data.data);
+          console.log("商品详情", res.data.data);
           let num1 = res.data.data.goods_price - res.data.data.bargain_price;
           that.setData({
             spInformAll: res.data.data,
-            content: res.data.data.goodsDetail.content.toString()
+            content: res.data.data.goodsDetail.content.toString(),
+            expenses: res.data.data.expenses
           })
           if (that.data.content) {
             WxParse.wxParse('content', 'html', that.data.content, that, 5)
@@ -84,6 +85,28 @@ Page({
             })
           }
           wx.hideLoading()
+        }
+      })
+      //砍价最低价
+      wx.request({
+        url: app.data.apiUrl2 + "/bargain/bargain?sign=" + sign + '&operator_id=' + app.data.kid,
+        data: {
+          bargain_id: that.data.bargain_id
+        },
+        header: {
+          'content-type': 'application/json'
+        },
+        method: "GET",
+        success: function (res) {
+          console.log("获取砍价最低价", res);
+          let status = res.data.status;
+          if (status == 1) {
+            that.setData({
+              minPrice: res.data.data
+            })
+          }else{
+            //tips.alert(res.data.msg);
+          }
         }
       })
       // 领取码
@@ -213,7 +236,7 @@ Page({
       goPaya:false
     })
     wx.navigateTo({
-      url: '../bargainPay/bargainPay?gid=' + this.data.gid + '&bargain_id=' + this.data.bargain_id + '&bargain_price=' + this.data.bargain_price,
+      url: '../bargainPay/bargainPay?gid=' + this.data.gid + '&bargain_id=' + this.data.bargain_id + '&bargain_price=' + this.data.bargain_price + '&expenses=' + this.data.expenses,
     })
   },
   finishClose(){

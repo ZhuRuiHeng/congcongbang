@@ -246,7 +246,7 @@ Page(Object.assign({}, Zan.Toast, {
     var carts = that.data.carts; 
     //var len = that.data.len; 
     var total = 0;
-     console.log("carts", carts);
+    // console.log("carts", carts);
     // console.log("len",len);
     var gouwu = [];
     for (var i = 0; i < carts.length; i++) {     // 循环列表得到每个数据

@@ -479,6 +479,7 @@ page{
   display: inline-block;
    width: 25%; 
   text-align: center;
+  cursor: pointer;
 }
 .sort navigator .image-text,.sort .navigator .image-text{
   width: 100%;

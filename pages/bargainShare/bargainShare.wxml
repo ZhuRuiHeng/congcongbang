@@ -45,14 +45,14 @@
     <view bindtap='poster' class='poster'>朋友圈海报</view>
     <view bindtap='cancel' class='cancel'>取消</view>
 </view>
-<!-- 砍价弹窗-->
+<!-- 帮砍价弹窗-->
 <view class='kanjia' wx:if="{{kanjia}}">
     <image src='../img/success.png' mode='widthFix'></image>
     <view class='less'>砍掉{{cut_money}}元</view>
     <view class='little'>小手一甩，成功帮TA砍下一刀</view>
     <view class='mine' bindtap='mine'>确定</view>
 </view>
-<!-- 砍价弹窗 -->
+<!-- 砍价完成弹窗 -->
  <view class='kanjia finish' wx:if="{{finish}}" >
     <image src='../img/finish.png' mode='widthFix' style='width:140rpx'></image>
     <view class='little'>此用户已完成砍价</view>

@@ -46,7 +46,8 @@ Page(Object.assign({}, Zan.Toast, {
       low_price: options.low_price,
       type: _type,
       bargain_id: options.bargain_id,
-      bargain_price: options.bargain_price
+      bargain_price: options.bargain_price,
+      expenses: options.expenses
     })
     var gid = that.data.gid;//列表页传来的
     var num = that.data.num;

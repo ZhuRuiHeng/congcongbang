@@ -59,10 +59,6 @@
             <image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"/>
         </view>
     </view>
-    <view class="controllist">
-        <view class="left">配送方式</view>
-        <view class="right">免运费</view>
-    </view>
     <view class="control">
         <view class="left">留言</view>
         <view class="right"><input class="liuyan" name="userMes" type="text" placeholder="点击给商家留言" bindinput="userMesInput"/></view>
@@ -90,7 +86,7 @@
       </view> -->
       <view class="controllist">
           <view class="left">运费</view>
-          <view class="right color">免运费</view>
+          <view class="right color">￥{{expenses}}</view>
       </view>
     </view>
      <!--购物车弹窗  -->

@@ -103,7 +103,7 @@
             <view class="xianshi">
                 <view class="left">
                     <text class="classname" style="color:#000000;font-weight:bold;font-size:26rpx">限时秒杀</text>
-                    <text class="classname" style="color:#666666">包邮抢购中</text>
+                    <text class="classname" style="color:#666666">抢购中</text>
                 </view>
                 <view class="right">
                     <view class="center time" wx:for="{{Countdown}}" wx:key="{{index}}">{{currentSeckillTime}}场结束仅剩 

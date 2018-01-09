@@ -163,7 +163,19 @@
 					"id": 22,
 					"name": "活体订单详情",
 					"pathName": "pages/aliveInform/aliveInform",
-					"query": "gid=173&low_price=2688.00&price=1&type=0"
+					"query": "gid=173&low_price=2688.00&price=1&type=0&expenses=8.01"
+				},
+				{
+					"id": -1,
+					"name": "订单列表",
+					"pathName": "pages/dingdan/dingdan",
+					"query": "gid=173"
+				},
+				{
+					"id": -1,
+					"name": "砍价支付",
+					"pathName": "pages/bargainPay/bargainPay",
+					"query": ""
 				}
 			]
 		}

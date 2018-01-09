@@ -26,18 +26,16 @@ Page(Object.assign({}, Zan.Toast, {
     var _gouwu = wx.getStorageSync("gouwu");
     console.log("dizhi",dizhi);
     console.log('_gouwu',_gouwu);
+    
     if (dizhi != undefined) {
       that.setData({
         dizhi: dizhi,
         gouwu:_gouwu
       })
-     ///////////////
       var gouwu = that.data.gouwu;
-      //wx.clearStorage("gouwu");
       console.log('old:', gouwu.length);
       var detailall = "";
       var attributeAll = "";
-
       for (i = gouwu.length - 1; i > 0; i--) {
         if (gouwu[i] == null) {
           console.log('1111111111',gouwu);
@@ -54,7 +52,7 @@ Page(Object.assign({}, Zan.Toast, {
        }
        console.log('gouwu:', gouwu);
       for (var i = 0; i < gouwu.length; i++) {
-        console.log('gouwu[i].gid:', i, gouwu[i].detail, gouwu[i].gid);
+        //console.log('gouwu[i].gid:', i, gouwu[i].detail, gouwu[i].gid);
         if (gouwu[i] == null){
           gouwu.splice(i, 1);
         }
@@ -71,7 +69,53 @@ Page(Object.assign({}, Zan.Toast, {
         detailall: detailall,
         gouwu:gouwu
       })
-     /////////////////
+      let gouwuLen = that.data.gouwu;
+      let gidLen   = ''; //string
+      let _gidLen = []; //arr
+      for (let i = 0; i < gouwuLen.length;i++){
+        gidLen += gouwuLen[i].gid + ','; 
+      }
+      // 请求运费
+      wx.request({
+        url: app.data.apiUrl2 + '/api/goods-expenses?sign=' + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+        data: {
+          gids: gidLen
+        },
+        header: {
+          'content-type': 'application/json'
+        },
+        method: "GET",
+        success: function (res) {
+          console.log("运费", res.data.data);
+          let freight = res.data.data;
+          console.log("freight:", freight);
+          //JSON.stringify
+          for (i in freight) {
+            _gidLen.push(i);
+          };
+         
+          function slice(obj) {
+            var arr = [];
+            var len = obj.length; // length 正好对应伪数组中的length属性
+            for (var i = 0; i < len; i++) {
+              arr.push[i] = obj[i]; // i 正好对应伪数组中的索引值
+            }
+           // console.log(arr,000);
+            return arr;
+          } 
+          slice(freight);
+          let expenses ='';
+          // for (let j = 0; j < _gidLen.length;j++){
+          //   console.log(freight[j]._gidLen[j]);
+          //   expenses += freight[j]._gidLen[j]
+          // }
+          console.log("expenses:", expenses);
+          that.setData({
+            expenses :expenses
+          })
+          wx.hideLoading()
+        }
+      });
     } else {
       console.log("请选择地址")
     }

@@ -27,7 +27,7 @@
             <view class='child' style='padding-left:{{width}}%'></view>
         </view>
         <view class='priceBar'>
-            <view>￥{{informAll.goods_price}}</view><view>￥0.00</view>
+            <view>￥{{informAll.goods_price}}</view><view>￥{{minPrice}}</view>
         </view>
         <view class='time' wx:if="{{informAll.surplus_count<1}}">
             活动提前结束：<text>已无更多库存</text>

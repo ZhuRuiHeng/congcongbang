@@ -36,7 +36,7 @@
     </view>
     <!--商品  -->
     <view class="shangpin">
-        <view class="service-list" wx:for="{{gouwu}}">
+        <view class="service-list" wx:for="{{gouwu}}" wx:key="{{index}}">
             <view class="service-item">
                 <view class="service-img">
                     <image src="{{item.figure}}" mode="aspectFill"></image>
@@ -54,7 +54,7 @@
     </view>
     <view class="controllist">
         <view class="left">配送方式</view>
-        <view class="right">免运费</view>
+        <view class="right">商家配送</view>
     </view>
     <view class="control">
         <view class="left">留言</view>
@@ -82,8 +82,8 @@
           <view class="right color">￥{{totalPrice}}</view>
       </view>
       <view class="controllist bottom">
-          <view class="left">运费</view>
-          <view class="right color">免运费</view>
+          <view class="left">运费{{expenses}}</view>
+          <view class="right color">￥{{}}</view>
       </view>
     </view>
      <!--购物车弹窗  -->
