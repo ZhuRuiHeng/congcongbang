@@ -2,6 +2,7 @@ var app = getApp();
 import tips from '../../utils/tips.js'
 Page({
   data: {
+      state: 0,
       monethList:[
         {
           moneth:'一月',
@@ -41,6 +42,27 @@ Page({
           eng: 'December '
         }
       ],
+      joinUsre:[
+        {
+          icon: 'https://pet.zealcdn.cn/assets/images/icons/category/363620171231130639.jpg',
+        }, {
+          icon: 'https://pet.zealcdn.cn/assets/images/icons/category/363620171231130639.jpg',
+        }, {
+          icon: 'https://pet.zealcdn.cn/assets/images/icons/category/363620171231130639.jpg',
+        }, {
+          icon: 'https://pet.zealcdn.cn/assets/images/icons/category/363620171231130639.jpg',
+        }, {
+          icon: 'https://pet.zealcdn.cn/assets/images/icons/category/363620171231130639.jpg',
+        }, {
+          icon: 'https://pet.zealcdn.cn/assets/images/icons/category/363620171231130639.jpg',
+        }, {
+          icon: 'https://pet.zealcdn.cn/assets/images/icons/category/363620171231130639.jpg',
+        }, {
+          icon: 'https://pet.zealcdn.cn/assets/images/icons/category/363620171231130639.jpg',
+        }, {
+          icon: 'https://pet.zealcdn.cn/assets/images/icons/category/363620171231130639.jpg',
+        }
+      ],
       width: '0',
       index:0,
       winHeight: "",//窗口高度
@@ -52,7 +74,11 @@ Page({
       array: ['图片','视频'],
       imageList:[],
       videoList: [],
-      upfinish:false
+      upfinish:false,
+      indicatorDots: true,
+      autoplay: true,
+      interval: 3000,
+      duration: 1000
 
   },
   onLoad: function (options) {
@@ -106,7 +132,8 @@ Page({
       nowMonth: nowMonth,
       currentTab:month-1,
       upfinish:false,
-      width: '0'
+      width: '0',
+      lunbo: wx.getStorageSync('lunbo')
     })
     wx.request({
       url: app.data.apiUrl + "/bargain/get-month-task?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
@@ -159,11 +186,37 @@ Page({
         }else{
           tips.alert(res.data.msg)
         }
-        
+      }
+    })
+    // banner
+    wx.request({
+      url: app.data.apiUrl1 + "bargain/banner?sign=" + wx.getStorageSync('sign'),
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (res) {
+        console.log("砍价获取轮播图", res);
+        let status = res.data.status;
+        if (status == 1) {
+          that.setData({
+            banner: res.data.data
+          })
+        } else {
+          console.log(res.data.msg);
+        }
       }
     })
     //})
 
+  },
+  //轮播图点击跳转
+  swipclick: function (e) {
+    console.log(e);
+    var url = e.currentTarget.dataset.url
+    wx.navigateTo({
+      url: '../webpage/webpage?url=' + url
+    })
   },
   // 滚动切换标签样式
   switchTab: function (e) {
@@ -424,9 +477,7 @@ Page({
         wx.hideLoading()
       }
     })
-
-      
-  },
+ },
   shenhe(){
     let that = this;
     let types ='';
@@ -470,5 +521,38 @@ Page({
         }
       }
     })
-  }
+  },
+  // 切换
+  tapKeyWorld: function (e) {
+    wx.showLoading({
+      title: '加载中',
+    })
+    var that = this;
+    var word = e.currentTarget.dataset.ontap;
+    var cate = e.currentTarget.dataset.cate;
+    var state = e.currentTarget.dataset.state;
+    var sign = wx.getStorageSync('sign');
+    this.setData({
+      searchword: word,
+      state: state
+    })
+    // 非真实
+    // wx.request({
+    //   url: app.data.apiUrl2 + '/api/get-category?sign=' + sign,
+    //   data: {
+    //     type: word
+    //   },
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   method: "GET",
+    //   success: function (res) {
+    //     console.log("切换", res);
+    //     that.setData({
+    //       modules: res.data.categorys,
+    //     })
+    //     wx.hideLoading()
+    //   }
+    // })
+  },
 })    

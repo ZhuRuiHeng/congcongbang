@@ -45,10 +45,10 @@
     </view> -->
     <view class="xuanze" bindtap="balance">
         <view class="classname"><image src="../images/money.png" mode="widthFix"></image>我的余额</view>
-        <view class="nextImg">￥{{money}}</view> 
+        <view class="nextImg"><image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"/></view> 
     </view>
     <!-- 
-    <view class="xuanze" bindtap="coupon">
+    <view class="xuanze" bindtap="coupon">  
         <view class="classname">
           <image style="margin-right:-1rpx;" src="../images/ka.png" mode="widthFix"></image> 优惠卡券
         </view>

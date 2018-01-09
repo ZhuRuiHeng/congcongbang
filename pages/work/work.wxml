@@ -1,4 +1,23 @@
 <view class="contain">
+     <!--轮播图 -->
+    <swiper class="swiper" wx:if="{{banner.length !=0}}"  indicator-dots="{{indicatorDots}}" 
+            autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color="#ff4444" 
+            indicator-active-color="#fff">
+        <block wx:for="{{banner}}" wx:key="{{index}}">
+          <swiper-item>
+            <image src="{{item.url}}" class="slide-image" mode="aspectFill" data-url="{{item.location}}" catchtap="swipclick"/>
+          </swiper-item>
+        </block>
+    </swiper>
+     <view class='titleUser'>
+        <view class="{{state == 0?'red':'default'}}" bindtap="tapKeyWorld" 
+              data-ontap="hot" data-cate="0" data-state = "0">已参与用户</view>
+        <view class="{{state == 1?'red':'default'}}" bindtap="tapKeyWorld" 
+              data-ontap="hot" data-cate="0" data-state = "1">相关用户</view>
+    </view>
+    <view class='content'>
+        <view class='icon' wx:for="{{joinUsre}}" wx:key="{{index}}"><image src="{{item.icon}}" mode='aspectFill'></image></view>
+    </view> 
     <view class='title'>本月任务</view>
     <view class='navbar'>
         <!-- <picker bindchange="bindPickerChange" value="{{index}}" range="{{monethList}}" range-key="{{'moneth'}}">

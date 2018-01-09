@@ -105,13 +105,13 @@ Page(Object.assign({}, Zan.Toast, {
       })
   },
   //轮播图点击跳转
-  swipclick: function (event) {
-    //console.log(event);
-    var gid = event.currentTarget.id
-    wx.navigateTo({ 
-      url: '../inform/inform?gid=' + gid 
+  swipclick: function (e) {
+    console.log(e);
+    var url = e.currentTarget.dataset.url
+    wx.navigateTo({
+      url: '../webpage/webpage?url=' + url
     })
-},
+  },
   //搜索跳转
 search: function() {
   wx.navigateTo({
@@ -515,7 +515,6 @@ onShow: function () {
         title: '加载中',
       });
       console.log('砍价');
-      console.log(app.data.apiUrl1 + "bargain/banner?sign=" + sign + '&operator_id=' + app.data.kid);
       // 砍价
       if (that.data.bargain_id) {
         wx.navigateTo({
@@ -684,11 +683,11 @@ onShow: function () {
             })
           }
       });
-      //获取普通分类
+      //获取狗狗分类
       wx.request({
           url: app.data.apiUrl2+'/api/get-category?sign=' + sign ,
           data:{
-            type:'ordinary'
+            type:'dog'
           },
           method: "GET",
           success: function (res) {
@@ -742,10 +741,30 @@ onShow: function () {
             }, 300)
             wx.hideLoading()
           } else {
-            that.showZanToast(res.data.msg);
+            //that.showZanToast(res.data.msg);
           }
         },
       });  
+      //获取火爆促销分类
+      wx.request({
+        url: app.data.apiUrl2 + '/api/get-category?sign=' + sign,
+        data: {
+          type: 'sales'
+        },
+        method: "GET",
+        success: function (res) {
+          console.log("火爆促销分类", res);
+          let status = res.data.status;
+          if (status == 1) {
+            that.setData({
+              modulesHot: res.data.categorys,
+            })
+            wx.hideLoading()
+          } else {
+            //that.showZanToast(res.data.msg);
+          }
+        },
+      });
   });
 },
 // 养宠套餐
@@ -775,5 +794,37 @@ onShow: function () {
     wx.navigateTo({
       url: '../bargainList/bargainList'
     })
-  }
+  },
+  // 切换
+  tapKeyWorld: function (e) {
+    wx.showLoading({
+      title: '加载中',
+    })
+    var that = this;
+    var word = e.currentTarget.dataset.ontap;
+    var cate = e.currentTarget.dataset.cate;
+    var state = e.currentTarget.dataset.state;
+    var sign = wx.getStorageSync('sign');
+    this.setData({
+      searchword: word,
+      state: state 
+    })
+    wx.request({
+      url: app.data.apiUrl2 + '/api/get-category?sign=' + sign,
+      data: {
+        type: word
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (res) {
+        console.log("切换", res);
+        that.setData({
+          modules: res.data.categorys,
+        })
+        wx.hideLoading()
+      }
+    })
+  },
 }))

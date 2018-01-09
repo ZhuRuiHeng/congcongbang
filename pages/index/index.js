@@ -54,12 +54,12 @@ Page(Object.assign({}, Zan.Toast, {
       })
   },
   //轮播图点击跳转
-  swipclick: function (event) {
-      //console.log(event);
-      var gid = event.currentTarget.id
-      wx.navigateTo({ 
-        url: '../inform/inform?gid=' + gid 
-      })
+  swipclick: function (e) {
+    console.log(e);
+    var url = e.currentTarget.dataset.url
+    wx.navigateTo({ 
+      url: '../webpage/webpage?url=' + url 
+    })
   },
   //搜索跳转
 search: function() {
@@ -231,6 +231,27 @@ addCar: function (e) {
         console.log("inform详情", inform);
       }
     })
+    // banner
+    wx.request({
+      url: app.data.apiUrl1 + "bargain/banner?sign=" + sign,
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (res) {
+        console.log("砍价获取轮播图", res);
+        let status = res.data.status;
+        if (status == 1) {
+          that.setData({
+            banner: res.data.data
+          })
+        } else {
+          console.log(res.data.msg);
+
+        }
+      }
+    })
+
 },
 closeCar: function (obj) {
       var id = obj.target.id;
@@ -562,9 +583,7 @@ onShow: function () {
       wx.showLoading({
         title: '加载中',
       });
-      console.log('砍价');
-      console.log(app.data.apiUrl1 + "bargain/banner?sign=" + sign + '&operator_id=' + app.data.kid);
-      // 砍价
+      // 二维码分享砍价
       if (that.data.bargain_id) {
         wx.navigateTo({
           url: '../bargainShare/bargainShare?bargain_id=' + that.data.bargain_id,
@@ -723,6 +742,7 @@ onShow: function () {
             begin_time = common.time(begin_time, 1);
             var lunbo = [];
             // 获取用户名称及发表时间
+            wx.setStorageSync('lunbo', res.data.data.carouselGoods);
             that.setData({
               lunbo: res.data.data.carouselGoods,
               fightGroups: res.data.data.fightGroups,

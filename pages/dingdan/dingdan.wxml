@@ -15,7 +15,7 @@
               url="../shangpinInform/shangpinInform?oid={{item.order_id}}&status1={{item.status}}&gbid={{item.gbid}}">
                     <view class="diangdanNum">
                         <view class="left">
-                            <view class="shop">韵达快递：<text>3958421035420</text></view> 
+                            <!-- <view class="shop">韵达快递：<text>3958421035420</text></view>  -->
                             <view class="bianhao">订单编号：<text>{{item.out_trade_no}}</text></view>
                         </view>
                         <!-- <view class="right"  wx:if="{{item.status == ''}}"> 全部{{len}}</view> -->

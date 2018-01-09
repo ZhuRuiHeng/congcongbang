@@ -6,6 +6,7 @@
         <image src="../img/money.png" mode='widthFix'></image>
         <view class='title'>我的余额</view>
         <view class='money'>￥{{money}}</view>
-        <!-- <view class='button'>充值</view> -->
+        <view class='button' bindtap='recharge'>充值</view> 
+        <view class='button' bindtap='cash' style='background:#fff;color:#000;'>提现</view> 
     </view>  
 </view> 

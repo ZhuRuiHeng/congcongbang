@@ -4,12 +4,12 @@
 <template is="zan-toast" data="{{ zanToast }}"></template>
 <view class="container">
     <!--轮播图 -->
-    <swiper class="swiper" wx:if="{{lunbo.length !=0}}"  bindtap="imgPreview"  indicator-dots="{{indicatorDots}}" 
+    <swiper class="swiper" wx:if="{{banner.length !=0}}"  indicator-dots="{{indicatorDots}}" 
             autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color="#ff4444" 
             indicator-active-color="#fff">
-        <block wx:for="{{lunbo}}" wx:key="{{index}}">
+        <block wx:for="{{banner}}" wx:key="{{index}}">
           <swiper-item>
-            <image src="{{item.icon}}" class="slide-image" mode="aspectFill" id="{{item.gid}}" catchtap="swipclick"/>
+            <image src="{{item.url}}" class="slide-image" mode="aspectFill" data-url="{{item.location}}" catchtap="swipclick"/>
           </swiper-item>
         </block>
     </swiper>

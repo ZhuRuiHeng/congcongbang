@@ -31,7 +31,7 @@
                 </navigator>
             </view>
         </view>
-        <view class="modeList" wx:elif="{{sonCategory != 0}}">
+        <view class="modeList" wx:elif="{{sonCategory != 0}}" style='background:#f2f2f2'>
             <view class="service-list" >
                 <navigator class="service-item" wx:for="{{sonCategory}}"  wx:for-item="v" wx:key="{{item.id}}" url="../inform/inform?gid={{v.gid}}">
                     <view class="service-img">

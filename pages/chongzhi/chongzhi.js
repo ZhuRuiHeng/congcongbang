@@ -32,5 +32,33 @@ Page(Object.assign({}, Zan.Toast, {
         wx.hideLoading()
       }
     })
+  },
+  //充值
+  recharge(){
+    let that = this;
+    wx.request({
+      url: app.data.apiUrl2 + "/bargain/recharge?sign=" + wx.getStorageSync('sign'),
+      data:{
+        money:10
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (res) {
+        let status = res.data.status;
+        if (status==1){
+          that.showZanToast('');
+        }else{
+          that.showZanToast(res.data.msg);
+        }
+        wx.hideLoading()
+      }
+    })
+  },
+  //提现cash
+  cash(){
+    let that = this;
+    that.showZanToast('暂未开通！');
   }
 }))

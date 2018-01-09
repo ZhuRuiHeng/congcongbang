@@ -4,16 +4,20 @@
 <template is="zan-toast" data="{{ zanToast }}"></template>
 <view class="container">
     <!--轮播图 -->
-    <swiper class="swiper" wx:if="{{lunbo.length !=0}}"  bindtap="imgPreview"  indicator-dots="{{indicatorDots}}" 
+    <swiper class="swiper" wx:if="{{banner.length !=0}}"  indicator-dots="{{indicatorDots}}" 
             autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color="#ff4444" 
             indicator-active-color="#fff">
-        <block wx:for="{{lunbo}}" wx:key="{{index}}">
+        <block wx:for="{{banner}}" wx:key="{{index}}">
           <swiper-item>
-            <image src="{{item.icon}}" class="slide-image" mode="aspectFill" id="{{item.gid}}" catchtap="swipclick"/>
+            <image src="{{item.url}}" class="slide-image" mode="aspectFill" data-url="{{item.location}}" catchtap="swipclick"/>
           </swiper-item>
         </block>
     </swiper>
     <!--分类 新增star -->
+    <view class="nav bc_white">
+          <view class="{{state == 0?'red':'default'}}" bindtap="tapKeyWorld" data-ontap="dog" data-cate="0" data-state = "0"><span>狗狗</span></view>
+          <view class="{{state == 1?'red':'default'}}" bindtap="tapKeyWorld" data-ontap="cat" data-cate="0" data-state = "1"><span>猫猫</span></view> 
+    </view>
     <view class="sort">
         <view wx:for="{{modules}}" data-allindex="{{index}}" wx:key="{{item.id}}" data-cate_id='{{item.cate_id}}'                             bindtap='petTab' data-cate_name='{{item.cate_name}}' class='navigator'>
             <view class="image-text">
@@ -37,19 +41,19 @@
         </view>
     </view>
     <!--火爆促销  -->
-    <!-- <view class="all chakan" wx:if="{{modulesPet}}">火爆促销</view>
-    <view class='allPackage'>
-        <view class='Package' wx:for="{{modulesPet}}" wx:key="{{index}}" bindtap='petTab' 
-              data-allindex="{{index}}"  data-cate_id='{{item.cate_id}}' data-cate_name='{{item.cate_name}}'>
-            <view class='packageText'>
-                <view class='packageTitle'>{{item.cate_name}}</view>
-                <view class='packageLittle'>{{item.desc}}</view>
-            </view>
-            <view class='packageImg'>
-                <image src="{{item.icon}}" mode='aspectFill'></image>
-            </view>
-        </view>
-    </view> -->
+     <view class="all chakan" wx:if="{{modulesHot}}">火爆促销</view>
+      <view class='allPackage'>
+          <view class='Package' wx:for="{{modulesHot}}" wx:key="{{index}}" bindtap='petTab' 
+                data-allindex="{{index}}"  data-cate_id='{{item.cate_id}}' data-cate_name='{{item.cate_name}}'>
+              <view class='packageText'>
+                  <view class='packageTitle'>{{item.cate_name}}</view>
+                  <view class='packageLittle'>{{item.desc}}</view>
+              </view>
+              <view class='packageImg'>
+                  <image src="{{item.icon}}" mode='aspectFill'></image>
+              </view>
+          </view>
+      </view> 
     <!-- m秒杀 -->
     <view class="groupon groupon2" wx:if="{{currentSeckillTime != null}}">
         <view class="gpTitle miao">

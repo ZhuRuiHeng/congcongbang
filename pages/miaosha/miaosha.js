@@ -241,12 +241,7 @@ Page({
           //倒计时
           var nowTime = (new Date()).getTime();
           var begin_time = begin;
-          
           console.log(nowTime + 'sssssssss' + begin_time);
-         // that.setData({
-          //   begin_time : begin_time
-          // })
-         
           console.log(begin_time);
           var Countdown = begin_time * 1000 - nowTime; //倒计时
           var nextSeckillTime = that.data.nextSeckillTime;

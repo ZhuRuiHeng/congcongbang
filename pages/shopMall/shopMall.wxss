@@ -822,3 +822,27 @@ navigator{
 .packageText .packageTitle,.packageText .packageLittle{
   width: 100%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;
 }
+.nav.bc_white .red{
+  line-height:68rpx;
+}
+.nav.bc_white{
+  background: #fff;
+  position: relative;
+}
+.nav.bc_white:after{
+   content:" ";
+    display: inline-block;
+    width:100%;
+    position:absolute;
+    bottom:0;
+    left:0;
+    border:1px solid #F7F7F7;
+    -webkit-transform:scaleY(0.5);
+    transform:scaleY(0.5);
+    -webkit-transform-origin:0 0;
+    transform-origin:0 0;
+    box-sizing:border-box;
+}
+.red span{
+  display:inline-block;padding:0 20rpx;color:rgb(220, 165, 74);height: 50rpx;line-height: 50rpx;
+}
