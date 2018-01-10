@@ -48,3 +48,48 @@ page{
   border-radius: 4px;
   z-index: 100;
 }
+.bg{
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  position:fixed; /* static */
+  top: 0;
+  left: 0;
+  z-index: 3;
+}
+.zindex{
+  width: 80%;
+  background: #fff;
+  margin: 0 auto;
+  padding: 30rpx 10rpx;
+  position: absolute;
+  border-radius: 20rpx;
+  z-index: 6;
+  top: 50%; 
+  left: 50%;  
+  -webkit-transform: translate(-50%,-50%);  
+  -ms-transform: translate(-50%,-50%);  
+  transform: translate(-50%,-50%);  
+}
+.zindex .recharge{
+  text-align: center;
+  padding:0 0 30rpx 0;
+  border-bottom: 1px solid #f7f7f7;
+}
+.input{
+  display:flex;
+  justify-content: flex-start;
+  margin: 30rpx;
+  padding:0 0 30rpx 0rpx;
+  box-sizing: border-box;
+  font-size: 36rpx;
+  font-weight: bold;
+  border-bottom: 1px solid #f7f7f7;
+}
+.button.next{
+  height:36px;
+  line-height:36px;
+  width: 80%;
+  margin: 60rpx auto 30rpx;
+}

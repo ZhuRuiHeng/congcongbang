@@ -55,12 +55,14 @@ onLoad: function (options) {
 
 onShow: function () {
    var sign = wx.getStorageSync('sign');
-  var that = this;//在请求数据时setData使用
-  wx.showToast({
-    title: '加载中',
-    icon: 'loading'
+   var that = this;//在请求数据时setData使用
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading'
+    })
+  that.setData({
+    status:''
   })
-  
   console.log("cate_id", that.data.cate_id);
   wx.request({
     url: app.data.apiUrl+'/api/order-list?sign=' + sign,
