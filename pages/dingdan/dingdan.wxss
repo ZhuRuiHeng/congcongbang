@@ -138,6 +138,10 @@ scroll-view{
     margin: 20rpx 20rpx;
     background: #fff;
 }
+button{
+  margin: 0!important;
+  padding: 0!important;
+}
 button::after{
     content: "";
 }

@@ -60,7 +60,6 @@ Page(Object.assign({}, Zan.Toast, {
         console.log(res);
         console.log(status);
         if (status==1){
-          console.log(res.data.data.data.timeStamp);
           // 调用支付
           wx.requestPayment({
             timeStamp: res.data.data.data.timeStamp,
@@ -69,7 +68,10 @@ Page(Object.assign({}, Zan.Toast, {
             signType: res.data.data.data.signType,
             paySign: res.data.data.data.paySign,
             success: function (res) {
-              console.log('充值成功：',res)
+              console.log('充值成功：',res);
+              wx.showLoading({
+                title: '加载中',
+              })
               wx.request({
                 url: app.data.apiUrl2 + "/bargain/my-wallet?sign=" + wx.getStorageSync('sign'),
                 header: {
@@ -108,6 +110,12 @@ Page(Object.assign({}, Zan.Toast, {
   cash(){
     let that = this;
     that.showZanToast('暂未开通！');
+  },
+  // 关闭
+  close(){
+    this.setData({
+      zindex:false
+    })
   },
   //金额
   bindKeyInput: function (e) {

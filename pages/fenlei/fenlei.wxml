@@ -6,7 +6,7 @@
     <view class="modelAll{{index}} modelAlls" style="width:100%" bindtap="suoyin">
         <scroll-view class="search_world" scroll-x="true">
             <view class="search_w_box" style="width:{{w_width}}rpx">
-              <view wx:for="{{modules.sonCategory}}" 
+              <view wx:for="{{modules.sonCategory}}" wx:key="{{index}}" 
               class="search_item {{item.active == true?'red':'default'}} {{ontap == true?'red':'default'}}" 
               data-cate="{{item.cate_id}}" 
               bindtap="tapKeyWorld1" data-active="{{item.active}}" data-ontap="{{item.cate_id}}"

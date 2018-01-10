@@ -32,57 +32,6 @@ Page(Object.assign({}, Zan.Toast, {
     i :0 ,
     activity: true, //帮砍价库存问题
     bargain_id:'',//砍价id
-    modulesList:[
-      {   cate_id:48,
-          cate_name:'狗狗',
-          icon:"https://pet.zealcdn.cn/assets/images/icons/category/363620171231130639.jpg"
-      },{
-          cate_id: 51,
-          cate_name: '猫猫',
-          icon: "https://pet.zealcdn.cn/assets/images/icons/category/363620171231130639.jpg"
-      }, {
-          cate_id: 148,
-          cate_name: '小宠',
-          icon: "https://pet.zealcdn.cn/assets/images/icons/category/363620171231130639.jpg"
-      }, {
-        cate_id: 148,
-        cate_name: '水族',
-        icon: "https://pet.zealcdn.cn/assets/images/icons/category/363620171231130639.jpg"
-      }, {
-        cate_id: 148,
-        cate_name: '狗粮',
-        icon: "https://pet.zealcdn.cn/assets/images/icons/category/363620171231130639.jpg"
-      }, {
-        cate_id: 148,
-        cate_name: '罐头',
-        icon: "https://pet.zealcdn.cn/assets/images/icons/category/363620171231130639.jpg"
-      }, {
-        cate_id: 148,
-        cate_name: '零食',
-        icon: "https://pet.zealcdn.cn/assets/images/icons/category/363620171231130639.jpg"
-      },
-      {
-        cate_id: 148,
-        cate_name: '保健',
-        icon: "https://pet.zealcdn.cn/assets/images/icons/category/363620171231130639.jpg"
-      }, {
-        cate_id: 148,
-        cate_name: '医疗',
-        icon: "https://pet.zealcdn.cn/assets/images/icons/category/363620171231130639.jpg"
-      }, {
-        cate_id: 148,
-        cate_name: '香波',
-        icon: "https://pet.zealcdn.cn/assets/images/icons/category/363620171231130639.jpg"
-      }, {
-        cate_id: 148,
-        cate_name: '用品',
-        icon: "https://pet.zealcdn.cn/assets/images/icons/category/363620171231130639.jpg"
-      }, {
-        cate_id: 148,
-        cate_name: '更多',
-        icon: "https://pet.zealcdn.cn/assets/images/icons/category/363620171231130639.jpg"
-      }
-    ]
 },
   //下拉刷新
   onPullDownRefresh: function () {
@@ -701,12 +650,14 @@ onShow: function () {
               })
               setTimeout(function () {
                 var modules = that.data.modules;
-                var sindex = [];
                 for (let i = 0; i < modules.length; i++) {
-                  var a = i;
-                  var _modules = that.data.modules;
+                  modules[i].cate_name = modules[i].cate_name.replace("（狗狗）", "");
                 }
-              }, 300)
+                that.setData({
+                   modules
+                })
+                console.log('modules:', modules);
+              }, 10)
               wx.hideLoading()
             }else{
               that.showZanToast(res.data.msg);
@@ -767,19 +718,6 @@ onShow: function () {
       });
   });
 },
-// 养宠套餐
- // url="../fenlei/fenlei?cate_id={{item.cate_id}}&index={{index}}"
-  petTab(e){
-    if (e.currentTarget.dataset.cate_name =='每日优惠'){
-        wx.navigateTo({
-          url: '../bargainList/bargainList',
-        })
-    }else{
-        wx.navigateTo({
-          url: '../fenlei/fenlei?cate_id=' + e.currentTarget.dataset.cate_id + '&index=' + e.currentTarget.dataset.allindex,
-        })
-    }
-  },
   // 搜索框
   inputSearch: function (e) {  //输入搜索文字
     this.setData({
@@ -795,17 +733,22 @@ onShow: function () {
       url: '../bargainList/bargainList'
     })
   },
-  // 切换
+  petTab(e) {
+    wx.navigateTo({
+      url: '../fenlei/fenlei?cate_id=' + e.currentTarget.dataset.cate_id + '&index=' + e.currentTarget.dataset.allindex,
+    })
+  },
+  // 狗狗猫猫切换
   tapKeyWorld: function (e) {
     wx.showLoading({
       title: '加载中',
     })
     var that = this;
-    var word = e.currentTarget.dataset.ontap;
+    let word = e.currentTarget.dataset.ontap;
     var cate = e.currentTarget.dataset.cate;
     var state = e.currentTarget.dataset.state;
     var sign = wx.getStorageSync('sign');
-    this.setData({
+    that.setData({
       searchword: word,
       state: state 
     })
@@ -819,9 +762,18 @@ onShow: function () {
       },
       method: "GET",
       success: function (res) {
-        console.log("切换", res);
+        let modules = res.data.categorys;
+        if (word == 'dog'){
+          for (let i = 0; i < modules.length; i++) {
+            modules[i].cate_name = modules[i].cate_name.replace("（狗狗）", "");
+          }
+        }else{
+          for (let i = 0; i < modules.length; i++) {
+            modules[i].cate_name = modules[i].cate_name.replace("（猫猫）", "");
+          }
+        }
         that.setData({
-          modules: res.data.categorys,
+          modules
         })
         wx.hideLoading()
       }

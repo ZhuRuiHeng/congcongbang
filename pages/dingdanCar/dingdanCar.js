@@ -1,5 +1,4 @@
-// pages/dingdanInform/dingdanInform.js
-//支付
+var common = require('../../common.js');
 const paymentUrl = require('../../config').paymentUrl;
 var app = getApp();
 var sign = wx.getStorageSync('sign');
@@ -170,7 +169,9 @@ Page(Object.assign({}, Zan.Toast, {
     var that = this;
     var dizhi = that.data.dizhi;
     var sharer_id = wx.getStorageSync('sharer_id');
+    var formId = e.detail.formId;
     console.log("sharer_id:",sharer_id);
+    console.log("formId:", formId);
     if (!sharer_id){
       sharer_id = 0;
     }
@@ -188,61 +189,58 @@ Page(Object.assign({}, Zan.Toast, {
           let status = res.data.status;
           if (status == 1) {
             console.log("余额", res.data.data);
-            that.setData({
-              money: res.data.data 
-            })
-            let money = res.data.data;
-            let totalPrice = that.data.totalPrice;
-            let expenses = that.data.expenses;
-            if (money < totalPrice * 1 + expenses){
+            let wallet     =  res.data.data.wallet;   //钱包余额1
+            let pet_money  =  res.data.data.pet_money;//返现余额2
+            let point      =  res.data.data.point;    //积分余额3
+            let totalPrice =  that.data.totalPrice;   //商品价格
+            let expenses   =  that.data.expenses;    //运费
+            let payment    =  totalPrice * 1 + expenses;//总支付金额
+            // 支付方法
+            function allPayment(pay_type) {
               wx.request({
-                url: app.data.apiUrl2 + '/api/create-order?sign=' + sign,
+                url: app.data.apiUrl2+'/api/create-order?sign=' + wx.getStorageSync('sign'),
                 data: {
-                  form_id: e.detail.formId,
+                  form_id: formId,
                   receiver: that.data.dizhi.userName,
                   message: that.data.userMes,//留言
                   receiver_address: that.data.dizhi.provinceName + that.data.dizhi.cityName + that.data.dizhi.countyName + that.data.dizhi.detailInfo,
                   receiver_phone: that.data.dizhi.telNumber, //'18749830459'
                   detail: that.data.detailall, //detail:"gid -   attribute   - number"
                   sharer_id: sharer_id,
-                  pay_type: 'cash'
+                  pay_type: pay_type //1wallet钱包 2pet_money返现账户支付 3point积分账户 多种支付使用, 分隔 缺少时单独使用移动支付 
                 },
                 method: 'POST',
                 success: function (res) {
-                  // success
+                  console.log(res);
                   var status = res.data.status;
                   if (status == 1) {
-                    // 调用支付
                     wx.requestPayment({
                       timeStamp: res.data.data.timeStamp,
                       nonceStr: res.data.data.nonceStr,
                       package: res.data.data.package,
                       signType: res.data.data.signType,
                       paySign: res.data.data.paySign,
-                      'success': function (res) {
-                        setTimeout(function () {
-                          that.setData({
-                            gouwu: []
-                          })
-                          console.log('gouwulast', that.data.gouwu);
-                          // 支付成功跳转
-                          wx.navigateTo({
-                            url: '../dingdan/dingdan?status='
-                          })
-                        }, 300)
+                      success: function (res) {
+                        let status = res.data.data.status;
+                        if (status==1){
+                          that.showZanToast('支付成功！');
+                          setTimeout(function () {
+                            that.setData({
+                              gouwu: []
+                            })
+                            console.log('gouwulast', that.data.gouwu);
+                            // 支付成功跳转
+                            wx.navigateTo({
+                              url: '../dingdan/dingdan?status='
+                            })
+                          }, 10)
+                        }else{
+                          console.log(res.data.data.msg)
+                          that.showZanToast('支付失败！');
+                        }
                       },
-                      'fail': function (res) {
-                        that.showZanToast(res.data.msg);
-                        that.setData({
-                          gouwu: []
-                        })
-                        console.log('gouwulast', that.data.gouwu);
-                        setTimeout(function () {
-                          // 支付成功跳转
-                          wx.navigateTo({
-                            url: '../dingdan/dingdan?status='
-                          })
-                        }, 300)
+                      fail: function (res) {
+                        that.showZanToast('您取消了支付！');
                       }
                     })
                     // 重置属性
@@ -264,76 +262,28 @@ Page(Object.assign({}, Zan.Toast, {
                   console.log(res)
                 },
               })
+            }
+            // 模式1 模式2 模式3 模式1+2 模式1+3
+            //（1）返现账户和积分账户不能相互抵用
+            //（2）返现账户余额不足仅可调用充值账户
+            //（3）积分账户余额不足仅可调用充值账户
+            if (wallet > payment){ //模式1
+              console.log('模式'+1);
+              allPayment('wallet');
+            } else if (pet_money > payment) { //模式2
+              console.log('模式' + 2);
+              allPayment('pet_money');
+            } else if (point > payment) { //模式3
+              console.log('模式' + 3);
+              allPayment('point');
+            }else if(wallet < payment || pet_money < payment){ //1+2模式
+              console.log('模式' +1+'+'+2);
+              allPayment('wallet,pet_money');
+            }else if (point < payment){  //1+3模式
+              console.log('模式' + 1 + '+' + 3);
+              allPayment('wallet,point');
             }else{
-              wx.request({
-                url: app.data.apiUrl2 + '/api/create-order?sign=' + sign,
-                data: {
-                  form_id: e.detail.formId,
-                  receiver: that.data.dizhi.userName,
-                  message: that.data.userMes,//留言
-                  receiver_address: that.data.dizhi.provinceName + that.data.dizhi.cityName + that.data.dizhi.countyName + that.data.dizhi.detailInfo,
-                  receiver_phone: that.data.dizhi.telNumber, //'18749830459'
-                  detail: that.data.detailall, //detail:"gid -   attribute   - number"
-                  sharer_id: sharer_id,
-                  pay_type: 'wallet'
-                },
-                method: 'POST',
-                success: function (res) {
-                  // success
-                  var status = res.data.status;
-                  if (status == 1) {
-                    // 调用支付
-                    wx.requestPayment({
-                      timeStamp: res.data.data.timeStamp,
-                      nonceStr: res.data.data.nonceStr,
-                      package: res.data.data.package,
-                      signType: res.data.data.signType,
-                      paySign: res.data.data.paySign,
-                      'success': function (res) {
-                        setTimeout(function () {
-                          that.setData({
-                            gouwu: []
-                          })
-                          console.log('gouwulast', that.data.gouwu);
-                          // 支付成功跳转
-                          wx.navigateTo({
-                            url: '../dingdan/dingdan?status='
-                          })
-                        }, 300)
-                      },
-                      'fail': function (res) {
-                        that.showZanToast(res.data.msg);
-                        that.setData({
-                          gouwu: []
-                        })
-                        console.log('gouwulast', that.data.gouwu);
-                        setTimeout(function () {
-                          // 支付成功跳转
-                          wx.navigateTo({
-                            url: '../dingdan/dingdan?status='
-                          })
-                        }, 300)
-                      }
-                    })
-                    // 重置属性
-                    that.setData({
-                      attr: "",//属性
-                      types: "", //类型
-                      userMes: '',//留言信息
-                      num: '', //数量
-                      detail: ''
-                    })
-                  } else {
-                    that.showZanToast(res.data.msg);
-                  }
-                  that.setData({
-                    // gouwu: []
-                  })
-                },
-                fail: function (res) {
-                  console.log(res)
-                },
-              })
+
             }
           } else {
             //tips.alert(res.data.msg);

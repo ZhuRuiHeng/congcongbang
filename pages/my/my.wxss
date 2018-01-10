@@ -146,6 +146,10 @@
 .xuanze{
     margin-top: 20rpx;
 }
+.xuanze .classname text{
+    position: relative;
+    top: 4rpx;
+}
 .listAll{
     border-bottom:1px solid #f7f7f7;
 }
@@ -163,13 +167,7 @@
   align-items: center;
   /* margin-bottom:20rpx; */
 }
-.kefu{
-  padding:20rpx;
-  position: relative;
-  top: 0;
-  left: 0;
-  z-index:9;
-}
+
 contact-button{
   padding:20rpx 20rpx 20rpx 20rpx;
 }
@@ -258,4 +256,16 @@ button.flex::after{
   width: 40rpx;
   vertical-align: middle;
   margin-right: 6rpx;
+}
+button{
+  width: 100%;
+  margin: 0!important;
+  padding: 0!important;
+}
+button:after{
+  content: none;
+}
+.button-hover{
+    background: none;
+    color: #000;
 }
