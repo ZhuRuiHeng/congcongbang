@@ -554,5 +554,6 @@ Page({
     //     wx.hideLoading()
     //   }
     // })
+    wx.hideLoading()
   },
 })    

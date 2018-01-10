@@ -41,18 +41,22 @@ Page(Object.assign({}, Zan.Toast, {
 onLoad: function (options) {
   var that = this;
   var nowTime = Date.parse(new Date());
- 
   var status = options.status;
   console.log(status);
+  if (options.status){
+    that.setData({
+      status: status,
+    })
+  }else{
+    that.setData({
+      status: '',
+    })
+  }
   that.setData({
-    status:status,
     nowTime: nowTime/1000
   })
-  console.log('nowTime:', that.datanowTime);
 },
-
 // 加载
-
 onShow: function () {
    var sign = wx.getStorageSync('sign');
    var that = this;//在请求数据时setData使用
@@ -60,12 +64,12 @@ onShow: function () {
       title: '加载中',
       icon: 'loading'
     })
-  that.setData({
-    status:''
-  })
   console.log("cate_id", that.data.cate_id);
   wx.request({
     url: app.data.apiUrl+'/api/order-list?sign=' + sign,
+    data:{
+      status: that.data.status
+    },
     header: {
       'content-type': 'application/json'
     },

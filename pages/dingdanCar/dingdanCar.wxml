@@ -60,21 +60,9 @@
         <view class="left">留言</view>
         <view class="right"><input class="liuyan" name="userMes" type="text" placeholder="点击给商家留言" bindinput="userMesInput"/></view>
     </view>
-    <!-- <view class="controllist">
-        <view class="left">合计</view>
-        <view class="right color">￥{{inform.low_price*price}}</view>
-    </view> -->
     <!-- <view class="controllist youhui top" bindtap="addCar">
         <view class="left">优惠</view>
         <view class="right">使用优惠<image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"></image></view>
-    </view> -->
-    <!-- <view class="controllist top" style="padding:10rpx 20rpx;">
-        <view class="left" style="position:relative;top:13rpx;">短信通知收件人</view>
-        <view class="right">
-            <view class="page-section page-section-gap">
-              <switch name="switch" bindchange="listenerSwitch" />
-            </view>
-        </view>
     </view> -->
     <view class="jine top">
        <view class="controllist ">
@@ -86,32 +74,24 @@
           <view class="right color">￥{{expenses}}</view>
       </view>
     </view>
-     <!--购物车弹窗  -->
-    <view class="bg {{addCar?'show':'hidden'}}"></view> 
-      <view class="carBox {{addCar?'show':'hidden'}}">
-        <view class="padding">
-            <view class="title">选择优惠</view>
-            <view class="coupon">
-                <view class="left">
-                    <input type="text" placeholder="请输入优惠码"/>
-                </view>
-                <view class="right">
-                   <text >兑换</text>
-                </view>
-            </view>
-            <text style="color:#ff4444;">优惠码位数有误，请重新输入</text>
-        </view>
-        <view class="btn">
-            <button class="addCar" bindtap="quxiao">取消</button>
-            <button class="buy" bindtap="queding">确定</button>
-        </view>
-    </view>
     <!--foot  -->
     <view class="fixed">
         <view class="heji">合计：<text>￥{{totalPrice*1 + expenses}}</text> </view>
-        <form report-submit="true" bindsubmit="formSubmit" class="formSubmit">
-            <button class="submit" formType="submit">提交订单</button>
-        </form>
+        <button class="submit" bindtap='submitDingdan' style='border-radius:0'>提交订单</button>
         <!-- <view class="submit">提交订单</view> -->
+    </view>
+</view>
+<view class='bg' wx:if="{{zindex}}" >
+    <view class='zindex'>
+      <image src="../images/closea.png" mode='widthFix' bindtap='close'></image>
+      <view class='recharge'>支付</view>
+      <picker bindchange="bindPickerChange" value="{{Array[index]}}" range="{{Array}}">
+        <view class="picker">
+          支付方式：{{Array[index]}}
+        </view>
+      </picker>
+      <form report-submit="true" bindsubmit="formSubmit" class="formSubmit">
+            <button class="submit" formType="submit">下一步</button>
+        </form>
     </view>
 </view>

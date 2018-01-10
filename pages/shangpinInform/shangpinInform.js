@@ -1,5 +1,4 @@
 // pages/dingdanInform/dingdanInform.js
-//支付
 var common = require('../../common.js');
 var sign = wx.getStorageSync('sign');
 const paymentUrl = require('../../config').paymentUrl;
@@ -34,7 +33,7 @@ Page(Object.assign({}, Zan.Toast, {
       title: '加载中',
     })
     var that = this;
-    // 列表
+    // 详情
     wx.request({
       url: app.data.apiUrl+"/api/order-detail?sign=" + sign,
       data: {
@@ -51,14 +50,15 @@ Page(Object.assign({}, Zan.Toast, {
         // 获取用户名称及发表时间
         var goods_list = list.goods_list;
         var begin_time = list.order_time;
-        
+        that.setData({
+          list: list,
+          goods_list: list.goods_list,
+          expenses: list.expenses
+        })
         //倒计时
-        console.log(typeof(list.order_time));
-        console.log(list.order_time_unix);
         var xiaTime = list.order_time_unix;//下单时间
         var begin_time = parseInt(xiaTime) + 1800; //超时时间
         var nowTime = Date.parse(new Date()); //现在时间
-
         var ge_nowTime = common.time(nowTime / 1000, 1); // 下单时间
         var be_gainTime = common.time(begin_time, 1);  //超时时间
         var Countdown = begin_time * 1000 - nowTime; //倒计时
@@ -69,17 +69,14 @@ Page(Object.assign({}, Zan.Toast, {
             var second = Math.floor(micro_second / 1000);
             // 小时位
             var day = Math.floor(second / 86400);
-
             if (day < 10) {
               day = '0' + day;
             }
-
             var hr = Math.floor((second - day * 86400) / 3600);
             // 分钟位
             if (hr < 10) {
               hr = '0' + hr;
             }
-
             var min = Math.floor((second - hr * 3600 - day * 86400) / 60);
             if (min < 10) {
               min = '0' + min;
@@ -91,11 +88,8 @@ Page(Object.assign({}, Zan.Toast, {
               sec = '0' + sec;
             }
             var micro_sec = Math.floor((micro_second % 1000) / 10);
-
             return day + ":" + hr + ":" + min + ":" + sec;
           }
-
-
           var inter = setInterval(function () {
             Countdown -= 1000;
             var time = dateformat(Countdown);
@@ -119,30 +113,22 @@ Page(Object.assign({}, Zan.Toast, {
         } else {
           countDown_tatic: false
         }
-
         begin_time = common.time(begin_time, 1);
-        console.log(begin_time);
-        // console.log(that.data.Countdown);
-        /////////////////////////////////////////////
-        that.setData({
-          list : list,
-          goods_list: list.goods_list
-        })
         wx.hideLoading()
       }
     })
   },
   //提交订单
   formSubmit: function (e) {
-    //console.log(e);
     console.log(e.detail.formId);
     var that = this;
+    let formId = e.detail.formId;
     console.log("oid", that.data.oid)
     wx.request({
       url: app.data.apiUrl + '/api/order-payment?sign=' + wx.getStorageSync('sign') ,
       data: {
         oid: that.data.oid,
-        form_id: e.detail.formId
+        form_id: formId
       },
       header: {
         'content-type': 'application/json'
@@ -171,27 +157,14 @@ Page(Object.assign({}, Zan.Toast, {
             detail: '',
             oid : ''
           })
-
         } else {
-          // wx.showToast({
-          //   title: '创建订单失败',
-          //   image: '../images/false.png'
-          // });
           that.showZanToast('创建订单失败');
         }
       },
       fail: function (res) {
-        // fail
         console.log(res)
-      },
-      complete: function () {
-        // complete
       }
     })
-  },
-  // switch
-  listenerSwitch: function (e) {
-    console.log('switch类型开关当前状态-----', e.detail.value);
   }
  
 }))

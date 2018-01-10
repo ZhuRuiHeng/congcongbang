@@ -32,7 +32,8 @@ Page(Object.assign({}, Zan.Toast, {
     figure: '',
     i: 0,
     activity: true, //帮砍价库存问题
-    bargain_id: ''//砍价id
+    bargain_id: '',//砍价id
+    kanjia:true //可以砍价
   },
   // 获取索引默认加载引用
   suoyin: function (e) {
@@ -292,7 +293,7 @@ Page(Object.assign({}, Zan.Toast, {
       values: []
     })
   },
-  // 立即购买
+  // 发起砍价立即购买
   buy: function (e) {
     var that = this;
     var attribute = "";
@@ -301,6 +302,9 @@ Page(Object.assign({}, Zan.Toast, {
     var values = that.data.values;
     console.log('bargain_id:', that.data.bargain_id);
     console.log("gid:",that.data.gid);
+    that.setData({
+      kanjia: false
+    })
     for (var i = 0; i < arr.length; i++) {
       if (arr[i]) {
         attribute += arr[i] + ',';
@@ -327,7 +331,7 @@ Page(Object.assign({}, Zan.Toast, {
             //console.log("post", res);
             var status = res.data.status;
             if (status == 1) {
-              console.log('发起砍价成功',res.data.data)
+              console.log('发起砍价成功',res.data.data);
               console.log('../bargainInform/bargainInform?bargain_id=' + res.data.data + '&gid=' + that.data.gid);
               wx.navigateTo({
                 url: '../bargainInform/bargainInform?bargain_id=' + res.data.data + '&gid=' + that.data.gid
@@ -338,7 +342,8 @@ Page(Object.assign({}, Zan.Toast, {
             that.setData({
               arr: [],
               values: [],
-              price: 1
+              price: 1,
+              kanjia:true
             })
 
           }

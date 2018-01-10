@@ -19,7 +19,10 @@ Page(Object.assign({}, Zan.Toast, {
     attrLen: '',
     values: [], //型号
     shuxing: '',
-    all: []
+    all: [],
+    pay_type: 'wallet',
+    index: 0,
+    zindex: false
   },
   onLoad: function (options) {
     console.log(options);
@@ -100,7 +103,8 @@ Page(Object.assign({}, Zan.Toast, {
           imgUrls: picture,
           shuxing: inform.attribute,
           is_collect: inform.is_collect,
-          is_membership: is_membership
+          is_membership: is_membership,
+          expenses: inform.expenses
         })
         var shuxing = that.data.shuxing;
         console.log("属性：", shuxing);
@@ -399,7 +403,7 @@ Page(Object.assign({}, Zan.Toast, {
         that.showZanToast('请选择收货地址');
       } else {
         wx.request({
-          url: app.data.apiUrl + '/bargain/bargain-buy?sign=' + wx.getStorageSync('sign') + '&type=0' + '&rid=' + that.data.rid + '&bargain_id='+that.data.bargain_id,
+          url: app.data.apiUrl2 + '/bargain/bargain-buy?sign=' + wx.getStorageSync('sign') + '&type=0' + '&rid=' + that.data.rid + '&bargain_id=' + that.data.bargain_id + '&pay_type=' + pay_type,
           method: 'POST', 
           data: {
             form_id: e.detail.formId,
@@ -420,7 +424,7 @@ Page(Object.assign({}, Zan.Toast, {
                 package: res.data.data.package,
                 signType: res.data.data.signType,
                 paySign: res.data.data.paySign,
-                'success': function (res) {
+                success: function (res) {
                   setTimeout(function () {
                     // 支付成功跳转
                     wx.redirectTo({
@@ -429,7 +433,7 @@ Page(Object.assign({}, Zan.Toast, {
                     })
                   }, 300)
                 },
-                'fail': function (res) {
+                fail: function (res) {
                 }
               })
             } else {

@@ -139,8 +139,8 @@ scroll-view{
     background: #fff;
 }
 button{
-  margin: 0!important;
-  padding: 0!important;
+  padding: 0 8rpx!important;
+  box-sizing:initial;
 }
 button::after{
     content: "";

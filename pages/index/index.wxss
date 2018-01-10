@@ -5,6 +5,7 @@ page{
 .container {
   padding: 0;
   overflow: hidden;
+  padding-bottom:100rpx; 
 }
 /*轮播*/
 .swiper{

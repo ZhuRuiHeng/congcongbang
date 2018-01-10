@@ -33,7 +33,7 @@ Page({
       },
       method: "GET",
       success: function (res) {
-        console.log("宠物列表", res);
+        console.log("宠物任务金额列表", res);
         let status = res.data.status;
         if (status == 1) {
           that.setData({

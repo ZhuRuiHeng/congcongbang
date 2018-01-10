@@ -25,7 +25,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 12,
+			"current": 24,
 			"list": [
 				{
 					"id": 0,
@@ -175,6 +175,12 @@
 					"id": -1,
 					"name": "砍价支付",
 					"pathName": "pages/bargainPay/bargainPay",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "购物车支付列表",
+					"pathName": "pages/dingdanCar/dingdanCar",
 					"query": ""
 				}
 			]

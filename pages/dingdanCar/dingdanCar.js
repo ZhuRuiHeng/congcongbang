@@ -6,7 +6,23 @@ var Zan = require('../../dist/index');
 Page(Object.assign({}, Zan.Toast, {
   data: {
     userMes : '',
-    gouwu:[]
+    Array: ['钱包支付', '返现支付','积分支付'],
+    objectArray:[
+      {
+        id: 'wallet',
+        name: '钱包余额'
+      },{
+        id: 'pet_money',
+        name: '返现余额'
+      },{
+        id: 'point',
+        name: '积分余额'
+      }
+    ],
+    gouwu:[],
+    pay_type: 'wallet',
+    index:0,
+    zindex:false
   },
   onLoad: function (options) {
     var sign = wx.getStorageSync('sign');
@@ -17,7 +33,6 @@ Page(Object.assign({}, Zan.Toast, {
         totalPrice: options.totalPrice
       })
   },
-  
   onShow: function () {
     var sign = wx.getStorageSync('sign');
     var that = this;
@@ -108,6 +123,40 @@ Page(Object.assign({}, Zan.Toast, {
       console.log("请选择地址")
     }
   },
+  submitDingdan(){
+    this.setData({
+      zindex:true
+    })
+  },
+  // 支付方式
+  bindPickerChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value);
+    let index = this.data.index;
+    this.setData({
+      index: e.detail.value
+    })
+    if (e.detail.value==0){
+      this.setData({
+        pay_type: 'wallet'
+      })
+    } else if (e.detail.value == 1) {
+      this.setData({
+        pay_type: 'pet_money'
+      })
+    } else if (e.detail.value == 2) {
+      this.setData({
+        pay_type: 'point'
+      })
+    }
+    console.log('index:', index);
+    console.log('pay_type:', this.data.pay_type);
+  },
+  // 关闭
+  close() {
+    this.setData({
+      zindex: false
+    })
+  },
   //地址
   nextAddress: function () {
     console.log("nextAddress");
@@ -170,8 +219,9 @@ Page(Object.assign({}, Zan.Toast, {
     var dizhi = that.data.dizhi;
     var sharer_id = wx.getStorageSync('sharer_id');
     var formId = e.detail.formId;
-    console.log("sharer_id:",sharer_id);
-    console.log("formId:", formId);
+    that.setData({
+        zindex:false
+    })
     if (!sharer_id){
       sharer_id = 0;
     }
@@ -189,9 +239,9 @@ Page(Object.assign({}, Zan.Toast, {
           let status = res.data.status;
           if (status == 1) {
             console.log("余额", res.data.data);
-            let wallet     =  res.data.data.wallet;   //钱包余额1
-            let pet_money  =  res.data.data.pet_money;//返现余额2
-            let point      =  res.data.data.point;    //积分余额3
+            let walletNow     =  res.data.data.wallet;   //钱包余额1
+            let pet_moneyNow  =  res.data.data.pet_money;//返现余额2
+            let pointNow      =  res.data.data.point;    //积分余额3
             let totalPrice =  that.data.totalPrice;   //商品价格
             let expenses   =  that.data.expenses;    //运费
             let payment    =  totalPrice * 1 + expenses;//总支付金额
@@ -267,23 +317,28 @@ Page(Object.assign({}, Zan.Toast, {
             //（1）返现账户和积分账户不能相互抵用
             //（2）返现账户余额不足仅可调用充值账户
             //（3）积分账户余额不足仅可调用充值账户
-            if (wallet > payment){ //模式1
+            console.log("payment:", payment);
+            if (that.data.pay_type == 'wallet'){ //模式1
               console.log('模式'+1);
-              allPayment('wallet');
-            } else if (pet_money > payment) { //模式2
+              if (walletNow < payment){
+                allPayment('wallet,pet_money');
+              }else{
+                allPayment('wallet');
+              }
+            } else if (that.data.pay_type == 'pet_money') { //模式2
               console.log('模式' + 2);
-              allPayment('pet_money');
-            } else if (point > payment) { //模式3
+              if (pet_moneyNow < payment) {
+                allPayment('pet_money,wallet');
+              } else {
+                allPayment('pet_money');
+              }
+            } else if (that.data.pay_type =='point') { //模式3
               console.log('模式' + 3);
-              allPayment('point');
-            }else if(wallet < payment || pet_money < payment){ //1+2模式
-              console.log('模式' +1+'+'+2);
-              allPayment('wallet,pet_money');
-            }else if (point < payment){  //1+3模式
-              console.log('模式' + 1 + '+' + 3);
-              allPayment('wallet,point');
-            }else{
-
+              if (pointNow < payment) {
+                allPayment('point,wallet');
+              } else {
+                allPayment('point');
+              }
             }
           } else {
             //tips.alert(res.data.msg);

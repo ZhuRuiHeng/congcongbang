@@ -849,6 +849,7 @@ onShow: function () {
 // 养宠套餐
  // url="../fenlei/fenlei?cate_id={{item.cate_id}}&index={{index}}"
   petTab(e){
+    console.log(e);
       wx.navigateTo({
         url: '../fenlei/fenlei?cate_id=' + e.currentTarget.dataset.cate_id + '&index=' + e.currentTarget.dataset.allindex,
       })

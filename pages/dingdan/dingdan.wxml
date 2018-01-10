@@ -4,14 +4,16 @@
 <template is="zan-toast" data="{{ zanToast }}"></template>
 <view class="main">
         <view class="nav bc_white" >
-            <view wx:for="{{navList}}"  class="selected {{status == item.status?'red':'default'}}" data-status="{{item.status}}" bindtap="tapKeyWorld"><span>{{item.word}}</span></view>
+            <view wx:for="{{navList}}" wx:key="{{index}}"  class="selected {{status == item.status?'red':'default'}}" 
+                  data-status="{{item.status}}" bindtap="tapKeyWorld"><span>{{item.word}}</span>
+            </view>
         </view>
         <!--全部  -->
         <!-- <scroll-view scroll-y="true" style="height:600px" bindscrolltolower="lower"> -->
             <view style="padding:30rpx;font-size:24rpx;text-align:center;margin-top:100rpx;" 
                   wx:if="{{len == 0}}">暂时没有订单哦！</view>
             <view class="service-list" wx:else style="margin-top:92rpx;">
-              <navigator class=""  wx:for="{{main_content}}" 
+              <navigator class=""  wx:for="{{main_content}}" wx:key="{{index}}"
               url="../shangpinInform/shangpinInform?oid={{item.order_id}}&status1={{item.status}}&gbid={{item.gbid}}">
                     <view class="diangdanNum">
                         <view class="left">
@@ -56,7 +58,9 @@
                             <view class="sum">x{{item.number}}</view>
                         </view>
                     </view>
-                    <view wx:if="{{item.count_goods > 1}}" class="heji hejiline" style="text-align:center">查看全部{{item.count_goods}}件商品</view>
+                    <view wx:if="{{item.count_goods > 1}}" class="heji hejiline" style="text-align:center">
+                        查看全部{{item.count_goods}}件商品
+                    </view>
                     <view class="heji">
                         <view class="money">
                             合计:<text>￥{{item.amount}}</text>

@@ -26,7 +26,7 @@
           </view>
         </picker> -->
         <scroll-view scroll-x="true" class="tab-h" scroll-left="{{scrollLeft}}">
-            <view wx:for="{{monethList}}" class="tab-item {{currentTab== index ?'active':''}}"  
+            <view wx:for="{{monethList}}" wx:key="{{index}}" class="tab-item {{currentTab== index ?'active':''}}"  
                   data-current="{{index}}" bindtap="swichNav">
             <text>{{item.moneth}}</text>
             <text>{{item.eng}}</text>
