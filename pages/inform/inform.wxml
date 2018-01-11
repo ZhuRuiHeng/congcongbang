@@ -113,7 +113,7 @@
                 <view class="mid">
                     <view class="buy">
                         <text>购买数量：{{price}}</text>
-                        <text class="gray">剩余{{inform.total_stock-price}}件</text>
+                        <text class="gray">剩余{{inform.total_stock}}件</text>
                     </view>
                     <view class="num">
                         <button class="reduce {{minusStatus}}" bindtap="bindMinus">-</button>
@@ -158,7 +158,7 @@
                 <view class="mid">
                     <view class="buy">
                         <text>购买数量：{{price}}</text>
-                        <text class="gray">剩余{{inform.total_stock-price}}件</text>
+                        <text class="gray">剩余{{inform.total_stock}}件</text>
                     </view>
                     <view class="num">
                         <button class="reduce {{minusStatus}}" bindtap="bindMinus">-</button>

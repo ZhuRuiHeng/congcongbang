@@ -44,7 +44,7 @@
                 </view>
                 <view class="service-text">
                     <view class="service-tite">{{inform.good_name}}</view>
-                    <view class="fenlei"> {{types}}</view>
+                    <view class="fenlei"> </view>
                     <view class="caozuo">
                         <text class="service-price" wx:if="{{low_group_price}}">￥{{low_group_price}}</text>
                         <text class="service-price" wx:else>￥{{low_price}}</text>
@@ -81,7 +81,7 @@
       </view>
       <view class="controllist ">
           <view class="left">商品定金</view>
-          <view class="right color">￥{{low_price}}</view>
+          <view class="right color">￥{{inform.deposit}}</view>
       </view>
       <view class="controllist">
           <view class="left">运费</view>
@@ -123,12 +123,23 @@
     </view>
     <!--foot  -->
     <view class="fixed">
-        <view class="heji">合计：<text>￥{{(low_price*num) + (expenses*1)}}</text>
+        <view class="heji">定金：<text>￥{{(inform.deposit*num) + (expenses*1)}}</text>
             <!-- <text><text style="color:#000;">优惠券:</text >￥{{amount}}</text>实付：<text>￥{{low_price*num-amount}}</text>  -->
         </view>
-        <form report-submit="true" bindsubmit="formSubmit" class="formSubmit">
-            <button class="submit" formType="submit">支付定金</button>
+        <button class="submit" bindtap='submitDingdan' style='border-radius:0'>支付定金</button>
+    </view>
+</view>
+<view class='bg' wx:if="{{zindex}}" >
+    <view class='zindex'>
+      <image src="../images/closea.png" mode='widthFix' bindtap='closeIndex'></image>
+      <view class='recharge'>支付</view>
+      <picker bindchange="bindPickerChange" value="{{Array[index]}}" range="{{Array}}">
+        <view class="picker">
+          支付方式：{{Array[index]}}
+        </view>
+      </picker>
+      <form report-submit="true" bindsubmit="formSubmit" class="formSubmit">
+            <button class="submit" formType="submit">下一步</button>
         </form>
-        <!-- <view class="submit">提交订单</view> -->
     </view>
 </view>

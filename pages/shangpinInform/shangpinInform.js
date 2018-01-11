@@ -11,6 +11,7 @@ Page(Object.assign({}, Zan.Toast, {
     goods_list:'',
     status1:'',
     countDown_tatic: false,
+    twoStage:false, //是否是定金
     Countdown: [{
       day: "",
       hr: "",
@@ -24,7 +25,8 @@ Page(Object.assign({}, Zan.Toast, {
     var that = this;
     that.setData({
       oid: options.oid,
-      status1: options.status1
+      status1: options.status1,
+      Allprice: options.price
     })
   },
   onShow: function () {
@@ -35,7 +37,7 @@ Page(Object.assign({}, Zan.Toast, {
     var that = this;
     // 详情
     wx.request({
-      url: app.data.apiUrl+"/api/order-detail?sign=" + sign,
+      url: app.data.apiUrl2+"/api/order-detail?sign=" + sign,
       data: {
         oid: that.data.oid
       },
@@ -55,6 +57,16 @@ Page(Object.assign({}, Zan.Toast, {
           goods_list: list.goods_list,
           expenses: list.expenses
         })
+        console.log(list);
+        console.log(that.data.Allprice);
+        console.log(list.goods_list[0].price)
+        console.log(that.data.Allprice == list.goods_list[0].price)
+        if (that.data.Allprice != list.goods_list[0].price) {
+          console.log(1111)
+          that.setData({
+            twoStage: true
+          })
+        }
         //倒计时
         var xiaTime = list.order_time_unix;//下单时间
         var begin_time = parseInt(xiaTime) + 1800; //超时时间

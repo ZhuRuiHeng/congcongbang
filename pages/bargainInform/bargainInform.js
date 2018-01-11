@@ -98,7 +98,7 @@ Page({
         },
         method: "GET",
         success: function (res) {
-          console.log("获取砍价最低价", res);
+          console.log("获取砍到的价格", res);
           let status = res.data.status;
           if (status == 1) {
             that.setData({

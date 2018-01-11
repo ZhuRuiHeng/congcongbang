@@ -9,7 +9,7 @@
           </swiper-item>
         </block>
     </swiper>
-     <view class='titleUser'>
+    <!-- <view class='titleUser'>
         <view class="{{state == 0?'red':'default'}}" bindtap="tapKeyWorld" 
               data-ontap="hot" data-cate="0" data-state = "0">已参与用户</view>
         <view class="{{state == 1?'red':'default'}}" bindtap="tapKeyWorld" 
@@ -17,7 +17,7 @@
     </view>
     <view class='content'>
         <view class='icon' wx:for="{{joinUsre}}" wx:key="{{index}}"><image src="{{item.icon}}" mode='aspectFill'></image></view>
-    </view> 
+    </view>  -->
     <view class='title'>本月任务</view>
     <view class='navbar'>
         <!-- <picker bindchange="bindPickerChange" value="{{index}}" range="{{monethList}}" range-key="{{'moneth'}}">

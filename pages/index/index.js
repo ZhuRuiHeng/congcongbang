@@ -613,62 +613,6 @@ onShow: function () {
           }
         }
       })
-      // old砍价
-      wx.request({
-        url: app.data.apiUrl1 + "bargain/goods-detail?sign=" + sign + '&operator_id=' + app.data.kid,
-        header: {
-          'content-type': 'application/json'
-        },
-        method: "GET",
-        success: function (res) {
-          let status = res.data.status;
-          if (status == 1) {
-            console.log("商品详情", res.data.data);
-            let goods_desc = res.data.data.goods_desc;
-            wx.setStorageSync('goods_desc', goods_desc);
-            wx.setStorageSync('rules', res.data.data.rules);
-            that.setData({
-              informAll: res.data.data,
-              goods_thumb: res.data.data.goods_thumb,
-              goods_desc: goods_desc,
-              already_bargain: res.data.data.already_bargain,
-              stock: res.data.data.total_count - res.data.data.sale_count
-            })
-            if (res.data.data.total_count - res.data.data.sale_count < 1) { //如果库存为0
-              that.setData({
-                activity: false
-              })
-            }
-          } else {
-            console.log(res, '失败')
-            //tips.alert(res.data.msg);
-          }
-          wx.hideLoading()
-        }
-      })
-      // new砍价
-      wx.request({
-        url: app.data.apiUrl + '/bargain/bargain-list?sign=' + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
-        header: {
-          'content-type': 'application/json'
-        },
-        method: "GET",
-        success: function (res) {
-          console.log("砍价列表", res);
-          let status = res.data.status;
-          if (status==1){
-            that.setData({
-              bargainList: res.data.data.goodsList
-            })
-          }else{
-            that.setData({
-              bargainList: false
-            })
-          }
-          
-          wx.hideLoading()
-        }
-      });
       wx.request({
           url: app.data.apiUrl+'/api/carousel-goods?sign=' + sign ,
           header: {

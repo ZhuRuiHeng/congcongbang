@@ -218,7 +218,7 @@ Page(Object.assign({}, Zan.Toast, {
 
         //carts.splice(index, 1);重新请求接口
           wx.request({
-            url: app.data.apiUrl+'/api/get-carts?sign=' + sign ,
+            url: app.data.apiUrl2+'/api/get-carts?sign=' + sign ,
             method: "GET",
             success: function (res) {
               console.log('购物车：',res);
@@ -360,7 +360,7 @@ Page(Object.assign({}, Zan.Toast, {
         icon: 'loading'
       })
       wx.request({
-        url: app.data.apiUrl+'/api/get-carts?sign=' + sign ,
+        url: app.data.apiUrl2+'/api/get-carts?sign=' + sign ,
         method: "GET",
         success: function (res) {
           console.log('购物车：',res);

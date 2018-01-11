@@ -275,7 +275,6 @@ Page(Object.assign({}, Zan.Toast, {
         var list = [];
         // 获取用户名称及发表时间
         var inform = res.data.data.goodsDetail;
-        console.log("商品详情：", inform.content);
         //infoem.attribute
         that.setData({
           addbuy: true,

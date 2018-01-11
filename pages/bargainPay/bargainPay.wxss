@@ -191,12 +191,12 @@
   border:none;
 }
 .fixed{
-  border-top: 1px solid #ddd;
+  width: 100%;
   position: fixed;
-  right:0;
+  display: flex;
+  left:0;
   bottom:0;
   background: #fff;
-  overflow: hidden;
 }
 .heji{
   flex: 2;
@@ -211,7 +211,7 @@
 }
 .submit{
   flex:1;
-  background: #ff4444; 
+   background: #ff4444; 
   color:#fff;
   text-align: center;
 }
@@ -228,12 +228,11 @@
 }
 .bg{
     width: 100%;
-    height: inherit;
-    background: #000;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
     position: fixed;
     bottom: 0;
     left: 0;
-    opacity: 0.6;
     z-index: 6;
     overflow: hidden;
 }
@@ -401,22 +400,29 @@
   font-size:20rpx;
   color:#626262;
 }
-.formSubmit{
-   background:#ff4444; 
-   width: 122rpx;
-   height: 76rpx;
-   line-height: 76rpx;
-}
 .formSubmit button:after{
     content:none;
 }
+.formSubmit{
+  margin: 0 auto;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
 .formSubmit button{
   font-size:24rpx;
-  border-radius: 0;
+  border-radius: 10rpx;
   display: inline-block;
   position: static;
   line-height: inherit;
   overflow: inherit;
+  width: 90%;
+  background:#51a938;
+  padding: 20rpx;
+}
+picker{
+  margin: 40rpx 0;
+  padding: 20rpx 0;
 }
 .coupon .li{
   display: flex;
@@ -650,17 +656,6 @@ switch{transform:scale(.8)}
 /*型号弹窗  */
 .show{display:block;}
 .hidden{display:none;}
-.bg{
-    width: 100%;
-    height: inherit;
-    background: #000;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    opacity: 0.6;
-    z-index: 6;
-    overflow: hidden;
-}
 .carBox{
     width: 100%;
     background: #fff;
@@ -811,4 +806,54 @@ switch{transform:scale(.8)}
     background: #ff4444;
     border-color:#ff4444;
     color:#fff;
+}
+.zindex{
+  width: 70%;
+  font-size: 28rpx;
+  background: #fff;
+  margin: 0 auto;
+  padding: 30rpx;
+  position: absolute;
+  border-radius: 20rpx;
+  z-index: 6;
+  top: 50%; 
+  left: 50%;  
+  -webkit-transform: translate(-50%,-50%);  
+  -ms-transform: translate(-50%,-50%);  
+  transform: translate(-50%,-50%);  
+}
+.zindex .recharge{
+  text-align: center;
+  padding:0 0 30rpx 0;
+  border-bottom: 1px solid #f7f7f7;
+}
+.input{
+  display:flex;
+  justify-content: flex-start;
+  margin: 30rpx;
+  padding:0 0 30rpx 0rpx;
+  box-sizing: border-box;
+  font-size: 36rpx;
+  font-weight: bold;
+  border-bottom: 1px solid #f7f7f7;
+}
+.button.next{
+  height:36px;
+  line-height:36px;
+  width: 80%;
+  margin: 60rpx auto 30rpx;
+}
+.zindex image{
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  top: 20rpx;
+  right: 20rpx;
+  cursor: pointer;
+}
+button{
+  font-size:24rpx;
+  display: inline-block;
+  position: static;
+  width: 200rpx;
 }

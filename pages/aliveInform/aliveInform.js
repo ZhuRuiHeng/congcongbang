@@ -14,7 +14,22 @@ Page(Object.assign({}, Zan.Toast, {
     detail:'',
     addCar:false,
     amount:"",
-    inform:[]
+    inform: [], Array: ['钱包支付', '返现支付', '积分支付'],
+    objectArray: [
+      {
+        id: 'wallet',
+        name: '钱包余额'
+      }, {
+        id: 'pet_money',
+        name: '返现余额'
+      }, {
+        id: 'point',
+        name: '积分余额'
+      }
+    ],
+    pay_type: 'wallet',
+    index: 0,
+    zindex: false
   },
   onLoad: function (options) {
     console.log('options:', options);
@@ -94,17 +109,52 @@ Page(Object.assign({}, Zan.Toast, {
       }
     })
     //优惠券
-    wx.request({
-      url: app.data.apiUrl+'/api/useable-coupon?sign=' + sign ,
-      data:{
-        amount: that.data.low_price //商品价格
-      },
-      success: function (res) {
-        console.log("优惠券", res.data.data.useableCoupons);
-        that.setData({
-          useableCoupons: res.data.data.useableCoupons
-        })
-      }
+    // wx.request({
+    //   url: app.data.apiUrl+'/api/useable-coupon?sign=' + sign ,
+    //   data:{
+    //     amount: that.data.low_price //商品价格
+    //   },
+    //   success: function (res) {
+    //     console.log("优惠券", res.data.data.useableCoupons);
+    //     that.setData({
+    //       useableCoupons: res.data.data.useableCoupons
+    //     })
+    //   }
+    // })
+  },
+  // 提交订单
+  submitDingdan() {
+    this.setData({
+      zindex: true
+    })
+  },
+  // 支付方式
+  bindPickerChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value);
+    let index = this.data.index;
+    this.setData({
+      index: e.detail.value
+    })
+    if (e.detail.value == 0) {
+      this.setData({
+        pay_type: 'wallet'
+      })
+    } else if (e.detail.value == 1) {
+      this.setData({
+        pay_type: 'pet_money'
+      })
+    } else if (e.detail.value == 2) {
+      this.setData({
+        pay_type: 'point'
+      })
+    }
+    console.log('index:', index);
+    console.log('pay_type:', this.data.pay_type);
+  },
+  // 关闭
+  closeIndex() {
+    this.setData({
+      zindex: false
     })
   },
   radioChange: function (e) {
@@ -179,12 +229,6 @@ Page(Object.assign({}, Zan.Toast, {
       addCar: true
     })
   },
-  close:function(){
-    var that = this;
-    that.setData({
-      addCar: false
-    })
-  },
   queren:function(){
     var that = this;
     var rid = that.data.rid;
@@ -205,7 +249,10 @@ Page(Object.assign({}, Zan.Toast, {
     var that = this;
     var dizhi = that.data.dizhi;
     var sharer_id = wx.getStorageSync('sharer_id');
-    console.log("sharer_id:", sharer_id);
+    var formId = e.detail.formId;
+    that.setData({
+      zindex: false
+    })
     if (!sharer_id) {
       sharer_id = 0;
     }
@@ -218,57 +265,116 @@ Page(Object.assign({}, Zan.Toast, {
     }
     if (dizhi.length == 0){
         that.showZanToast('请选择收货地址');
-    }else{
+    } else {
       wx.request({
-        url: app.data.apiUrl + '/api/create-order?sign=' + wx.getStorageSync('sign') + '&type=' + that.data.type + '&rid=' + that.data.rid ,
-        data: {
-          form_id: e.detail.formId,
-          receiver: that.data.dizhi.userName,
-          message: that.data.userMes,//留言
-          receiver_address: that.data.dizhi.provinceName + that.data.dizhi.cityName + that.data.dizhi.countyName + that.data.dizhi.detailInfo,
-          receiver_phone: that.data.dizhi.telNumber, //18749830459,//, 
-          detail: that.data.detail,
-          sharer_id: sharer_id
+        url: app.data.apiUrl2 + "/bargain/my-wallet?sign=" + sign,
+        header: {
+          'content-type': 'application/json'
         },
-        //detail:"gid -   attribute   - number"
-        //detail:" 1  -  1:2,2:4,3:6  - 1"
-        method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-        // header: {}, // 设置请求的 header
+        method: "GET",
         success: function (res) {
-          // success
-         // console.log(res);
-          var status = res.data.status;
+          let status = res.data.status;
           if (status == 1) {
-            // 调用支付
-            wx.requestPayment({
-              timeStamp: res.data.data.timeStamp,
-              nonceStr: res.data.data.nonceStr,
-              package: res.data.data.package,
-              signType: res.data.data.signType,
-              paySign: res.data.data.paySign,
-              'success': function (res) {
-                setTimeout(function () {
-                  // 支付成功跳转
-                  wx.navigateTo({
-                    url: '../dingdan/dingdan?status='
+            console.log("余额", res.data.data);
+            let walletNow = res.data.data.wallet;   //钱包余额1
+            let pet_moneyNow = res.data.data.pet_money;//返现余额2
+            let pointNow = res.data.data.point;    //积分余额3
+            let totalPrice = that.data.totalPrice;   //商品价格
+            let expenses = that.data.expenses;    //运费
+            let payment = totalPrice * 1 + expenses;//总支付金额
+            // 支付方法
+            function allPayment(pay_type) {
+              wx.request({
+                url: app.data.apiUrl2 + '/api/create-order?sign=' + wx.getStorageSync('sign'),
+                data: {
+                  form_id: formId,
+                  receiver: that.data.dizhi.userName,
+                  message: that.data.userMes,//留言
+                  receiver_address: that.data.dizhi.provinceName + that.data.dizhi.cityName + that.data.dizhi.countyName + that.data.dizhi.detailInfo,
+                  receiver_phone: that.data.dizhi.telNumber, //'18749830459'
+                  detail: that.data.detail, //detail:"gid -   attribute   - number"
+                  sharer_id: sharer_id,
+                  pay_type: pay_type //1wallet钱包 2pet_money返现账户支付 3point积分账户 多种支付使用, 分隔 缺少时单独使用移动支付 
+                },
+                method: 'POST',
+                success: function (res) {
+                  console.log(res);
+                  var status = res.data.status;
+                  if (status == 1) {
+                    wx.requestPayment({
+                      timeStamp: res.data.data.timeStamp,
+                      nonceStr: res.data.data.nonceStr,
+                      package: res.data.data.package,
+                      signType: res.data.data.signType,
+                      paySign: res.data.data.paySign,
+                      success: function (res) {
+                        let status = res.data.data.status;
+                        if (status == 1) {
+                          that.showZanToast('支付成功！');
+                          setTimeout(function () {
+                            that.setData({
+                              gouwu: []
+                            })
+                            console.log('gouwulast', that.data.gouwu);
+                            // 支付成功跳转
+                            wx.navigateTo({
+                              url: '../dingdan/dingdan?status='
+                            })
+                          }, 10)
+                        } else {
+                          console.log(res.data.data.msg)
+                          that.showZanToast('支付失败！');
+                        }
+                      },
+                      fail: function (res) {
+                        that.showZanToast('您取消了支付！');
+                      }
+                    })
+                  } else {
+                    that.showZanToast(res.data.msg);
+                  }
+                  that.setData({
+                    // gouwu: []
                   })
-                }, 300)
-              },
-              'fail': function (res) {
+                },
+                fail: function (res) {
+                  console.log(res)
+                },
+              })
+            }
+            // 模式1 模式2 模式3 模式1+2 模式1+3
+            //（1）返现账户和积分账户不能相互抵用
+            //（2）返现账户余额不足仅可调用充值账户
+            //（3）积分账户余额不足仅可调用充值账户
+            console.log("payment:", payment);
+            if (that.data.pay_type == 'wallet') { //模式1
+              console.log('模式' + 1);
+              if (walletNow < payment) {
+                allPayment('wallet,pet_money');
+              } else {
+                allPayment('wallet');
               }
-            })
+            } else if (that.data.pay_type == 'pet_money') { //模式2
+              console.log('模式' + 2);
+              if (pet_moneyNow < payment) {
+                allPayment('pet_money,wallet');
+              } else {
+                allPayment('pet_money');
+              }
+            } else if (that.data.pay_type == 'point') { //模式3
+              console.log('模式' + 3);
+              if (pointNow < payment) {
+                allPayment('point,wallet');
+              } else {
+                allPayment('point');
+              }
+            }
           } else {
-            var msg = res.data.msg;
-            that.showZanToast(msg);
+            tips.alert(res.data.msg);
           }
-        },
-        fail: function (res) {
-          // fail
-        },
-        complete: function () {
-          
         }
       })
+
     }
     
   },

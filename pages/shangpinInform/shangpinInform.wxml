@@ -78,10 +78,6 @@
             <input class="liuyan" name="userMes" type="text" placeholder="" value="{{list.message}}" disabled/>
         </view>
     </view>
-     <view class="controllist">
-        <view class="left">合计</view>
-        <view class="right color">￥{{list.total_fee}}</view>
-    </view> 
     <!-- <view class="controllist youhui top">
         <view class="left">优惠</view>
         <view class="right">优惠￥5</view>
@@ -89,6 +85,12 @@
     <view class="jine top" style="margin-bottom:120rpx;">
        <view class="controllist ">
           <view class="left">商品金额</view>
+          <view class="right color" wx:if="{{twoStage}}">￥{{Allprice}}</view>
+          <view class="right color" wx:else>￥{{list.total_fee}}</view>
+      </view>
+      <!--twoStage  -->
+      <view class="controllist " wx:if="{{twoStage}}">
+          <view class="left">商品定金</view>
           <view class="right color">￥{{list.total_fee}}</view>
       </view>
       <view class="controllist">
@@ -99,7 +101,8 @@
     
     <!--foot  -->
     <view class="fixed">
-        <view class="heji">合计：<text>￥{{(list.total_fee)*1 + expenses*1}}</text> </view>
+        <view class="heji" wx:if="{{twoStage}}">定金：<text>￥{{list.amount}}</text> </view>
+        <view class="heji" wx:else>合计：<text>￥{{list.amount}}</text> </view>
         <!--如果status1=待支付就显示去支付  -->
         <form wx:if="{{status1 == 'payment'}}" report-submit="true" bindsubmit="formSubmit" class="formSubmit">
             <button class="submit" formType="submit">去支付</button>

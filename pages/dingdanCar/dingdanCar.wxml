@@ -78,7 +78,7 @@
     <view class="fixed">
         <view class="heji">合计：<text>￥{{totalPrice*1 + expenses}}</text> </view>
         <button class="submit" bindtap='submitDingdan' style='border-radius:0'>提交订单</button>
-        <!-- <view class="submit">提交订单</view> -->
+        <!-- <view class="submit">提交订单 </view> -->
     </view>
 </view>
 <view class='bg' wx:if="{{zindex}}" >

@@ -44,9 +44,9 @@
                 </view>
                 <view class="service-text">
                     <view class="service-tite">{{inform.good_name}}</view>
-                    <view class="fenlei"> {{types}}</view>
+                    <view class="fenlei"> 砍价商品</view>
                     <view class="caozuo">
-                        <text class="">砍价商品</text>
+                        <text class="service-price">￥{{bargain_price}}</text>
                         <view class="service-gouwu">x1</view>
                     </view>
                 </view>
@@ -70,14 +70,6 @@
     <!-- <view class="controllist youhui top" bindtap="coupon" wx:if="{{type == 0}}">
         <view class="left">优惠</view>
         <view class="right">使用优惠卷￥{{amount}}<image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"></image></view>
-    </view> -->
-    <!-- <view class="controllist top" style="padding:10rpx 20rpx;">
-        <view class="left" style="position:relative;top:13rpx;">短信通知收件人</view>
-        <view class="right">
-            <view class="page-section page-section-gap">
-              <switch name="switch" bindchange="listenerSwitch" />
-            </view>
-        </view>
     </view> -->
     <view class="jine top">
        <!-- <view class="controllist ">
@@ -133,13 +125,28 @@
             </view>
         </view>
     <!--foot  -->
-    <view class="fixed">
-        <!-- <view class="heji">合计：<text>￥{{low_price*num}}</text>
-         <text><text style="color:#000;">优惠券:</text >￥{{amount}}</text>实付：<text>￥{{low_price*num-amount}}</text>  
-         </view> -->
+    <!-- <view class="fixed">
         <form report-submit="true" bindsubmit="formSubmit" class="formSubmit">
-            <button class="submit" formType="submit">提交订单</button>
+            <button class="submit" bindtap='submitDingdan' style='border-radius:0'>提交订单</button>
         </form>
+    </view> -->
+     <view class="fixed">
+        <view class="heji">合计：<text>￥{{bargain_price*1 + expenses*1}}</text> </view>
+        <button class="submit" bindtap='submitDingdan' style='border-radius:0'>提交订单</button>
         <!-- <view class="submit">提交订单</view> -->
+    </view>
+</view>
+<view class='bg' wx:if="{{zindex}}" >
+    <view class='zindex'>
+      <image src="../images/closea.png" mode='widthFix' bindtap='closezindex'></image>
+      <view class='recharge'>支付</view>
+      <picker bindchange="bindPickerChange" value="{{Array[index]}}" range="{{Array}}">
+        <view class="picker">
+          支付方式：{{Array[index]}}
+        </view>
+      </picker>
+      <form report-submit="true" bindsubmit="formSubmit" class="formSubmit">
+            <button class="submit" formType="submit">下一步</button>
+        </form>
     </view>
 </view>

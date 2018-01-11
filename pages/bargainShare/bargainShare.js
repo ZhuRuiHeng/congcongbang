@@ -135,9 +135,9 @@ Page({
   help(){
     let that = this;
     let sign = wx.getStorageSync('sign');
-    console.log("帮砍价：",app.data.apiUrl + "/bargain/bargain?sign=" + sign + '&operator_id=' + app.data.kid);
+    console.log("帮砍价：",app.data.apiUrl2 + "/bargain/bargain?sign=" + sign + '&operator_id=' + app.data.kid);
     wx.request({
-      url: app.data.apiUrl + "/bargain/bargain?sign=" + sign + '&operator_id=' + app.data.kid,
+      url: app.data.apiUrl2 + "/bargain/bargain?sign=" + sign + '&operator_id=' + app.data.kid,
       data: {
         bargain_id: that.data.bargain_id
       },

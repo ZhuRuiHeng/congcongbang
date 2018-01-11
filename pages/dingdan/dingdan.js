@@ -66,7 +66,7 @@ onShow: function () {
     })
   console.log("cate_id", that.data.cate_id);
   wx.request({
-    url: app.data.apiUrl+'/api/order-list?sign=' + sign,
+    url: app.data.apiUrl2+'/api/order-list?sign=' + sign,
     data:{
       status: that.data.status
     },
@@ -100,7 +100,7 @@ onReachBottom: function () {
   var reqPage = oldPage + 1;
   console.log('reqPage:', reqPage);
   wx.request({
-    url: app.data.apiUrl + "/api/order-list?sign=" + wx.getStorageSync('sign'),
+    url: app.data.apiUrl2 + "/api/order-list?sign=" + wx.getStorageSync('sign'),
     data: {
       page: reqPage,
       status: that.data.status
@@ -145,7 +145,7 @@ tapKeyWorld: function (e) {
   })
   setTimeout(function () {
     wx.request({
-      url: app.data.apiUrl + "/api/order-list?sign=" + wx.getStorageSync('sign'),
+      url: app.data.apiUrl2 + "/api/order-list?sign=" + wx.getStorageSync('sign'),
       data: {
         status: that.data.status
       },
@@ -214,7 +214,7 @@ shouhuo: function (event) {
                     if (status == 1){
                       that.showZanToast('确认收货成功');
                       wx.request({
-                        url: app.data.apiUrl + "/api/order-list?sign=" + wx.getStorageSync('sign'),
+                        url: app.data.apiUrl2 + "/api/order-list?sign=" + wx.getStorageSync('sign'),
                           data: {
                             status: that.data.status
                           },

@@ -2,7 +2,7 @@ var common = require('../../common.js');
 const paymentUrl = require('../../config').paymentUrl;
 var app = getApp();
 var sign = wx.getStorageSync('sign');
-var Zan = require('../../dist/index');
+var Zan = require('../../dist/index'); 
 Page(Object.assign({}, Zan.Toast, {
   data: {
     userMes : '',
@@ -215,12 +215,12 @@ Page(Object.assign({}, Zan.Toast, {
   //提交订单
   formSubmit: function (e) {
     var sign = wx.getStorageSync('sign');
-    var that = this;
+    let that = this;
     var dizhi = that.data.dizhi;
     var sharer_id = wx.getStorageSync('sharer_id');
     var formId = e.detail.formId;
     that.setData({
-        zindex:false
+      zindex: false
     })
     if (!sharer_id){
       sharer_id = 0;
@@ -293,14 +293,6 @@ Page(Object.assign({}, Zan.Toast, {
                         that.showZanToast('您取消了支付！');
                       }
                     })
-                    // 重置属性
-                    that.setData({
-                      attr: "",//属性
-                      types: "", //类型
-                      userMes: '',//留言信息
-                      num: '', //数量
-                      detail: ''
-                    })
                   } else {
                     that.showZanToast(res.data.msg);
                   }
@@ -341,7 +333,7 @@ Page(Object.assign({}, Zan.Toast, {
               }
             }
           } else {
-            //tips.alert(res.data.msg);
+            tips.alert(res.data.msg);
           }
         }
       })
