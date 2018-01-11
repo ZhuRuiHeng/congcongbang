@@ -137,7 +137,7 @@ Page(Object.assign({}, Zan.Toast, {
     let formId = e.detail.formId;
     console.log("oid", that.data.oid)
     wx.request({
-      url: app.data.apiUrl + '/api/order-payment?sign=' + wx.getStorageSync('sign') ,
+      url: app.data.apiUrl2 + '/api/order-payment?sign=' + wx.getStorageSync('sign') ,
       data: {
         oid: that.data.oid,
         form_id: formId
@@ -170,7 +170,7 @@ Page(Object.assign({}, Zan.Toast, {
             oid : ''
           })
         } else {
-          that.showZanToast('创建订单失败');
+          that.showZanToast(res.data.msg);
         }
       },
       fail: function (res) {

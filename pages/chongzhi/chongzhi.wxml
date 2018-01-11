@@ -33,7 +33,6 @@
 </view>
 <view class='buttons'>
     <view class='button ' bindtap='zindex'>钱包充值</view> 
-    <view class='button' bindtap='cash' style='background:#fff;color:#000;'>提现</view>
 </view>
 <view class='bg' wx:if="{{zindex}}">
     <view class='zindex'>

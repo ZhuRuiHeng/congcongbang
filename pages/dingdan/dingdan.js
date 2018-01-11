@@ -183,6 +183,41 @@ pintuan: function (event) {
       url: '../pintuanxiangqing/pintuanxiangqing?gbid=' + that.data.gbid + '&gid=' + that.data.gid
     })   
 },
+// cancel未支付订单可取消订单
+  cancel(e){
+    console.log(e);
+    let that = this;
+    let oid = e.currentTarget.dataset.oid;
+    let delindex = e.currentTarget.dataset.delindex;
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading'
+    })
+    wx.request({
+      url: app.data.apiUrl2 + "/api/cancel-order?sign=" + wx.getStorageSync('sign'),
+      data: {
+        oid: oid
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (res) {
+        let status = res.data.status;
+        if (status == 1){
+          that.showZanToast('取消订单成功');
+          let main_content = that.data.main_content;
+          main_content.splice(delindex, 1)
+          that.setData({
+            main_content
+          })
+        }else{
+          that.showZanToast(res.data.msg);
+        }
+        wx.hideLoading()
+      }
+    })
+  },
   //取消订单
 shouhuo: function (event) {
     var that = this;

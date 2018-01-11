@@ -17,7 +17,7 @@
               url="../shangpinInform/shangpinInform?oid={{item.order_id}}&status1={{item.status}}&gbid={{item.gbid}}&price={{item.price}}">
                     <view class="diangdanNum">
                         <view class="left">
-                            <!-- <view class="shop">韵达快递：<text>3958421035420</text></view>  -->
+                             <!-- <view class="shop">韵达快递：<text>3958421035420</text></view>   -->
                             <view class="bianhao">订单编号：<text>{{item.out_trade_no}}</text></view>
                         </view>
                         <!-- <view class="right"  wx:if="{{item.status == ''}}"> 全部{{len}}</view> -->
@@ -67,7 +67,8 @@
                         </view>
                     </view>
                     <view class="button" wx:if="{{item.status == 'payment'}}">
-                        <button>确认付款</button>
+                        <button>确认付款</button> 
+                        <button catchtap='cancel' data-oid='{{item.order_id}}' data-delindex='{{index}}'>取消订单</button>
                     </view>
                     <view class="button" wx:if="{{item.status == 'deliver'}}">
                     </view>
@@ -75,18 +76,6 @@
                         <button catchtap="shouhuo" id="{{item.order_id}}">确认收货</button>
                     </view>
                     <view class="button"  wx:if="{{item.status == 'finish'}}">
-                    </view>
-                    <view wx:if="{{item.order_status == 'ok'}}">
-                        <view wx:if="{{item.type == 1}}"> 
-                            <view class="button" wx:if="{{item.success_time == 0 && item.group_expire > nowTime}}">
-                                <view id="{{item.order_id}}">
-                                    <button style="background:#ff4444;color:#fff;"  data-gbid="{{item.gbid}}" data-gid="{{item.order_id}}" id="{{item.order_id}}" catchtap="pintuan">邀请参团</button>
-                                </view>
-                            </view>
-                            <view class="button" wx:else id="{{item.order_id}}">
-                                <button class="" data-gbid="{{item.gbid}}" data-gid="{{item.order_id}}" id="{{item.order_id}}" catchtap="pintuan">拼团详情</button>
-                            </view>
-                        </view>
                     </view>
                     <view class="button" wx:else></view>
                 </navigator>

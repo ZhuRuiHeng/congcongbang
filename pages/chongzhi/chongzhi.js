@@ -106,11 +106,6 @@ Page(Object.assign({}, Zan.Toast, {
       }
     })
   },
-  //提现cash
-  cash(){
-    let that = this;
-    that.showZanToast('暂未开通，敬请期待！');
-  },
   // 关闭
   close(){
     this.setData({

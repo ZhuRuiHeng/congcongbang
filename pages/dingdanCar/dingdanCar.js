@@ -274,6 +274,20 @@ Page(Object.assign({}, Zan.Toast, {
                         let status = res.data.data.status;
                         if (status==1){
                           that.showZanToast('支付成功！');
+                          // 保存formid成功
+                          wx.request({
+                            url: app.data.apiUrl + "/api/save-form?sign=" + wx.getStorageSync('sign'),
+                            data: {
+                              form_id: formId
+                            },
+                            header: {
+                              'content-type': 'application/json'
+                            },
+                            method: "GET",
+                            success: function (res) {
+                              console.log('保存formid成功');
+                            }
+                          })
                           setTimeout(function () {
                             that.setData({
                               gouwu: []
