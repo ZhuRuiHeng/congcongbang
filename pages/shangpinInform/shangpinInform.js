@@ -175,7 +175,36 @@ Page(Object.assign({}, Zan.Toast, {
             nonceStr: res.data.data.nonceStr,
             package: res.data.data.package,
             signType: res.data.data.signType,
-            paySign: res.data.data.paySign
+            paySign: res.data.data.paySign,
+            success: function (res) {
+              let status = res.data.data.status;
+              if (status == 1) {
+                that.showZanToast('支付成功！');
+                // 保存formid
+                wx.request({
+                  url: app.data.apiUrl + "/api/save-form?sign=" + wx.getStorageSync('sign'),
+                  data: {
+                    form_id: formId
+                  },
+                  header: {
+                    'content-type': 'application/json'
+                  },
+                  method: "GET",
+                  success: function (res) {
+                    console.log('保存formid成功');
+                  }
+                })
+                setTimeout(function () {
+                  // 支付成功跳转
+                  wx.navigateTo({
+                    url: '../dingdan/dingdan?status='
+                  })
+                }, 10)
+              } else {
+                console.log(res.data.data.msg)
+                that.showZanToast('支付失败！');
+              }
+            },
           })
           // 重置属性
           that.setData({

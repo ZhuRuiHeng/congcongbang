@@ -32,13 +32,15 @@
     </view>
 </view>
 <view class='buttons'>
-    <view class='button ' bindtap='zindex'>钱包充值</view> 
+    <view class='button ' bindtap='zindex' style='background-color: #51a938;'>钱包充值</view> 
 </view>
 <view class='bg' wx:if="{{zindex}}">
     <view class='zindex'>
       <image src="../images/closea.png" mode='widthFix' bindtap='close'></image>
       <view class='recharge'>充值</view>
       <view class='input'> ￥<input type="digit"  bindinput="bindKeyInput" auto-focus></input></view>
-      <view bindtap='recharge' class='button next'>下一步</view>
+      <form report-submit="true" bindsubmit="recharge" class="formSubmit button next">
+            <button class="submit" formType="submit">下一步</button>
+      </form>
     </view>
 </view>

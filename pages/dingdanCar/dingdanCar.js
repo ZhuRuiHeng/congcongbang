@@ -238,7 +238,7 @@ Page(Object.assign({}, Zan.Toast, {
         success: function (res) {
           let status = res.data.status;
           if (status == 1) {
-            console.log("余额", res.data.data);
+            console.log("余额 ", res.data.data);
             let walletNow     =  res.data.data.wallet;   //钱包余额1
             let pet_moneyNow  =  res.data.data.pet_money;//返现余额2
             let pointNow      =  res.data.data.point;    //积分余额3
@@ -264,51 +264,74 @@ Page(Object.assign({}, Zan.Toast, {
                   console.log(res);
                   var status = res.data.status;
                   if (status == 1) {
-                    wx.requestPayment({
-                      timeStamp: res.data.data.timeStamp,
-                      nonceStr: res.data.data.nonceStr,
-                      package: res.data.data.package,
-                      signType: res.data.data.signType,
-                      paySign: res.data.data.paySign,
-                      success: function (res) {
-                        let status = res.data.data.status;
-                        if (status==1){
-                          that.showZanToast('支付成功！');
-                          // 保存formid成功
-                          wx.request({
-                            url: app.data.apiUrl + "/api/save-form?sign=" + wx.getStorageSync('sign'),
-                            data: {
-                              form_id: formId
-                            },
-                            header: {
-                              'content-type': 'application/json'
-                            },
-                            method: "GET",
-                            success: function (res) {
-                              console.log('保存formid成功');
-                            }
-                          })
-                          setTimeout(function () {
-                            that.setData({
-                              gouwu: []
-                            })
-                            console.log('gouwulast', that.data.gouwu);
-                            // 支付成功跳转
-                            wx.navigateTo({
-                              url: '../dingdan/dingdan?status='
-                            })
-                          }, 10)
-                        }else{
-                          console.log(res.data.data.msg)
-                          that.showZanToast('支付失败！');
+                    if (!res.data.data.timeStamp){
+                      that.showZanToast('支付成功！');
+                      // 保存formid
+                      wx.request({
+                        url: app.data.apiUrl + "/api/save-form?sign=" + wx.getStorageSync('sign'),
+                        data: {
+                          form_id: formId
+                        },
+                        header: {
+                          'content-type': 'application/json'
+                        },
+                        method: "GET",
+                        success: function (res) {
+                          console.log('保存formid成功');
                         }
-                      },
-                      fail: function (res) {
-                        that.showZanToast('您取消了支付！');
-                      }
-                    })
+                      })
+                      // 支付成功跳转
+                      wx.navigateTo({
+                        url: '../dingdan/dingdan?status='
+                      })
+                    }else{
+                      wx.requestPayment({
+                        timeStamp: res.data.data.timeStamp,
+                        nonceStr: res.data.data.nonceStr,
+                        package: res.data.data.package,
+                        signType: res.data.data.signType,
+                        paySign: res.data.data.paySign,
+                        success: function (res) {
+                          let status = res.data.data.status;
+                          if (status == 1) {
+                            that.showZanToast('支付成功！');
+                            // 保存formid
+                            wx.request({
+                              url: app.data.apiUrl + "/api/save-form?sign=" + wx.getStorageSync('sign'),
+                              data: {
+                                form_id: formId
+                              },
+                              header: {
+                                'content-type': 'application/json'
+                              },
+                              method: "GET",
+                              success: function (res) {
+                                console.log('保存formid成功');
+                              }
+                            })
+                            setTimeout(function () {
+                              that.setData({
+                                gouwu: []
+                              })
+                              console.log('gouwulast', that.data.gouwu);
+                              // 支付成功跳转
+                              wx.navigateTo({
+                                url: '../dingdan/dingdan?status='
+                              })
+                            }, 10)
+                          } else {
+                            console.log(res.data.data.msg)
+                            that.showZanToast('支付失败！');
+                          }
+                        },
+                        fail: function (res) {
+                          that.showZanToast('您取消了订单支付');
+                        }
+                      })
+                    }
                   } else {
                     that.showZanToast(res.data.msg);
+                    console.log(11111111)
                   }
                   that.setData({
                     // gouwu: []

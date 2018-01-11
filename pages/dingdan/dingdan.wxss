@@ -135,13 +135,8 @@ scroll-view{
 .button button{
     display: inline-block;
     font-size: 22rpx;
-    margin: 20rpx 20rpx;
+    margin: 20rpx 20rpx!important;
     background: #fff;
-}
-button{
-  padding: 0 8rpx!important;
-  box-sizing:initial;
-  margin: 0;
 }
 button::after{
     content: "";
@@ -194,4 +189,9 @@ navigator-hover{
   border-radius: 6rpx;
   font-size: 22rpx;
   margin-left: 10rpx;
+}
+button{
+  padding: 0 8rpx!important;
+  box-sizing:initial;
+  margin: 20rpx!important;
 }

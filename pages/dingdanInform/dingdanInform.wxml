@@ -127,6 +127,6 @@
       </picker>
       <form report-submit="true" bindsubmit="formSubmit" class="formSubmit">
             <button class="submit" formType="submit">下一步</button>
-        </form>
+      </form>
     </view>
 </view>

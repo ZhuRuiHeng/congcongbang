@@ -40,7 +40,9 @@ Page(Object.assign({}, Zan.Toast, {
     })
   },
   //充值
-  recharge(){
+  recharge(e){
+    console.log(e);
+    let form_id = e.detail.formId;
     let that = this;
     if (!that.data.money || that.data.money =='money:undefined'){
       that.showZanToast('请输入充值金额');
@@ -83,6 +85,20 @@ Page(Object.assign({}, Zan.Toast, {
                   if (status == 1) {
                     that.setData({
                       allMoney: res.data.data
+                    })
+                    // 保存formid
+                    wx.request({
+                      url: app.data.apiUrl + "/api/save-form?sign=" + wx.getStorageSync('sign'),
+                      data: {
+                        form_id: form_id
+                      },
+                      header: {
+                        'content-type': 'application/json'
+                      },
+                      method: "GET",
+                      success: function (res) {
+                        console.log('保存formid成功');
+                      }
                     })
                     that.showZanToast('充值成功！');
                   } else {

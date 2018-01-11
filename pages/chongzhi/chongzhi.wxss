@@ -27,7 +27,6 @@ page{
     width: 90%;
     height: 42px;
     margin:60rpx auto 30rpx;
-    background-color: #51a938;
     color: #fff;
     font-size: 15px;
     text-align: center;
@@ -95,9 +94,10 @@ page{
   border-bottom: 1px solid #f7f7f7;
 }
 .button.next{
+  display: block;
   height:36px;
   line-height:36px;
-  width: 80%;
+  width: 100%;
   margin: 60rpx auto 30rpx;
 }
 .zindex image{
@@ -163,4 +163,22 @@ page{
     width: 40rpx;
     height: 40rpx;
     vertical-align: middle;
+}
+.formSubmit button:after{
+    content:none;
+}
+.formSubmit{
+  text-align: center;
+}
+.formSubmit button{
+  font-size:24rpx;
+  border-radius: 10rpx;
+  display: block;
+  position: static;
+  line-height: inherit;
+  overflow: inherit;
+  width: 80%;
+  margin: 0 auto;
+  background:#51a938;
+  color: #fff;
 }
