@@ -19,7 +19,7 @@
                       <view class="service-gouwu goBainList" wx:else>去砍价</view>
                   </view>
                   <view id="gouwu{{item.gid}}" data-bargain_id='{{item.bargain_id}}' data-gid="{{item.gid}}" 
-                        class="buy-response" catchtap="addCar"></view>
+                        class="buy-response" catchtap="addCar" ></view>
               </view>
           </view>
     </view>
@@ -69,8 +69,10 @@
         </view>
         <view class="btn">
             <!-- <button class="addCar" bindtap="addCars">加入购物车</button> -->
-            <button class="buy" bindtap="buy" wx:if="{{kanjia}}" data-gid="{{item.gid}}">发起砍价</button> 
-            <button class="buy" bindtap="buy" wx:else data-gid="{{item.gid}}">发起砍价</button> 
+            <button class="buy" bindtap="buy" wx:if="{{kanjia}}" data-gid="{{item.gid}}" 
+                    data-is_alive="{{item.is_alive}}">发起砍价</button> 
+            <button class="buy"  wx:else data-gid="{{item.gid}}" data-is_alive="{{item.is_alive}}"
+                  data-is_alive="{{item.is_alive}}">发起砍价</button> 
         </view>
     </view>
 </view>

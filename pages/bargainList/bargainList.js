@@ -296,6 +296,12 @@ Page(Object.assign({}, Zan.Toast, {
   // 发起砍价立即购买
   buy: function (e) {
     var that = this;
+    let is_alive = e.currentTarget.dataset.is_alive;
+    console.log("is_alive：",is_alive);
+    if (is_alive==1){
+        that.showZanToast('活体不能砍价');
+        return;
+    }
     var attribute = "";
     var types = "";
     var arr = that.data.arr;
