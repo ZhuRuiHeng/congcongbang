@@ -9,12 +9,13 @@
             <image src="https://qncdn.playonwechat.com/shangcheng/pay.png" mode="widthFix"></image>
         </view>
         <view class="left2">
-            <text style="color:#000"  wx:if="{{list.status == 'payment'}}"> 等待买家付款</text>
-            <text style="color:#000"  wx:elif="{{list.status == 'deliver'}}"> 等待卖家发货</text>
-            <text style="color:#000"  wx:elif="{{list.status == 'receipt'}}"> 等待买家收货</text>
-            <text style="color:#000"  wx:elif="{{list.status == 'finish'}}"> 已完成</text>
-            <text style="color:#000"  wx:elif="{{list.status == 'group'}}"> 拼团中</text>
-            <text style="color:#000"  wx:else="{{list.status == 'close'}}"> 交易关闭</text>
+            <text style="color:#000"  wx:if="{{status1 == 'payment'}}"> 等待买家付款</text>
+            <text style="color:#000"  wx:if="{{status1 == 'deliver'}}"> 等待卖家发货</text>
+            <text style="color:#000"  wx:if="{{status1 == 'receipt'}}"> 等待买家收货</text>
+            <text style="color:#000"  wx:if="{{status1 == 'finish'}}"> 已完成</text>
+            <text style="color:#000"  wx:if="{{status1 == 'group'}}"> 拼团中</text>
+            <text style="color:#000"  wx:if="{{status1 == 'close'}}"> 交易关闭</text>
+            <text style="color:#000"  wx:if="{{status1 == 'paydeposit'}}"> 已付定金</text>
             <text wx:if="{{list.status !='payment'}}">订单编号：{{list.out_trade_no}}</text>
             <text wx:if="{{list.status == 'payment'}}" wx:key="{{index}}"
                   wx:for="{{Countdown}}">请于{{item.min}}分{{item.sec}}秒内付款，超时订单将自动关闭</text>
@@ -70,20 +71,20 @@
     </view>
     <view class="controllist">
         <view class="left">配送方式</view>
-        <view class="right">商家配送</view>
+        <view class="right">{{company}}</view>
     </view>
-    <view class="control">
+    <!-- <view class="control">
         <view class="left">留言</view>
         <view class="right">
             <input class="liuyan" name="userMes" type="text" placeholder="" value="{{list.message}}" disabled/>
         </view>
-    </view>
+    </view> -->
     <!-- <view class="controllist youhui top">
         <view class="left">优惠</view>
         <view class="right">优惠￥5</view>
     </view> -->
     <view class="jine top" style="margin-bottom:120rpx;">
-       <view class="controllist ">
+      <view class="controllist ">
           <view class="left">商品金额</view>
           <view class="right color" wx:if="{{twoStage}}">￥{{Allprice}}</view>
           <view class="right color" wx:else>￥{{list.total_fee}}</view>
@@ -96,6 +97,12 @@
       <view class="controllist">
           <view class="left">运费</view>
           <view class="right color">￥{{expenses}}</view>
+      </view>
+      <view class="controllist ">
+          <view class="left">运单号</view>
+          <view class="right color" >{{express_no}}
+              <text class='copy' bindtap='copy' data-number='{{express_no}}'>复制</text>
+          </view>
       </view>
     </view>
     

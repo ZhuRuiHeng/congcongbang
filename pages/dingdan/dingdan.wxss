@@ -141,6 +141,7 @@ scroll-view{
 button{
   padding: 0 8rpx!important;
   box-sizing:initial;
+  margin: 0;
 }
 button::after{
     content: "";
@@ -184,4 +185,13 @@ navigator-hover{
   -webkit-transform-origin:0 0;
   transform-origin:0 0;
   box-sizing:border-box;
+}
+.copy{
+  display: inline-block;
+  border: 1px solid #ccc;
+  color: #626262;
+  padding: 3rpx 12rpx;
+  border-radius: 6rpx;
+  font-size: 22rpx;
+  margin-left: 10rpx;
 }

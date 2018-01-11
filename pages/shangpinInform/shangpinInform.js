@@ -21,12 +21,14 @@ Page(Object.assign({}, Zan.Toast, {
   },
   onLoad: function (options) {
     var sign = wx.getStorageSync('sign');
-    console.log(options);
+    console.log('options:', options);
     var that = this;
     that.setData({
       oid: options.oid,
       status1: options.status1,
-      Allprice: options.price
+      Allprice: options.price,
+      express_no: options.express_no,
+      company: options.company,
     })
   },
   onShow: function () {
@@ -127,6 +129,22 @@ Page(Object.assign({}, Zan.Toast, {
         }
         begin_time = common.time(begin_time, 1);
         wx.hideLoading()
+      }
+    })
+  },
+  // copy
+  copy(e){
+    let that = this;
+    let number1 = e.currentTarget.dataset.number;
+    wx.setClipboardData({
+      data: number1,
+      success: function (res) {
+        wx.getClipboardData({
+          success: function (res) {
+            console.log(res.data) // data
+            that.showZanToast('复制成功！');
+          }
+        })
       }
     })
   },

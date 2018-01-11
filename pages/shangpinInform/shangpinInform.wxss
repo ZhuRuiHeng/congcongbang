@@ -479,3 +479,12 @@ switch{transform:scale(.8)}
   border-radius: 4px;
   z-index: 100;
 }
+.copy{
+  display: inline-block;
+  border: 1px solid #ccc;
+  color: #626262;
+  padding: 3rpx 12rpx;
+  border-radius: 6rpx;
+  font-size: 22rpx;
+  margin-left: 10rpx;
+}

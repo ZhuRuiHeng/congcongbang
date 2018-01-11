@@ -183,6 +183,22 @@ pintuan: function (event) {
       url: '../pintuanxiangqing/pintuanxiangqing?gbid=' + that.data.gbid + '&gid=' + that.data.gid
     })   
 },
+// 复制
+copy(e) {
+  let that = this;
+  let number1 = e.currentTarget.dataset.number;
+  wx.setClipboardData({
+    data: number1,
+    success: function (res) {
+      wx.getClipboardData({
+        success: function (res) {
+          console.log(res.data) // data
+          that.showZanToast('复制成功！');
+        }
+      })
+    }
+  })
+},
 // cancel未支付订单可取消订单
   cancel(e){
     console.log(e);
