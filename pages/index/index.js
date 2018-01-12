@@ -566,9 +566,15 @@ onLoad: function (options) {
       that.setData({
         bargain_id: bargain_id
       })
+      wx.navigateTo({
+        url: '../bargainShare/bargainShare?bargain_id=' + that.data.bargain_id,
+      })
     } else if (strs[0] == 'shop'){
       that.setData({
         gid: strs[2]
+      })
+      wx.navigateTo({
+        url: '../inform/inform?gid=' + that.data.gid,
       })
     }
   }
@@ -583,16 +589,6 @@ onShow: function () {
       wx.showLoading({
         title: '加载中',
       });
-      // 二维码分享砍价
-      if (that.data.bargain_id) {
-        wx.navigateTo({
-          url: '../bargainShare/bargainShare?bargain_id=' + that.data.bargain_id,
-        })
-      } else if (that.data.gid) {
-        wx.navigateTo({
-          url: '../inform/inform?gid=' + that.data.gid,
-        })
-      }
       // banner
       wx.request({
         url: app.data.apiUrl1 + "bargain/banner?sign=" + sign + '&operator_id=' + app.data.kid,

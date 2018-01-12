@@ -203,9 +203,9 @@ receive(e) {
     console.log('砍价already_bargain', that.data.already_bargain)
     if (that.data.already_bargain == false) { //未发起过
       console.log('未发起过')
-      console.log("请求砍价id：", app.data.apiUrl1 + "bargain/create-bargain?sign=" + sign + '&operator_id=' + app.data.kid + '&goods_id=' + that.data.informAll.goods_id)
+      console.log("请求砍价id：", app.data.apiUrl1 + "/bargain/create-bargain?sign=" + sign + '&operator_id=' + app.data.kid + '&goods_id=' + that.data.informAll.goods_id)
       wx.request({
-        url: app.data.apiUrl1 + "bargain/create-bargain?sign=" + sign + '&operator_id=' + app.data.kid,
+        url: app.data.apiUrl1 + "/bargain/create-bargain?sign=" + sign + '&operator_id=' + app.data.kid,
         data: {
           goods_id: that.data.informAll.goods_id
         },
@@ -476,7 +476,7 @@ onShow: function () {
       }
       // banner
       wx.request({
-        url: app.data.apiUrl1 + "bargain/banner?sign=" + sign + '&operator_id=' + app.data.kid,
+        url: app.data.apiUrl1 + "/bargain/banner?sign=" + sign + '&operator_id=' + app.data.kid,
         header: {
           'content-type': 'application/json'
         },
@@ -496,7 +496,7 @@ onShow: function () {
       })
       // old砍价
       wx.request({
-        url: app.data.apiUrl1 + "bargain/goods-detail?sign=" + sign + '&operator_id=' + app.data.kid,
+        url: app.data.apiUrl1 + "/bargain/goods-detail?sign=" + sign + '&operator_id=' + app.data.kid,
         header: {
           'content-type': 'application/json'
         },
